@@ -1,0 +1,31 @@
+body {
+  background: #080a0f;
+  colour: #e0f7ff;
+  font-family: 'Segoe UI' , sans-serif;
+  margin: 20px;
+}
+a {
+  colour: #00e5ff;
+  text-decoration: none;
+  margin-right: 10px:
+  font-weight: bold;
+}
+h1 { 
+  colour: #00e5ff;
+  text-shadow: 0 0 10px #00e5ff;
+  border-bottom: 2px solid #00e5ff;
+  padding-bottom: 10px;
+}
+h2 , h3 {
+  colour: #ffffff;
+}
+ul {
+  background: rgba(0 , 229 , 225 , 05);
+  border: 1px solid #00e5ff;
+  padding: 15px 30px;
+  border-radius: 10px;
+}
+li {
+  margin: 10px 0;
+}
+  
