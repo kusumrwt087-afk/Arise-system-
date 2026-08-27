@@ -11,8 +11,6 @@ body {
   padding: 0;
   min-height: 100vh;
 }
-
-/* NAVBAR LEVEL 2 */
 nav {
   background: rgba(5, 7, 10, 0.7);
   padding: 18px 40px;
@@ -25,7 +23,6 @@ nav {
   justify-content: space-between;
   align-items: center;
 }
-
 nav a {
   color: #8a9bb5;
   text-decoration: none;
@@ -36,7 +33,6 @@ nav a {
   transition: 0.3s;
   position: relative;
 }
-
 nav a::after {
   content: '';
   position: absolute;
@@ -48,41 +44,32 @@ nav a::after {
   box-shadow: 0 0 10px #00e5ff;
   transition: 0.3s;
 }
-
 nav a:hover {
   color: #00e5ff;
   text-shadow: 0 0 10px #00e5ff;
 }
-
 nav a:hover::after {
   width: 100%;
 }
-
-/* HERO LEVEL 2 */
 .hero {
   text-align: center;
   padding: 120px 20px 80px;
 }
-
 .hero h1 {
   font-size: 65px;
   font-weight: 900;
   color: #fff;
   letter-spacing: 3px;
   margin-bottom: 10px;
-  text-shadow: 
-    0 0 20px rgba(0, 229, 255, 0.8),
-    0 0 60px rgba(0, 229, 255, 0.5);
+  text-shadow: 0 0 20px rgba(0, 229, 255, 0.8), 0 0 60px rgba(0, 229, 255, 0.5);
   animation: glowPulse 3s infinite alternate;
 }
-
 .hero p {
   color: #8a9bb5;
   font-size: 16px;
   letter-spacing: 4px;
   text-transform: uppercase;
 }
-
 .btn {
   display: inline-block;
   margin-top: 40px;
@@ -96,18 +83,13 @@ nav a:hover::after {
   border: 1px solid #00e5ff;
   box-shadow: 0 0 15px rgba(0, 229, 255, 0.3), inset 0 0 15px rgba(0, 229, 255, 0.1);
   transition: 0.3s;
-  position: relative;
-  overflow: hidden;
 }
-
 .btn:hover {
   background: #00e5ff;
   color: #000;
   box-shadow: 0 0 40px #00e5ff, 0 0 80px rgba(0, 229, 255, 0.5);
   transform: translateY(-3px);
 }
-
-/* GLOW ANIMATION */
 @keyframes glowPulse {
   from { text-shadow: 0 0 20px rgba(0,229,255,0.8), 0 0 40px rgba(0,229,255,0.4); }
   to { text-shadow: 0 0 30px rgba(0,229,255,1), 0 0 80px rgba(0,229,255,0.6); }
