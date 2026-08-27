@@ -23,6 +23,13 @@ nav {
   justify-content: space-between;
   align-items: center;
 }
+.logo {
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: 3px;
+  font-size: 18px;
+  text-shadow: 0 0 10px #00e5ff;
+}
 nav a {
   color: #8a9bb5;
   text-decoration: none;
