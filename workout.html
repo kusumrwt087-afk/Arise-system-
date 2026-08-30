@@ -39,7 +39,7 @@
     }
   </style>
 </head>
-<body>
+  <body>
 <nav>
   <div class="logo">ARISE FITNESS</div>
   <div>
@@ -66,5 +66,38 @@
     <p>Squats, Lunges, Leg Press, Planks - Foundation of a King</p>
   </div>
 </div>
-</body>
+<div id="portal-overlay">
+  <div class="portal">
+    <div class="portal-ring"></div>
+    <div class="portal-core"></div>
+  </div>
+  <div id="workout-detail">
+    <span id="close-portal">&times;</span>
+    <h2 id="detail-title"></h2>
+    <p id="detail-desc"></p>
+    <ul id="detail-list"></ul>
+    <a href="#" class="btn">BEGIN BATTLE</a>
+  </div>
+</div>
+<script>
+const workouts = {
+  "DAY 1 - CHEST & TRICEPS": { desc: "The Monarch's Power", list: ["Bench Press - 4x10", "Incline Dumbbell - 3x12", "Pushups - 100", "Tricep Dips - 3x15"] },
+  "DAY 2 - BACK & BICEPS": { desc: "Dominion of Shadows", list: ["Pull-ups - 4x8", "Deadlifts - 4x8", "Barbell Rows - 3x12", "Curls - 3x12"] },
+  "DAY 3 - LEGS & ABS": { desc: "Foundation of a King", list: ["Squats - 5x8", "Lunges - 3x12", "Leg Press - 4x10", "Planks - 3x1min"] }
+};
+
+document.querySelectorAll('.workout-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const title = card.querySelector('h3').innerText;
+    document.getElementById('detail-title').innerText = title;
+    document.getElementById('detail-desc').innerText = workouts[title].desc;
+    document.getElementById('detail-list').innerHTML = workouts[title].list.map(i=>`<li>${i}</li>`).join('');
+    document.getElementById('portal-overlay').classList.add('active');
+  });
+});
+document.getElementById('close-portal').onclick = () => {
+  document.getElementById('portal-overlay').classList.remove('active');
+};
+</script>    
+  </body>
 </html>
