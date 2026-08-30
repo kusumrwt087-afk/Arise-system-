@@ -4,8 +4,22 @@
   <title>ARISE FITNESS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <style>
+    #music-btn {
+      position:fixed; bottom:20px; right:20px; z-index:99999;
+      background:rgba(0,229,255,0.15); border:1px solid #00e5ff;
+      color:#00e5ff; padding:10px 16px; border-radius:30px;
+      font-size:12px; letter-spacing:2px; cursor:pointer; 
+      backdrop-filter:blur(10px); font-family: sans-serif;
+    }
+  </style>
 </head>
 <body>
+
+  <!-- DARK ARIA - SHURU SE REPEAT PE -->
+  <audio id="bg-music" src="dark-aria.mp3" loop preload="auto"></audio>
+  <div id="music-btn">🔊 TAP TO ARISE</div>
+
 <nav>
   <div class="logo">ARISE FITNESS</div>
   <div>
@@ -19,5 +33,34 @@
   <p>DISCIPLINE // POWER // ARISE</p>
   <a href="workout.html" class="btn">START TRAINING</a>
 </div>
+
+<script>
+const bgMusic = document.getElementById('bg-music');
+const musicBtn = document.getElementById('music-btn');
+bgMusic.volume = 0.25;
+
+function playMusic() {
+  bgMusic.play().then(() => {
+    musicBtn.innerHTML = "🔊 DARK ARIA Lv2";
+    setTimeout(() => { musicBtn.style.opacity = '0.4'; }, 3000);
+  }).catch(()=>{});
+}
+
+// Page pe kahi bhi first click pe music start hoga
+document.addEventListener('click', function firstClick() {
+  playMusic();
+  document.removeEventListener('click', firstClick);
+}, { once: true });
+
+musicBtn.onclick = (e) => {
+  e.stopPropagation();
+  if(bgMusic.paused) { bgMusic.play(); musicBtn.innerHTML = "🔊 DARK ARIA Lv2"; }
+  else { bgMusic.pause(); musicBtn.innerHTML = "🔇 PAUSED"; }
+};
+
+// Try auto play
+playMusic();
+</script>
+
 </body>
 </html>
