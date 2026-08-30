@@ -37,6 +37,46 @@
       font-size: 17px;
       line-height: 1.6;
     }
+   #portal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: none; justify-content: center; align-items: center;
+  z-index: 999;
+}
+#portal-overlay.active { display: flex; }
+
+.portal {
+  position: absolute;
+  width: 10px; height: 10px;
+  background: #00e5ff;
+  border-radius: 50%;
+  box-shadow: 0 0 100px #00e5ff;
+  animation: openGate 0.8s forwards;
+}
+.portal-ring {
+  position: absolute; inset: -20px;
+  border: 3px solid #00e5ff; border-radius: 50%;
+  animation: spin 2s linear infinite;
+}
+@keyframes openGate {
+  0% { width: 10px; height: 10px; }
+  100% { width: 200vmax; height: 200vmax; }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+#workout-detail {
+  position: relative; z-index: 10;
+  background: rgba(5,7,10,0.95);
+  border: 1px solid #00e5ff;
+  padding: 40px; border-radius: 16px;
+  max-width: 500px; width: 90%;
+  box-shadow: 0 0 50px rgba(0,229,255,0.5);
+  opacity: 0; animation: fadeIn 0.5s 0.8s forwards;
+}
+@keyframes fadeIn { to { opacity: 1; } }
+#close-portal { position: absolute; top: 15px; right: 20px; font-size: 28px; cursor: pointer; color: #00e5ff; }
+#detail-title { color: #00e5ff; letter-spacing: 2px; }
+#detail-list li { color: #c7d5e8; margin: 10px 0; } 
   </style>
 </head>
   <body>
