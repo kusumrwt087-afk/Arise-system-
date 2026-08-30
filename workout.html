@@ -28,39 +28,46 @@
    .workout-card h3 { color: #00e5ff; margin: 0 0 10px 0; letter-spacing: 2px; font-size: 22px; font-weight: 900; }
    .workout-card p { color: #a0b8d0; margin: 0; font-size: 15px; }
 
-    /* ===== SOLO LEVELING PORTAL ===== */
+    /* ===== SOLO LEVELING PORTAL - FIXED ===== */
     #portal-overlay {
-      position: fixed; inset: 0; background: #000;
-      display: none; justify-content: center; align-items: center;
-      z-index: 9999; padding: 20px;
+      position: fixed; 
+      inset: 0; 
+      background: rgba(0,0,0,0.25);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: none; 
+      justify-content: center; 
+      align-items: center;
+      z-index: 9999; 
+      padding: 20px;
     }
     #portal-overlay.active { display: flex; }
-    #portal-overlay.active.portal { animation: openGate 0.9s cubic-bezier(0.7,0,0.3,1) forwards; }
 
    .portal {
-      position: absolute; width: 20px; height: 20px;
-      background: radial-gradient(circle, #fff, #00e5ff, #0066ff);
+      position: absolute; 
+      width: 50px; height: 50px;
+      border: 3px solid #00e5ff;
       border-radius: 50%;
-      box-shadow: 0 0 50px #00e5ff, 0 0 100px #00e5ff, 0 0 200px #0066ff;
+      box-shadow: 0 0 30px #00e5ff, 0 0 60px #00e5ff, inset 0 0 20px #00e5ff;
+      animation: openGate 0.9s cubic-bezier(0.7,0,0.3,1) forwards;
     }
    .portal-ring {
-      position: absolute; inset: -30px;
-      border: 2px solid #00e5ff; border-radius: 50%;
-      box-shadow: 0 0 20px #00e5ff inset;
+      position: absolute; inset: -20px;
+      border: 2px solid rgba(0,229,255,0.6); border-radius: 50%;
       animation: spin 1.2s linear infinite;
     }
-   .portal-ring:nth-child(2) { inset: -60px; border-color: rgba(0,229,255,0.5); animation-duration: 2s; animation-direction: reverse; }
+   .portal-ring:nth-child(2) { inset: -45px; border-color: rgba(0,229,255,0.3); animation-duration: 2s; animation-direction: reverse; }
 
     @keyframes openGate {
-      0% { width: 20px; height: 20px; opacity: 1; }
-      40% { width: 250px; height: 250px; }
-      100% { width: 300vmax; height: 300vmax; opacity: 1; }
+      0% { width: 20px; height: 20px; opacity: 0; transform: scale(0.5); }
+      20% { opacity: 1; transform: scale(1); }
+      100% { width: 120vmax; height: 120vmax; opacity: 0; transform: scale(1.5); border-width: 1px; }
     }
     @keyframes spin { to { transform: rotate(360deg); } }
     @keyframes cardArise {
-      0% { opacity: 0; transform: scale(0.7) translateY(50px); filter: blur(10px); }
+      0% { opacity: 0; transform: scale(0.7) translateY(50px); filter: blur(15px); }
       100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
-    }
+        }
 
     /* ===== DETAIL CARD - BADA WALA ===== */
     #workout-detail {
