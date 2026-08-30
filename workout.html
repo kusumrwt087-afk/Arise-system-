@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,7 @@
       margin: 40px auto;
       padding: 0 20px;
     }
+
  .workout-card {
       background: linear-gradient(145deg, rgba(10,20,30,0.9), rgba(5,7,10,0.8));
       border: 1px solid rgba(0,229,255,0.3);
@@ -22,6 +24,7 @@
       position: relative;
       overflow: hidden;
     }
+
  .workout-card::before {
       content: "";
       position: absolute;
@@ -32,14 +35,17 @@
       background: linear-gradient(90deg, transparent, rgba(0,229,255,0.2), transparent);
       transition: 0.6s;
     }
+
  .workout-card:hover::before {
       left: 100%;
     }
+
  .workout-card:hover {
       border-color: #00e5ff;
       box-shadow: 0 0 40px rgba(0,229,255,0.5);
       transform: translateY(-8px);
     }
+
  .workout-card h3 {
       color: #00e5ff;
       margin: 0 0 10px 0;
@@ -47,11 +53,13 @@
       font-size: 22px;
       font-weight: 900;
     }
+
  .workout-card p {
       color: #a0b8d0;
       margin: 0;
       font-size: 15px;
     }
+
     /* ===== FINAL S-RANK GATE - GHANA + BADA + LAMBA ===== */
     #portal-overlay {
       position: fixed;
@@ -66,9 +74,11 @@
       padding: 20px;
       overflow: hidden;
     }
+
     #portal-overlay.active {
       display: flex;
     }
+
  .portal {
       position: absolute;
       width: 130vmax;
@@ -80,6 +90,7 @@
       display: grid;
       place-items: center;
     }
+
  .portal::before {
       content: "";
       position: absolute;
@@ -89,6 +100,7 @@
       filter: blur(8px) brightness(1.5);
       animation: swirlSpin 0.35s linear infinite;
     }
+
  .portal::after {
       content: "";
       position: absolute;
@@ -98,16 +110,19 @@
       box-shadow: 0 0 100px #00e5ff, 0 0 200px #00aaff, inset 0 0 60px #fff;
       animation: corePulse 0.4s ease-in-out infinite alternate;
     }
+
  .portal-ring {
       position: absolute;
       border-radius: 50%;
       border: 4px solid rgba(0,229,255,0.9);
       box-shadow: 0 0 40px #00e5ff, inset 0 0 40px #00e5ff;
     }
+
  .portal-ring:nth-child(1) {
       inset: 8%;
       animation: swirlSpin 0.6s linear infinite reverse;
     }
+
  .portal-ring:nth-child(2) {
       inset: -3%;
       border-color: rgba(0,229,255,0.4);
@@ -115,13 +130,16 @@
       border-width: 3px;
       animation: swirlSpin 1.2s linear infinite;
     }
+
     @keyframes swirlSpin {
       to { transform: rotate(360deg); }
     }
+
     @keyframes corePulse {
       from { transform: scale(0.9); }
       to { transform: scale(1.1); }
     }
+
     @keyframes openGate {
       0% { transform: scale(0); opacity: 0; filter: blur(50px); }
       20% { opacity: 1; filter: blur(0); }
@@ -129,10 +147,12 @@
       80% { transform: scale(1.1); opacity: 1; }
       100% { transform: scale(1.5); opacity: 0; filter: blur(40px); }
     }
+
     @keyframes cardArise {
       0% { opacity: 0; transform: scale(0.6) translateY(80px); filter: blur(20px); }
       100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
     }
+
     /* ===== DETAIL CARD ===== */
     #workout-detail {
       position: relative;
@@ -147,15 +167,18 @@
       opacity: 0;
       overflow: hidden;
     }
+
     #portal-overlay.active #workout-detail {
       animation: cardArise 0.7s 2.2s forwards;
     }
+
  .detail-header {
       background: linear-gradient(90deg, rgba(0,229,255,0.15), transparent);
       padding: 35px 35px 20px;
       border-bottom: 1px solid rgba(0,229,255,0.2);
       position: relative;
     }
+
     #close-portal {
       position: absolute;
       top: 18px;
@@ -170,10 +193,12 @@
       border-radius: 50%;
       transition: 0.3s;
     }
+
     #close-portal:hover {
       background: rgba(0,229,255,0.2);
       transform: rotate(90deg);
     }
+
     #detail-title {
       color: #fff;
       font-size: 30px!important;
@@ -182,6 +207,7 @@
       margin: 0;
       text-shadow: 0 0 20px #00e5ff;
     }
+
     #detail-desc {
       color: #00e5ff;
       font-size: 13px;
@@ -189,14 +215,17 @@
       margin-top: 8px;
       font-weight: 700;
     }
+
  .detail-body {
       padding: 30px 35px;
     }
+
     #detail-list {
       padding: 0;
       margin: 0;
       list-style: none;
     }
+
     #detail-list li {
       color: #e0efff;
       font-size: 19px!important;
@@ -209,12 +238,14 @@
       justify-content: space-between;
       align-items: center;
     }
+
     #detail-list li::before {
       content: "▸";
       color: #00e5ff;
       font-weight: 900;
       margin-right: 10px;
     }
+
  .btn-battle {
       display: block;
       width: 100%;
@@ -231,11 +262,13 @@
       box-shadow: 0 0 30px rgba(0,229,255,0.6);
       transition: 0.3s;
     }
+
  .btn-battle:hover {
       transform: scale(1.02);
       box-shadow: 0 0 50px rgba(0,229,255,0.9);
     }
-    /* MUSIC BUTTON */
+
+    /* MUSIC BUTTON - SIRF YE ADDED HAI */
     #music-btn {
       position:fixed; bottom:20px; right:20px; z-index:10000;
       background:rgba(0,229,255,0.15); border:1px solid #00e5ff;
@@ -247,7 +280,6 @@
 </head>
 <body>
 
-<!-- MUSIC ADDED - SHURU SE REPEAT -->
 <audio id="bg-music" src="dark-aria.mp3" loop preload="auto"></audio>
 <div id="music-btn">🎧 DARK ARIA Lv2</div>
 
@@ -292,16 +324,31 @@ const workouts = {
   "DAY 3 - LEGS & ABS": { desc: "FOUNDATION OF A KING", list: ["Squats - 5x8", "Lunges - 3x12", "Leg Press - 4x10", "Planks - 3x1min"] }
 };
 
-// MUSIC SYSTEM - SHURU SE REPEAT
+// MUSIC SYSTEM - EK BAAR CHALE, PURA CHALE
 const bgMusic = document.getElementById('bg-music');
 const musicBtn = document.getElementById('music-btn');
 bgMusic.volume = 0.25;
-function playMusic(){ bgMusic.play().then(()=>{ musicBtn.innerHTML="🔊 DARK ARIA Lv2"; }).catch(()=>{}); }
-document.addEventListener('click', function first(){ playMusic(); document.removeEventListener('click', first); }, {once:true});
-musicBtn.onclick = (e)=>{ e.stopPropagation(); if(bgMusic.paused){ bgMusic.play(); musicBtn.innerHTML="🔊 DARK ARIA Lv2"; } else { bgMusic.pause(); musicBtn.innerHTML="🔇 PAUSED"; } };
-playMusic();
+let savedTime = localStorage.getItem('aria-time');
+if(savedTime) bgMusic.currentTime = parseFloat(savedTime);
+let wasPlaying = localStorage.getItem('aria-playing') === 'true';
+function playMusic(){
+  bgMusic.play().then(()=>{
+    musicBtn.innerHTML="🔊 DARK ARIA Lv2";
+    localStorage.setItem('aria-playing','true');
+  }).catch(()=>{});
+}
+setInterval(()=>{ if(!bgMusic.paused) localStorage.setItem('aria-time', bgMusic.currentTime); }, 800);
+if(wasPlaying) playMusic();
+document.addEventListener('click', function firstClick(){
+  playMusic();
+  document.removeEventListener('click', firstClick);
+}, {once:true});
+musicBtn.onclick = (e)=>{
+  e.stopPropagation();
+  if(bgMusic.paused){ bgMusic.play(); musicBtn.innerHTML="🔊 DARK ARIA Lv2"; localStorage.setItem('aria-playing','true'); }
+  else { bgMusic.pause(); musicBtn.innerHTML="🔇 PAUSED"; localStorage.setItem('aria-playing','false'); }
+};
 
-// TERA ORIGINAL PORTAL SYSTEM - SAME
 document.querySelectorAll('.workout-card').forEach(card => {
   card.addEventListener('click', () => {
     const title = card.querySelector('h3').innerText;
@@ -315,10 +362,12 @@ document.querySelectorAll('.workout-card').forEach(card => {
     document.body.style.overflow = 'hidden';
   });
 });
+
 document.getElementById('close-portal').onclick = () => {
   document.getElementById('portal-overlay').classList.remove('active');
   document.body.style.overflow = 'auto';
 };
+
 document.getElementById('portal-overlay').addEventListener('click', (e) => {
   if(e.target.id === 'portal-overlay') {
     document.getElementById('portal-overlay').classList.remove('active');
