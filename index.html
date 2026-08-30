@@ -16,7 +16,6 @@
 </head>
 <body>
 
-  <!-- DARK ARIA - SHURU SE REPEAT PE -->
   <audio id="bg-music" src="dark-aria.mp3" loop preload="auto"></audio>
   <div id="music-btn">🔊 TAP TO ARISE</div>
 
@@ -38,29 +37,10 @@
 const bgMusic = document.getElementById('bg-music');
 const musicBtn = document.getElementById('music-btn');
 bgMusic.volume = 0.25;
+let savedTime = localStorage.getItem('aria-time');
+if(savedTime) bgMusic.currentTime = parseFloat(savedTime);
+let wasPlaying = localStorage.getItem('aria-playing') === 'true';
 
-function playMusic() {
-  bgMusic.play().then(() => {
-    musicBtn.innerHTML = "🔊 DARK ARIA Lv2";
-    setTimeout(() => { musicBtn.style.opacity = '0.4'; }, 3000);
-  }).catch(()=>{});
-}
-
-// Page pe kahi bhi first click pe music start hoga
-document.addEventListener('click', function firstClick() {
-  playMusic();
-  document.removeEventListener('click', firstClick);
-}, { once: true });
-
-musicBtn.onclick = (e) => {
-  e.stopPropagation();
-  if(bgMusic.paused) { bgMusic.play(); musicBtn.innerHTML = "🔊 DARK ARIA Lv2"; }
-  else { bgMusic.pause(); musicBtn.innerHTML = "🔇 PAUSED"; }
-};
-
-// Try auto play
-playMusic();
-</script>
-
-</body>
-</html>
+function playMusic(){
+  bgMusic.play().then(()=>{
+    musicBtn.innerHTML="🔊 D
