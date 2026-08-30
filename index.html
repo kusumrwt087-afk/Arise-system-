@@ -9,7 +9,7 @@
       position:fixed; bottom:20px; right:20px; z-index:99999;
       background:rgba(0,229,255,0.15); border:1px solid #00e5ff;
       color:#00e5ff; padding:10px 16px; border-radius:30px;
-      font-size:12px; letter-spacing:2px; cursor:pointer; 
+      font-size:12px; letter-spacing:2px; cursor:pointer;
       backdrop-filter:blur(10px); font-family: sans-serif;
     }
   </style>
@@ -43,4 +43,25 @@ let wasPlaying = localStorage.getItem('aria-playing') === 'true';
 
 function playMusic(){
   bgMusic.play().then(()=>{
-    musicBtn.innerHTML="🔊 D
+    musicBtn.innerHTML="🔊 DARK ARIA Lv2";
+    localStorage.setItem('aria-playing','true');
+  }).catch(()=>{});
+}
+setInterval(()=>{ if(!bgMusic.paused) localStorage.setItem('aria-time', bgMusic.currentTime); }, 800);
+if(wasPlaying) playMusic();
+
+document.addEventListener('click', function firstClick(){
+  playMusic();
+  document.removeEventListener('click', firstClick);
+}, {once:true});
+
+musicBtn.onclick = (e)=>{
+  e.stopPropagation();
+  if(bgMusic.paused){ bgMusic.play(); musicBtn.innerHTML="🔊 DARK ARIA Lv2"; localStorage.setItem('aria-playing','true'); }
+  else { bgMusic.pause(); musicBtn.innerHTML="🔇 PAUSED"; localStorage.setItem('aria-playing','false'); }
+};
+playMusic();
+</script>
+
+</body>
+</html>
