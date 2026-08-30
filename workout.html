@@ -5,170 +5,153 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <style>
-    .workout-container {
-      max-width: 900px;
-      margin: 60px auto;
-      padding: 0 20px;
-    }
-    .workout-card {
-      background: rgba(5,7,10,0.75);
-      border: 1px solid rgba(0,229,255,0.4);
-      backdrop-filter: blur(12px);
-      padding: 38px 32px;
-      border-radius: 14px;
-      margin-bottom: 28px;
-      transition: 0.3s;
+   .workout-container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+   .workout-card {
+      background: linear-gradient(145deg, rgba(10,20,30,0.9), rgba(5,7,10,0.8));
+      border: 1px solid rgba(0,229,255,0.3);
+      backdrop-filter: blur(15px);
+      padding: 35px 30px;
+      border-radius: 16px;
+      margin-bottom: 25px;
       cursor: pointer;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
     }
-    .workout-card:hover {
-      border-color: #00e5ff;
-      box-shadow: 0 0 30px rgba(0,229,255,0.4);
-      transform: translateY(-5px) scale(1.02);
+   .workout-card::before {
+      content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0,229,255,0.2), transparent);
+      transition: 0.6s;
     }
-    .workout-card h3 {
-      color: #00e5ff;
-      margin: 0 0 14px 0;
-      letter-spacing: 2px;
-      font-size: 22px;
+   .workout-card:hover::before { left: 100%; }
+   .workout-card:hover { border-color: #00e5ff; box-shadow: 0 0 40px rgba(0,229,255,0.5); transform: translateY(-8px); }
+   .workout-card h3 { color: #00e5ff; margin: 0 0 10px 0; letter-spacing: 2px; font-size: 22px; font-weight: 900; }
+   .workout-card p { color: #a0b8d0; margin: 0; font-size: 15px; }
+
+    /* ===== SOLO LEVELING PORTAL ===== */
+    #portal-overlay {
+      position: fixed; inset: 0; background: #000;
+      display: none; justify-content: center; align-items: center;
+      z-index: 9999; padding: 20px;
     }
-    .workout-card p {
-      color: #c7d5e8;
-      margin: 0;
-      font-size: 17px;
-      line-height: 1.6;
+    #portal-overlay.active { display: flex; }
+    #portal-overlay.active.portal { animation: openGate 0.9s cubic-bezier(0.7,0,0.3,1) forwards; }
+
+   .portal {
+      position: absolute; width: 20px; height: 20px;
+      background: radial-gradient(circle, #fff, #00e5ff, #0066ff);
+      border-radius: 50%;
+      box-shadow: 0 0 50px #00e5ff, 0 0 100px #00e5ff, 0 0 200px #0066ff;
     }
-   #portal-overlay {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,0.9);
-  display: none; justify-content: center; align-items: center;
-  z-index: 999;
-}
-#portal-overlay.active { display: flex; }
+   .portal-ring {
+      position: absolute; inset: -30px;
+      border: 2px solid #00e5ff; border-radius: 50%;
+      box-shadow: 0 0 20px #00e5ff inset;
+      animation: spin 1.2s linear infinite;
+    }
+   .portal-ring:nth-child(2) { inset: -60px; border-color: rgba(0,229,255,0.5); animation-duration: 2s; animation-direction: reverse; }
 
-.portal {
-  position: absolute;
-  width: 10px; height: 10px;
-  background: #00e5ff;
-  border-radius: 50%;
-  box-shadow: 0 0 100px #00e5ff;
-  animation: openGate 0.8s forwards;
-}
-.portal-ring {
-  position: absolute; inset: -20px;
-  border: 3px solid #00e5ff; border-radius: 50%;
-  animation: spin 2s linear infinite;
-}
-@keyframes openGate {
-  0% { width: 10px; height: 10px; }
-  100% { width: 200vmax; height: 200vmax; }
-}
-@keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes openGate {
+      0% { width: 20px; height: 20px; opacity: 1; }
+      40% { width: 250px; height: 250px; }
+      100% { width: 300vmax; height: 300vmax; opacity: 1; }
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes cardArise {
+      0% { opacity: 0; transform: scale(0.7) translateY(50px); filter: blur(10px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+    }
 
-#workout-detail {
-  position: relative; z-index: 10;
-  background: rgba(5,7,10,0.95);
-  border: 2px solid #00e5ff;
-  padding: 30px 25px;
-  border-radius: 20px;
-  max-width: 90%;
-  width: 90%;
-  min-height: 60vh;
-  box-shadow: 0 0 80px rgba(0,229,255,0.6);
-  opacity: 0; 
-  animation: fadeIn 0.5s 0.8s forwards;
-}
+    /* ===== DETAIL CARD - BADA WALA ===== */
+    #workout-detail {
+      position: relative; z-index: 10;
+      background: rgba(8,15,25,0.98);
+      border: 2px solid #00e5ff;
+      padding: 0; border-radius: 24px;
+      width: 100%; max-width: 600px;
+      box-shadow: 0 0 100px rgba(0,229,255,0.7), inset 0 0 30px rgba(0,229,255,0.1);
+      opacity: 0;
+      overflow: hidden;
+    }
+    #portal-overlay.active #workout-detail { animation: cardArise 0.6s 0.9s forwards; }
 
-#detail-title {
-  color: #00e5ff;
-  letter-spacing: 2px;
-  font-size: 26px !important;
-  font-weight: 900;
-  text-align: center;
-  margin-bottom: 10px;
-}
+   .detail-header { background: linear-gradient(90deg, rgba(0,229,255,0.2), transparent); padding: 35px 35px 20px; border-bottom: 1px solid rgba(0,229,255,0.2); }
+    #close-portal { position: absolute; top: 18px; right: 22px; color: #00e5ff; font-size: 32px; cursor: pointer; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; transition: 0.3s; }
+    #close-portal:hover { background: rgba(0,229,255,0.2); transform: rotate(90deg); }
+    #detail-title { color: #fff; font-size: 32px!important; font-weight: 900; letter-spacing: 3px; margin: 0; text-shadow: 0 0 20px #00e5ff; }
+    #detail-desc { color: #00e5ff; font-size: 14px; letter-spacing: 4px; margin-top: 8px; font-weight: 700; }
 
-#detail-desc {
-  color: #fff;
-  font-size: 16px;
-  text-align: center;
-  margin-bottom: 25px;
-  opacity: 0.8;
-}
-
-#detail-list li {
-  color: #c7d5e8;
-  margin: 15px 0;
-  font-size: 18px !important;
-  list-style: none;
-  border-bottom: 1px solid rgba(0,229,255,0.2);
-  padding-bottom: 10px;
-}
-
-#close-portal, #begin-battle-btn {
-  font-size: 18px !important;
-  padding: 14px !important;
-}
+   .detail-body { padding: 30px 35px; }
+    #detail-list { padding: 0; margin: 0; list-style: none; }
+    #detail-list li {
+      color: #e0efff; font-size: 20px!important; padding: 16px 15px;
+      background: rgba(0,229,255,0.05); border: 1px solid rgba(0,229,255,0.15);
+      border-radius: 12px; margin-bottom: 12px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    #detail-list li::before { content: "▸"; color: #00e5ff; font-weight: 900; }
+   .btn-battle {
+      display: block; width: 100%; text-align: center; margin-top: 25px;
+      background: linear-gradient(90deg, #00e5ff, #00aaff); color: #000;
+      padding: 18px!important; border-radius: 14px; font-weight: 900;
+      font-size: 18px!important; text-decoration: none; letter-spacing: 2px;
+      box-shadow: 0 0 30px rgba(0,229,255,0.6); transition: 0.3s;
+    }
+   .btn-battle:hover { transform: scale(1.02); box-shadow: 0 0 50px rgba(0,229,255,0.9); }
   </style>
 </head>
-  <body>
+<body>
 <nav>
   <div class="logo">ARISE FITNESS</div>
-  <div>
-    <a href="index.html">Home</a>
-    <a href="workout.html">Workout</a>
-    <a href="about.html">About</a>
-  </div>
+  <div><a href="index.html">Home</a><a href="workout.html">Workout</a><a href="about.html">About</a></div>
 </nav>
-<div class="hero" style="padding: 60px 20px 20px;">
-  <h1 style="font-size: 48px;">WORKOUTS</h1>
-  <p>CHOOSE YOUR BATTLE</p>
+
+<div class="hero" style="padding: 70px 20px 10px;">
+  <h1 style="font-size: 52px; letter-spacing: 5px;">WORKOUTS</h1>
+  <p style="letter-spacing: 6px; color: #00e5ff;">CHOOSE YOUR BATTLE</p>
 </div>
+
 <div class="workout-container">
-  <div class="workout-card">
-    <h3>DAY 1 - CHEST & TRICEPS</h3>
-    <p>Bench Press, Incline Dumbbell, Pushups, Tricep Dips - The Monarch's Power</p>
-  </div>
-  <div class="workout-card">
-    <h3>DAY 2 - BACK & BICEPS</h3>
-    <p>Pull-ups, Deadlifts, Barbell Rows, Curls - Dominion of Shadows</p>
-  </div>
-  <div class="workout-card">
-    <h3>DAY 3 - LEGS & ABS</h3>
-    <p>Squats, Lunges, Leg Press, Planks - Foundation of a King</p>
-  </div>
+  <div class="workout-card"><h3>DAY 1 - CHEST & TRICEPS</h3><p>Bench Press, Incline Dumbbell, Pushups, Tricep Dips - The Monarch's Power</p></div>
+  <div class="workout-card"><h3>DAY 2 - BACK & BICEPS</h3><p>Pull-ups, Deadlifts, Barbell Rows, Curls - Dominion of Shadows</p></div>
+  <div class="workout-card"><h3>DAY 3 - LEGS & ABS</h3><p>Squats, Lunges, Leg Press, Planks - Foundation of a King</p></div>
 </div>
+
 <div id="portal-overlay">
   <div class="portal">
     <div class="portal-ring"></div>
-    <div class="portal-core"></div>
+    <div class="portal-ring"></div>
   </div>
   <div id="workout-detail">
-    <span id="close-portal">&times;</span>
-    <h2 id="detail-title"></h2>
-    <p id="detail-desc"></p>
-    <ul id="detail-list"></ul>
-    <a href="#" class="btn">BEGIN BATTLE</a>
+    <div class="detail-header">
+      <span id="close-portal">&times;</span>
+      <h2 id="detail-title"></h2>
+      <p id="detail-desc"></p>
+    </div>
+    <div class="detail-body">
+      <ul id="detail-list"></ul>
+      <a href="#" class="btn-battle">BEGIN BATTLE ⚔️</a>
+    </div>
   </div>
 </div>
+
 <script>
 const workouts = {
-  "DAY 1 - CHEST & TRICEPS": { desc: "The Monarch's Power", list: ["Bench Press - 4x10", "Incline Dumbbell - 3x12", "Pushups - 100", "Tricep Dips - 3x15"] },
-  "DAY 2 - BACK & BICEPS": { desc: "Dominion of Shadows", list: ["Pull-ups - 4x8", "Deadlifts - 4x8", "Barbell Rows - 3x12", "Curls - 3x12"] },
-  "DAY 3 - LEGS & ABS": { desc: "Foundation of a King", list: ["Squats - 5x8", "Lunges - 3x12", "Leg Press - 4x10", "Planks - 3x1min"] }
+  "DAY 1 - CHEST & TRICEPS": { desc: "THE MONARCH'S POWER", list: ["Bench Press - 4x10", "Incline Dumbbell - 3x12", "Pushups - 100 Reps", "Tricep Dips - 3x15"] },
+  "DAY 2 - BACK & BICEPS": { desc: "DOMINION OF SHADOWS", list: ["Pull-ups - 4x8", "Deadlifts - 4x8", "Barbell Rows - 3x12", "Bicep Curls - 3x12"] },
+  "DAY 3 - LEGS & ABS": { desc: "FOUNDATION OF A KING", list: ["Squats - 5x8", "Lunges - 3x12", "Leg Press - 4x10", "Planks - 3x1min"] }
 };
-
 document.querySelectorAll('.workout-card').forEach(card => {
   card.addEventListener('click', () => {
     const title = card.querySelector('h3').innerText;
     document.getElementById('detail-title').innerText = title;
     document.getElementById('detail-desc').innerText = workouts[title].desc;
-    document.getElementById('detail-list').innerHTML = workouts[title].list.map(i=>`<li>${i}</li>`).join('');
+    document.getElementById('detail-list').innerHTML = workouts[title].list.map(i=>`<li><span>${i.split(' - ')[0]}</span><span style="color:#00e5ff;font-size:14px;">${i.split(' - ')[1]}</span></li>`).join('');
     document.getElementById('portal-overlay').classList.add('active');
   });
 });
-document.getElementById('close-portal').onclick = () => {
-  document.getElementById('portal-overlay').classList.remove('active');
-};
-</script>    
-  </body>
+document.getElementById('close-portal').onclick = () => document.getElementById('portal-overlay').classList.remove('active');
+document.getElementById('portal-overlay').addEventListener('click', (e) => { if(e.target.id === 'portal-overlay') document.getElementById('portal-overlay').classList.remove('active'); });
+</script>
+</body>
 </html>
