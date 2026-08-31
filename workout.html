@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <style>
- .workout-container {
+   .workout-container {
       max-width: 900px;
       margin: 40px auto;
       padding: 0 20px;
     }
 
- .workout-card {
+   .workout-card {
       background: linear-gradient(145deg, rgba(10,20,30,0.9), rgba(5,7,10,0.8));
       border: 1px solid rgba(0,229,255,0.3);
       backdrop-filter: blur(15px);
@@ -25,7 +24,7 @@
       overflow: hidden;
     }
 
- .workout-card::before {
+   .workout-card::before {
       content: "";
       position: absolute;
       top: 0;
@@ -36,17 +35,17 @@
       transition: 0.6s;
     }
 
- .workout-card:hover::before {
+   .workout-card:hover::before {
       left: 100%;
     }
 
- .workout-card:hover {
+   .workout-card:hover {
       border-color: #00e5ff;
       box-shadow: 0 0 40px rgba(0,229,255,0.5);
       transform: translateY(-8px);
     }
 
- .workout-card h3 {
+   .workout-card h3 {
       color: #00e5ff;
       margin: 0 0 10px 0;
       letter-spacing: 2px;
@@ -54,7 +53,7 @@
       font-weight: 900;
     }
 
- .workout-card p {
+   .workout-card p {
       color: #a0b8d0;
       margin: 0;
       font-size: 15px;
@@ -79,7 +78,7 @@
       display: flex;
     }
 
- .portal {
+   .portal {
       position: absolute;
       width: 130vmax;
       height: 130vmax;
@@ -91,7 +90,7 @@
       place-items: center;
     }
 
- .portal::before {
+   .portal::before {
       content: "";
       position: absolute;
       inset: 0;
@@ -101,7 +100,7 @@
       animation: swirlSpin 0.35s linear infinite;
     }
 
- .portal::after {
+   .portal::after {
       content: "";
       position: absolute;
       inset: 18%;
@@ -111,19 +110,19 @@
       animation: corePulse 0.4s ease-in-out infinite alternate;
     }
 
- .portal-ring {
+   .portal-ring {
       position: absolute;
       border-radius: 50%;
       border: 4px solid rgba(0,229,255,0.9);
       box-shadow: 0 0 40px #00e5ff, inset 0 0 40px #00e5ff;
     }
 
- .portal-ring:nth-child(1) {
+   .portal-ring:nth-child(1) {
       inset: 8%;
       animation: swirlSpin 0.6s linear infinite reverse;
     }
 
- .portal-ring:nth-child(2) {
+   .portal-ring:nth-child(2) {
       inset: -3%;
       border-color: rgba(0,229,255,0.4);
       border-style: dashed;
@@ -172,7 +171,7 @@
       animation: cardArise 0.7s 2.2s forwards;
     }
 
- .detail-header {
+   .detail-header {
       background: linear-gradient(90deg, rgba(0,229,255,0.15), transparent);
       padding: 35px 35px 20px;
       border-bottom: 1px solid rgba(0,229,255,0.2);
@@ -216,7 +215,7 @@
       font-weight: 700;
     }
 
- .detail-body {
+   .detail-body {
       padding: 30px 35px;
     }
 
@@ -246,7 +245,7 @@
       margin-right: 10px;
     }
 
- .btn-battle {
+   .btn-battle {
       display: block;
       width: 100%;
       text-align: center;
@@ -263,7 +262,7 @@
       transition: 0.3s;
     }
 
- .btn-battle:hover {
+   .btn-battle:hover {
       transform: scale(1.02);
       box-shadow: 0 0 50px rgba(0,229,255,0.9);
     }
@@ -294,9 +293,9 @@
 </div>
 
 <div class="workout-container">
-  <div class="workout-card"><h3>DAY 1 - CHEST & TRICEPS</h3><p>Bench Press, Incline Dumbbell, Pushups, Tricep Dips - The Monarch's Power</p></div>
-  <div class="workout-card"><h3>DAY 2 - BACK & BICEPS</h3><p>Pull-ups, Deadlifts, Barbell Rows, Curls - Dominion of Shadows</p></div>
-  <div class="workout-card"><h3>DAY 3 - LEGS & ABS</h3><p>Squats, Lunges, Leg Press, Planks - Foundation of a King</p></div>
+  <div class="workout-card"><h3>DAY 1 - CHEST & TRICEPS</h3><p>Calisthenics Push - 6 Home Exercises - Monarch Power</p></div>
+  <div class="workout-card"><h3>DAY 2 - BACK & BICEPS</h3><p>Calisthenics Pull & Core - 6 Home Exercises - Shadows</p></div>
+  <div class="workout-card"><h3>DAY 3 - LEGS & ABS</h3><p>Calisthenics Legs - 6 Home Exercises - King Foundation</p></div>
 </div>
 
 <div id="portal-overlay">
@@ -319,9 +318,39 @@
 
 <script>
 const workouts = {
-  "DAY 1 - CHEST & TRICEPS": { desc: "THE MONARCH'S POWER", list: ["Bench Press - 4x10", "Incline Dumbbell - 3x12", "Pushups - 100 Reps", "Tricep Dips - 3x15"] },
-  "DAY 2 - BACK & BICEPS": { desc: "DOMINION OF SHADOWS", list: ["Pull-ups - 4x8", "Deadlifts - 4x8", "Barbell Rows - 3x12", "Bicep Curls - 3x12"] },
-  "DAY 3 - LEGS & ABS": { desc: "FOUNDATION OF A KING", list: ["Squats - 5x8", "Lunges - 3x12", "Leg Press - 4x10", "Planks - 3x1min"] }
+  "DAY 1 - CHEST & TRICEPS": {
+    desc: "PUSH POWER - CALISTHENICS HOME",
+    list: [
+      "Standard Pushups - 4x20",
+      "Diamond Pushups - 3x15",
+      "Wide Pushups - 3x15",
+      "Pike Pushups - 3x12",
+      "Chair Tricep Dips - 3x20",
+      "Shoulder Tap Plank - 3x30 sec"
+    ]
+  },
+  "DAY 2 - BACK & BICEPS": {
+    desc: "PULL & CORE - NO GYM NEEDED",
+    list: [
+      "Door Pullups / Towel Row - 4x10",
+      "Superman Hold - 3x20 sec",
+      "Towel Bicep Curl - 3x15",
+      "Hanging Knee Raises - 3x20",
+      "Leg Raises - 3x20",
+      "Plank Hold - 3x60 sec"
+    ]
+  },
+  "DAY 3 - LEGS & ABS": {
+    desc: "LEGS OF MONARCH - HOME BATTLE",
+    list: [
+      "Bodyweight Squats - 5x25",
+      "Lunges - 3x20 each leg",
+      "Bulgarian Split Squat - 3x12 each",
+      "Wall Sit - 3x60 sec",
+      "Calf Raises - 4x30",
+      "Glute Bridge - 3x20"
+    ]
+  }
 };
 
 // MUSIC SYSTEM - EK BAAR CHALE, PURA CHALE
@@ -331,22 +360,37 @@ bgMusic.volume = 0.25;
 let savedTime = localStorage.getItem('aria-time');
 if(savedTime) bgMusic.currentTime = parseFloat(savedTime);
 let wasPlaying = localStorage.getItem('aria-playing') === 'true';
+
 function playMusic(){
   bgMusic.play().then(()=>{
     musicBtn.innerHTML="🔊 DARK ARIA Lv2";
     localStorage.setItem('aria-playing','true');
   }).catch(()=>{});
 }
-setInterval(()=>{ if(!bgMusic.paused) localStorage.setItem('aria-time', bgMusic.currentTime); }, 800);
+
+setInterval(()=>{
+  if(!bgMusic.paused) localStorage.setItem('aria-time', bgMusic.currentTime);
+}, 800);
+
 if(wasPlaying) playMusic();
+
 document.addEventListener('click', function firstClick(){
   playMusic();
   document.removeEventListener('click', firstClick);
 }, {once:true});
+
 musicBtn.onclick = (e)=>{
   e.stopPropagation();
-  if(bgMusic.paused){ bgMusic.play(); musicBtn.innerHTML="🔊 DARK ARIA Lv2"; localStorage.setItem('aria-playing','true'); }
-  else { bgMusic.pause(); musicBtn.innerHTML="🔇 PAUSED"; localStorage.setItem('aria-playing','false'); }
+  if(bgMusic.paused){
+    bgMusic.play();
+    musicBtn.innerHTML="🔊 DARK ARIA Lv2";
+    localStorage.setItem('aria-playing','true');
+  }
+  else {
+    bgMusic.pause();
+    musicBtn.innerHTML="🔇 PAUSED";
+    localStorage.setItem('aria-playing','false');
+  }
 };
 
 document.querySelectorAll('.workout-card').forEach(card => {
