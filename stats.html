@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Stats - SHADOW MONARCH</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<style>
+#music-btn{position:fixed;bottom:20px;right:20px;z-index:99999;background:rgba(0,229,255,0.15);border:1px solid #00e5ff;color:#00e5ff;padding:10px 16px;border-radius:30px;font-size:12px;letter-spacing:2px;cursor:pointer;backdrop-filter:blur(10px);}
+body{background:radial-gradient(ellipse at center, #0a1a24 0%, #020508 100%); min-height:100vh;}
+.stats-wrap{max-width:900px;margin:40px auto;padding:15px;}
+.level-card{
+background:linear-gradient(180deg, rgba(15,30,45,0.95) 0%, rgba(5,10,15,0.98) 100%);
+border:2px solid #00e5ff; border-radius:28px; padding:45px 30px; text-align:center;
+box-shadow:0 0 80px rgba(0,229,255,0.5), inset 0 0 40px rgba(0,229,255,0.08), 0 0 0 1px rgba(0,229,255,0.3);
+position:relative; overflow:hidden;
+}
+.level-card::before{
+content:""; position:absolute; top:-50%; left:-50%; width:200%; height:200%;
+background:linear-gradient(120deg, transparent 30%, rgba(0,229,255,0.08) 50%, transparent 70%);
+animation:shine 4s infinite;
+}
+@keyframes shine{0%{transform:translateX(-100%) rotate(20deg);}100%{transform:translateX(100%) rotate(20deg);}}
+.level-num{font-size:92px;font-weight:900;color:#fff;text-shadow:0 0 20px #00e5ff, 0 0 40px #00e5ff, 0 0 60px #00aaff;letter-spacing:8px;line-height:1;position:relative;z-index:1;}
+.rank{color:#00e5ff;letter-spacing:10px;font-size:20px;font-weight:900;margin-top:14px;text-shadow:0 0 20px #00e5ff;position:relative;z-index:1;}
+.rank.monarch{color:#ffaa00;text-shadow:0 0 20px #ffaa00, 0 0 40px #ff4400;}
+.rank.shadow{color:#a855f7;text-shadow:0 0 20px #a855f7, 0 0 40px #7c3aed; animation:pulse 1.5s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.7;}}
+.xp-bar{width:100%;height:28px;background:rgba(0,0,0,0.7);border:1px solid rgba(0,229,255,0.4);border-radius:40px;margin:36px 0 14px;overflow:hidden;position:relative;z-index:1;box-shadow:inset 0 2px 10px rgba(0,0,0,0.8);}
+.xp-fill{height:100%;background:linear-gradient(90deg,#00e5ff 0%,#0099ff 50%,#00e5ff 100%);background-size:200% 100%;box-shadow:0 0 20px #00e5ff, 0 0 40px rgba(0,229,255,0.5);transition:width 1.5s cubic-bezier(0.4,0,0.2,1);width:0%;animation:flow 2s linear infinite;position:relative;}
+@keyframes flow{0%{background-position:0% 0%;}100%{background-position:200% 0%;}}
+.xp-fill::after{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);animation:glint 1.5s infinite;}
+@keyframes glint{0%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
+.xp-text{position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:12px;letter-spacing:2px;font-weight:900;text-shadow:0 1px 4px #000;z-index:2;}
+.grid-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px;position:relative;z-index:1;}
+@media(max-width:650px){.grid-stats{grid-template-columns:1fr;}.level-num{font-size:68px;}}
+.stat-box{background:linear-gradient(145deg, rgba(0,229,255,0.08), rgba(0,0,0,0.3));border:1px solid rgba(0,229,255,0.25);border-radius:16px;padding:22px;backdrop-filter:blur(10px);transition:0.3s;}
+.stat-box:hover{border-color:#00e5ff;box-shadow:0 0 25px rgba(0,229,255,0.3);transform:translateY(-2px);}
+.stat-box b{color:#00e5ff;font-size:30px;display:block;text-shadow:0 0 15px #00e5ff;}
+.stat-box span{color:#7aa;font-size:10px;letter-spacing:3px;font-weight:700;margin-top:4px;display:block;}
+.back-btn{display:inline-block;margin-top:36px;background:linear-gradient(90deg,#00e5ff,#0099ff);color:#000;padding:14px 36px;border-radius:40px;letter-spacing:4px;font-size:13px;font-weight:900;text-decoration:none;box-shadow:0 0 30px rgba(0,229,255,0.6);transition:0.3s;position:relative;z-index:1;}
+.back-btn:hover{transform:scale(1.05);box-shadow:0 0 50px rgba(0,229,255,0.8);}
+</style>
+</head>
+<body>
+<audio id="bg-music" src="dark-aria.mp3" loop preload="auto"></audio>
+<div id="music-btn">🔊 DARK ARIA Lv2</div>
+<nav><div class="logo">ARISE FITNESS</div><div><a href="index.html">Home</a><a href="workout.html">Workout</a><a href="stats.html">Stats</a><a href="about.html">About</a></div></nav>
+
+<div class="stats-wrap">
+<div class="level-card">
+<div style="color:#00e5ff;font-size:10px;letter-spacing:6px;margin-bottom:10px;opacity:0.7;position:relative;z-index:1;">[ SYSTEM WINDOW ]</div>
+<div class="level-num" id="lvlNum">Lv 0</div>
+<div class="rank" id="rankName">E-RANK</div>
+<div class="xp-bar"><div class="xp-fill" id="xpFill"></div><div class="xp-text" id="xpText">0 / 1000 XP</div></div>
+<p style="color:#5a7a8a;font-size:10px;letter-spacing:3px;margin:0;position:relative;z-index:1;" id="nextInfo">NEXT LEVEL: 1000 XP NEEDED</p>
+<div class="grid-stats">
+<div class="stat-box"><b id="totalXp">0</b><span>TOTAL XP</span></div>
+<div class="stat-box"><b id="totalBattles">0</b><span>BATTLES WON</span></div>
+<div class="stat-box"><b id="totalSets">0</b><span>TOTAL SETS</span></div>
+</div>
+
+<div style="margin-top:32px;display:grid;grid-template-columns:1fr 1fr;gap:14px;position:relative;z-index:1;">
+<div class="stat-box"><b id="avgXp" style="font-size:20px;">0</b><span>AVG XP / BATTLE</span></div>
+<div class="stat-box"><b id="toMax" style="font-size:20px;color:#ffaa00;">156</b><span>LEVELS TO MAX</span></div>
+</div>
+
+<p style="color:#3a5a6a;margin-top:34px;font-size:10px;letter-spacing:3px;line-height:1.8;position:relative;z-index:1;">
+MAX LEVEL 156 - SHADOW MONARCH<br>
+<span style="color:#00e5ff;">0-10 E | 11-25 D | 26-45 C | 46-70 B | 71-100 A | 101-130 S | 131-154 MONARCH | 155-156 SHADOW MONARCH</span><br>
+<span style="color:#ffaa00;">HARD GRIND • NO EASY WAY • ARISE OR DIE</span>
+</p>
+<a href="workout.html" class="back-btn">ENTER GATE →</a>
+</div>
+</div>
+
+<script>
+// MUSIC
+const bgMusic=document.getElementById('bg-music'); const musicBtn=document.getElementById('music-btn');
+bgMusic.volume=0.25; let savedTime=localStorage.getItem('aria-time'); if(savedTime) bgMusic.currentTime=parseFloat(savedTime);
+let wasPlaying=localStorage.getItem('aria-playing')==='true';
+function playMusic(){bgMusic.play().then(()=>{musicBtn.innerHTML="🔊 DARK ARIA Lv2";localStorage.setItem('aria-playing','true');}).catch(()=>{});}
+setInterval(()=>{if(!bgMusic.paused)localStorage.setItem('aria-time',bgMusic.currentTime);},800);
+if(wasPlaying) playMusic();
+document.addEventListener('click',function firstClick(){playMusic();document.removeEventListener('click',firstClick);},{once:true});
+musicBtn.onclick=(e)=>{e.stopPropagation(); if(bgMusic.paused){bgMusic.play();musicBtn.innerHTML="🔊 DARK ARIA Lv2";localStorage.setItem('aria-playing','true');}else{bgMusic.pause();musicBtn.innerHTML="🔇 PAUSED";localStorage.setItem('aria-playing','false');}};
+
+function getXPForLevel(lvl){if(lvl<=1)return 1000;return Math.floor(1000*Math.pow(lvl,1.35)+lvl*350);}
+function getRank(lvl){
+if(lvl<=10)return["E-RANK",""]; if(lvl<=25)return["D-RANK",""]; if(lvl<=45)return["C-RANK",""];
+if(lvl<=70)return["B-RANK",""]; if(lvl<=100)return["A-RANK",""]; if(lvl<=130)return["S-RANK",""];
+if(lvl<=154)return["MONARCH","monarch"]; return["SHADOW MONARCH","shadow"];
+}
+let xp=parseInt(localStorage.getItem('ARISE_TOTAL_XP')||'0');
+let battles=parseInt(localStorage.getItem('ARISE_BATTLES')||'0');
+let sets=parseInt(localStorage.getItem('ARISE_SETS')||'0');
+let tempXp=xp; let calcLvl=0;
+while(calcLvl<156){let need=getXPForLevel(calcLvl+1); if(tempXp>=need){tempXp-=need;calcLvl++;}else break;}
+localStorage.setItem('ARISE_LEVEL',calcLvl);
+let rankInfo=getRank(calcLvl);
+document.getElementById('lvlNum').innerText="Lv "+calcLvl;
+document.getElementById('rankName').innerText=rankInfo[0];
+document.getElementById('rankName').className="rank "+rankInfo[1];
+document.getElementById('totalXp').innerText=xp.toLocaleString();
+document.getElementById('totalBattles').innerText=battles;
+document.getElementById('totalSets').innerText=sets;
+document.getElementById('avgXp').innerText=battles?Math.floor(xp/battles):0;
+document.getElementById('toMax').innerText=(156-calcLvl);
+let nextNeed=getXPForLevel(calcLvl+1);
+if(calcLvl>=156){
+document.getElementById('xpFill').style.width="100%";
+document.getElementById('xpText').innerText="MAXIMUM - YOU ARE SHADOW MONARCH";
+document.getElementById('nextInfo').innerText="☠️ SYSTEM: YOU HAVE TRANSCENDED ☠️";
+}else{
+let perc=Math.floor((tempXp/nextNeed)*100);
+setTimeout(()=>{document.getElementById('xpFill').style.width=perc+"%";},300);
+document.getElementById('xpText').innerText=tempXp+" / "+nextNeed+" XP ("+perc+"%)";
+let nextRank=getRank(calcLvl+1)[0];
+document.getElementById('nextInfo').innerText=(nextNeed-tempXp)+" XP TO "+nextRank+" • "+(156-calcLvl)+" LEVELS TO SHADOW MONARCH";
+}
+</script>
+</body>
+</html>
