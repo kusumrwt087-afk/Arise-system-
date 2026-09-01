@@ -5,13 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <style>
-   .workout-container {
+ .workout-container {
       max-width: 900px;
       margin: 40px auto;
       padding: 0 20px;
     }
-
-   .workout-card {
+ .workout-card {
       background: linear-gradient(145deg, rgba(10,20,30,0.9), rgba(5,7,10,0.8));
       border: 1px solid rgba(0,229,255,0.3);
       backdrop-filter: blur(15px);
@@ -23,8 +22,7 @@
       position: relative;
       overflow: hidden;
     }
-
-   .workout-card::before {
+ .workout-card::before {
       content: "";
       position: absolute;
       top: 0;
@@ -34,32 +32,21 @@
       background: linear-gradient(90deg, transparent, rgba(0,229,255,0.2), transparent);
       transition: 0.6s;
     }
-
-   .workout-card:hover::before {
-      left: 100%;
-    }
-
-   .workout-card:hover {
+ .workout-card:hover::before { left: 100%; }
+ .workout-card:hover {
       border-color: #00e5ff;
       box-shadow: 0 0 40px rgba(0,229,255,0.5);
       transform: translateY(-8px);
     }
-
-   .workout-card h3 {
+ .workout-card h3 {
       color: #00e5ff;
       margin: 0 0 10px 0;
       letter-spacing: 2px;
       font-size: 22px;
       font-weight: 900;
     }
+ .workout-card p { color: #a0b8d0; margin: 0; font-size: 15px; }
 
-   .workout-card p {
-      color: #a0b8d0;
-      margin: 0;
-      font-size: 15px;
-    }
-
-    /* ===== FINAL S-RANK GATE - GHANA + BADA + LAMBA ===== */
     #portal-overlay {
       position: fixed;
       inset: 0;
@@ -73,12 +60,8 @@
       padding: 20px;
       overflow: hidden;
     }
-
-    #portal-overlay.active {
-      display: flex;
-    }
-
-   .portal {
+    #portal-overlay.active { display: flex; }
+ .portal {
       position: absolute;
       width: 130vmax;
       height: 130vmax;
@@ -89,8 +72,7 @@
       display: grid;
       place-items: center;
     }
-
-   .portal::before {
+ .portal::before {
       content: "";
       position: absolute;
       inset: 0;
@@ -99,8 +81,7 @@
       filter: blur(8px) brightness(1.5);
       animation: swirlSpin 0.35s linear infinite;
     }
-
-   .portal::after {
+ .portal::after {
       content: "";
       position: absolute;
       inset: 18%;
@@ -109,36 +90,20 @@
       box-shadow: 0 0 100px #00e5ff, 0 0 200px #00aaff, inset 0 0 60px #fff;
       animation: corePulse 0.4s ease-in-out infinite alternate;
     }
-
-   .portal-ring {
+ .portal-ring {
       position: absolute;
       border-radius: 50%;
       border: 4px solid rgba(0,229,255,0.9);
       box-shadow: 0 0 40px #00e5ff, inset 0 0 40px #00e5ff;
     }
-
-   .portal-ring:nth-child(1) {
-      inset: 8%;
-      animation: swirlSpin 0.6s linear infinite reverse;
-    }
-
-   .portal-ring:nth-child(2) {
-      inset: -3%;
-      border-color: rgba(0,229,255,0.4);
-      border-style: dashed;
-      border-width: 3px;
+ .portal-ring:nth-child(1) { inset: 8%; animation: swirlSpin 0.6s linear infinite reverse; }
+ .portal-ring:nth-child(2) {
+      inset: -3%; border-color: rgba(0,229,255,0.4);
+      border-style: dashed; border-width: 3px;
       animation: swirlSpin 1.2s linear infinite;
     }
-
-    @keyframes swirlSpin {
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes corePulse {
-      from { transform: scale(0.9); }
-      to { transform: scale(1.1); }
-    }
-
+    @keyframes swirlSpin { to { transform: rotate(360deg); } }
+    @keyframes corePulse { from { transform: scale(0.9); } to { transform: scale(1.1); } }
     @keyframes openGate {
       0% { transform: scale(0); opacity: 0; filter: blur(50px); }
       20% { opacity: 1; filter: blur(0); }
@@ -146,163 +111,145 @@
       80% { transform: scale(1.1); opacity: 1; }
       100% { transform: scale(1.5); opacity: 0; filter: blur(40px); }
     }
-
     @keyframes cardArise {
       0% { opacity: 0; transform: scale(0.6) translateY(80px); filter: blur(20px); }
       100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
     }
-
-    /* ===== DETAIL CARD ===== */
     #workout-detail {
-      position: relative;
-      z-index: 10;
+      position: relative; z-index: 10;
       background: rgba(8,15,25,0.98);
-      border: 2px solid #00e5ff;
-      padding: 0;
-      border-radius: 24px;
-      width: 100%;
-      max-width: 620px;
+      border: 2px solid #00e5ff; padding: 0;
+      border-radius: 24px; width: 100%; max-width: 620px;
       box-shadow: 0 0 120px rgba(0,229,255,0.7), inset 0 0 30px rgba(0,229,255,0.1);
-      opacity: 0;
-      overflow: hidden;
+      opacity: 0; overflow: hidden;
     }
-
-    #portal-overlay.active #workout-detail {
-      animation: cardArise 0.7s 2.2s forwards;
-    }
-
-   .detail-header {
+    #portal-overlay.active #workout-detail { animation: cardArise 0.7s 2.2s forwards; }
+ .detail-header {
       background: linear-gradient(90deg, rgba(0,229,255,0.15), transparent);
-      padding: 35px 35px 20px;
-      border-bottom: 1px solid rgba(0,229,255,0.2);
-      position: relative;
+      padding: 35px 35px 20px; border-bottom: 1px solid rgba(0,229,255,0.2); position: relative;
     }
-
     #close-portal {
-      position: absolute;
-      top: 18px;
-      right: 22px;
-      color: #00e5ff;
-      font-size: 32px;
-      cursor: pointer;
-      width: 40px;
-      height: 40px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      transition: 0.3s;
+      position: absolute; top: 18px; right: 22px; color: #00e5ff;
+      font-size: 32px; cursor: pointer; width: 40px; height: 40px;
+      display: grid; place-items: center; border-radius: 50%; transition: 0.3s;
     }
-
-    #close-portal:hover {
-      background: rgba(0,229,255,0.2);
-      transform: rotate(90deg);
-    }
-
-    #detail-title {
-      color: #fff;
-      font-size: 30px!important;
-      font-weight: 900;
-      letter-spacing: 2px;
-      margin: 0;
-      text-shadow: 0 0 20px #00e5ff;
-    }
-
-    #detail-desc {
-      color: #00e5ff;
-      font-size: 13px;
-      letter-spacing: 4px;
-      margin-top: 8px;
-      font-weight: 700;
-    }
-
-   .detail-body {
-      padding: 30px 35px;
-    }
-
-    #detail-list {
-      padding: 0;
-      margin: 0;
-      list-style: none;
-    }
-
+    #close-portal:hover { background: rgba(0,229,255,0.2); transform: rotate(90deg); }
+    #detail-title { color: #fff; font-size: 30px!important; font-weight: 900; letter-spacing: 2px; margin: 0; text-shadow: 0 0 20px #00e5ff; }
+    #detail-desc { color: #00e5ff; font-size: 13px; letter-spacing: 4px; margin-top: 8px; font-weight: 700; }
+ .detail-body { padding: 30px 35px; }
+    #detail-list { padding: 0; margin: 0; list-style: none; }
     #detail-list li {
-      color: #e0efff;
-      font-size: 19px!important;
-      padding: 16px 15px;
-      background: rgba(0,229,255,0.05);
-      border: 1px solid rgba(0,229,255,0.15);
-      border-radius: 12px;
-      margin-bottom: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      color: #e0efff; font-size: 19px!important; padding: 16px 15px;
+      background: rgba(0,229,255,0.05); border: 1px solid rgba(0,229,255,0.15);
+      border-radius: 12px; margin-bottom: 12px;
+      display: flex; justify-content: space-between; align-items: center;
     }
-
-    #detail-list li::before {
-      content: "▸";
-      color: #00e5ff;
-      font-weight: 900;
-      margin-right: 10px;
+    #detail-list li::before { content: "▸"; color: #00e5ff; font-weight: 900; margin-right: 10px; }
+ .btn-battle {
+      display: block; width: 100%; text-align: center; margin-top: 25px;
+      background: linear-gradient(90deg, #00e5ff, #00aaff); color: #000;
+      padding: 18px!important; border-radius: 14px; font-weight: 900;
+      font-size: 18px!important; text-decoration: none; letter-spacing: 2px;
+      box-shadow: 0 0 30px rgba(0,229,255,0.6); transition: 0.3s;
     }
-
-   .btn-battle {
-      display: block;
-      width: 100%;
-      text-align: center;
-      margin-top: 25px;
-      background: linear-gradient(90deg, #00e5ff, #00aaff);
-      color: #000;
-      padding: 18px!important;
-      border-radius: 14px;
-      font-weight: 900;
-      font-size: 18px!important;
-      text-decoration: none;
-      letter-spacing: 2px;
-      box-shadow: 0 0 30px rgba(0,229,255,0.6);
-      transition: 0.3s;
-    }
-
-   .btn-battle:hover {
-      transform: scale(1.02);
-      box-shadow: 0 0 50px rgba(0,229,255,0.9);
-    }
-
-    /* MUSIC BUTTON - SIRF YE ADDED HAI */
+ .btn-battle:hover { transform: scale(1.02); box-shadow: 0 0 50px rgba(0,229,255,0.9); }
     #music-btn {
       position:fixed; bottom:20px; right:20px; z-index:10000;
       background:rgba(0,229,255,0.15); border:1px solid #00e5ff;
       color:#00e5ff; padding:8px 14px; border-radius:30px;
-      font-size:10px; letter-spacing:1px; cursor:pointer;
-      backdrop-filter:blur(10px);
+      font-size:10px; letter-spacing:1px; cursor:pointer; backdrop-filter:blur(10px);
+                             }
+        /* ===== NEW CUSTOM BUILDER STYLES ===== */
+ .builder-wrap{
+      max-width:1100px; margin:60px auto 80px; padding:0 20px;
+      border-top:1px solid rgba(0,229,255,0.2); padding-top:50px;
     }
+ .builder-title{
+      text-align:center; color:#fff; font-size:38px; font-weight:900; letter-spacing:5px;
+      text-shadow:0 0 20px #00e5ff; margin:0;
+    }
+ .builder-sub{ text-align:center; color:#00e5ff; letter-spacing:5px; font-size:12px; margin-top:8px;}
+ .day-tabs{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin:30px 0; }
+ .day-tab{
+      background:rgba(10,20,30,0.8); border:1px solid rgba(0,229,255,0.25);
+      color:#8ab; padding:10px 18px; border-radius:30px; cursor:pointer;
+      letter-spacing:2px; font-size:12px; font-weight:800; transition:0.3s;
+    }
+ .day-tab.active{ background:#00e5ff; color:#000; box-shadow:0 0 25px #00e5ff; }
+ .builder-grid{ display:grid; grid-template-columns: 1.1fr 0.9fr; gap:20px; }
+    @media(max-width:800px){.builder-grid{ grid-template-columns:1fr; } }
+ .lib-box,.plan-box{
+      background:rgba(8,15,25,0.92); border:1px solid rgba(0,229,255,0.25);
+      border-radius:18px; padding:20px; backdrop-filter:blur(15px);
+    }
+ .lib-head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; flex-wrap:wrap; gap:10px;}
+ .lib-head h3{ color:#00e5ff; margin:0; letter-spacing:2px; font-size:14px;}
+ .search{ background:rgba(0,0,0,0.5); border:1px solid rgba(0,229,255,0.2); color:#fff; padding:8px 12px; border-radius:20px; outline:none; font-size:12px; width:180px;}
+ .cat-filters{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:15px;}
+ .cat-btn{ padding:6px 12px; border-radius:20px; border:1px solid rgba(0,229,255,0.2); background:transparent; color:#7fa9c0; font-size:10px; cursor:pointer; letter-spacing:1px;}
+ .cat-btn.active{ background:rgba(0,229,255,0.2); color:#00e5ff; border-color:#00e5ff;}
+ .ex-list{ max-height:520px; overflow-y:auto; display:grid; gap:10px; padding-right:5px;}
+ .ex-item{ background:rgba(0,229,255,0.04); border:1px solid rgba(0,229,255,0.12); border-radius:12px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;}
+ .ex-item b{ color:#e0f7ff; font-size:13px; letter-spacing:1px; display:block;}
+ .ex-item span{ color:#7aa; font-size:10px;}
+ .add-btn{ background:transparent; border:1px solid #00e5ff; color:#00e5ff; padding:6px 12px; border-radius:20px; cursor:pointer; font-size:10px; font-weight:800; transition:0.3s;}
+ .add-btn:hover{ background:#00e5ff; color:#000; box-shadow:0 0 15px #00e5ff;}
+ .plan-head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;}
+ .plan-head h3{ color:#fff; margin:0; letter-spacing:2px; font-size:14px;}
+ .clear-btn{ background:rgba(255,60,60,0.1); border:1px solid rgba(255,60,60,0.4); color:#ff6b6b; padding:5px 10px; border-radius:20px; font-size:10px; cursor:pointer;}
+ .plan-list{ display:grid; gap:10px;}
+ .plan-item{ background:linear-gradient(90deg, rgba(0,229,255,0.08), transparent); border:1px solid rgba(0,229,255,0.2); border-radius:12px; padding:12px; display:grid; grid-template-columns:1fr auto; gap:10px; align-items:center;}
+ .plan-item b{ color:#fff; font-size:13px;}
+ .plan-controls{ display:flex; gap:8px; align-items:center; margin-top:6px; flex-wrap:wrap;}
+ .plan-controls input{ width:55px; background:#000; border:1px solid rgba(0,229,255,0.3); color:#00e5ff; padding:5px; border-radius:8px; text-align:center; font-weight:800; font-size:12px;}
+ .plan-controls label{ font-size:9px; color:#7aa; letter-spacing:1px;}
+ .del-btn{ background:transparent; border:none; color:#ff5a5a; cursor:pointer; font-size:18px;}
+ .save-msg{ text-align:center; margin-top:15px; color:#00ff88; font-size:11px; letter-spacing:2px; opacity:0; transition:0.5s;}
+ .save-msg.show{ opacity:1;}
   </style>
 </head>
 <body>
-
 <audio id="bg-music" src="dark-aria.mp3" loop preload="auto"></audio>
 <div id="music-btn">🎧 DARK ARIA Lv2</div>
-
 <nav>
   <div class="logo">ARISE FITNESS</div>
   <div><a href="index.html">Home</a><a href="workout.html">Workout</a><a href="about.html">About</a></div>
 </nav>
-
 <div class="hero" style="padding: 70px 20px 10px;">
   <h1 style="font-size: 52px; letter-spacing: 5px;">WORKOUTS</h1>
   <p style="letter-spacing: 6px; color: #00e5ff;">CHOOSE YOUR BATTLE</p>
 </div>
-
 <div class="workout-container">
   <div class="workout-card"><h3>DAY 1 - CHEST & TRICEPS</h3><p>Calisthenics Push - 6 Home Exercises - Monarch Power</p></div>
   <div class="workout-card"><h3>DAY 2 - BACK & BICEPS</h3><p>Calisthenics Pull & Core - 6 Home Exercises - Shadows</p></div>
   <div class="workout-card"><h3>DAY 3 - LEGS & ABS</h3><p>Calisthenics Legs - 6 Home Exercises - King Foundation</p></div>
 </div>
+<div class="builder-wrap">
+  <h2 class="builder-title">CUSTOM ARISE BUILDER</h2>
+  <p class="builder-sub">CHOOSE EXERCISE • SET DAY • EDIT REPS</p>
+  <div class="day-tabs" id="dayTabs"></div>
+  <div class="builder-grid">
+    <div class="lib-box">
+      <div class="lib-head">
+        <h3>EXERCISE LIBRARY [45]</h3>
+        <input id="searchEx" class="search" placeholder="Search... pushup etc">
+      </div>
+      <div class="cat-filters" id="catFilters"></div>
+      <div class="ex-list" id="exList"></div>
+    </div>
+    <div class="plan-box">
+      <div class="plan-head">
+        <h3 id="planTitle">MONDAY PLAN</h3>
+        <button class="clear-btn" onclick="clearDay()">CLEAR DAY</button>
+      </div>
+      <div class="plan-list" id="planList"></div>
+      <div class="save-msg" id="saveMsg">SAVED TO SHADOW VAULT ✓</div>
+    </div>
+  </div>
+</div>
 
 <div id="portal-overlay">
-  <div class="portal">
-    <div class="portal-ring"></div>
-    <div class="portal-ring"></div>
-  </div>
+  <div class="portal"><div class="portal-ring"></div><div class="portal-ring"></div></div>
   <div id="workout-detail">
     <div class="detail-header">
       <span id="close-portal">&times;</span>
@@ -320,79 +267,34 @@
 const workouts = {
   "DAY 1 - CHEST & TRICEPS": {
     desc: "PUSH POWER - CALISTHENICS HOME",
-    list: [
-      "Standard Pushups - 4x20",
-      "Diamond Pushups - 3x15",
-      "Wide Pushups - 3x15",
-      "Pike Pushups - 3x12",
-      "Chair Tricep Dips - 3x20",
-      "Shoulder Tap Plank - 3x30 sec"
-    ]
+    list: ["Standard Pushups - 4x20","Diamond Pushups - 3x15","Wide Pushups - 3x15","Pike Pushups - 3x12","Chair Tricep Dips - 3x20","Shoulder Tap Plank - 3x30 sec"]
   },
   "DAY 2 - BACK & BICEPS": {
     desc: "PULL & CORE - NO GYM NEEDED",
-    list: [
-      "Door Pullups / Towel Row - 4x10",
-      "Superman Hold - 3x20 sec",
-      "Towel Bicep Curl - 3x15",
-      "Hanging Knee Raises - 3x20",
-      "Leg Raises - 3x20",
-      "Plank Hold - 3x60 sec"
-    ]
+    list: ["Door Pullups / Towel Row - 4x10","Superman Hold - 3x20 sec","Towel Bicep Curl - 3x15","Hanging Knee Raises - 3x20","Leg Raises - 3x20","Plank Hold - 3x60 sec"]
   },
   "DAY 3 - LEGS & ABS": {
     desc: "LEGS OF MONARCH - HOME BATTLE",
-    list: [
-      "Bodyweight Squats - 5x25",
-      "Lunges - 3x20 each leg",
-      "Bulgarian Split Squat - 3x12 each",
-      "Wall Sit - 3x60 sec",
-      "Calf Raises - 4x30",
-      "Glute Bridge - 3x20"
-    ]
+    list: ["Bodyweight Squats - 5x25","Lunges - 3x20 each leg","Bulgarian Split Squat - 3x12 each","Wall Sit - 3x60 sec","Calf Raises - 4x30","Glute Bridge - 3x20"]
   }
 };
-
-// MUSIC SYSTEM - EK BAAR CHALE, PURA CHALE
 const bgMusic = document.getElementById('bg-music');
 const musicBtn = document.getElementById('music-btn');
 bgMusic.volume = 0.25;
 let savedTime = localStorage.getItem('aria-time');
 if(savedTime) bgMusic.currentTime = parseFloat(savedTime);
 let wasPlaying = localStorage.getItem('aria-playing') === 'true';
-
 function playMusic(){
-  bgMusic.play().then(()=>{
-    musicBtn.innerHTML="🔊 DARK ARIA Lv2";
-    localStorage.setItem('aria-playing','true');
-  }).catch(()=>{});
+  bgMusic.play().then(()=>{ musicBtn.innerHTML="🔊 DARK ARIA Lv2"; localStorage.setItem('aria-playing','true'); }).catch(()=>{});
 }
-
-setInterval(()=>{
-  if(!bgMusic.paused) localStorage.setItem('aria-time', bgMusic.currentTime);
-}, 800);
-
+setInterval(()=>{ if(!bgMusic.paused) localStorage.setItem('aria-time', bgMusic.currentTime); }, 800);
 if(wasPlaying) playMusic();
-
-document.addEventListener('click', function firstClick(){
-  playMusic();
-  document.removeEventListener('click', firstClick);
-}, {once:true});
-
+document.addEventListener('click', function firstClick(){ playMusic(); document.removeEventListener('click', firstClick); }, {once:true});
 musicBtn.onclick = (e)=>{
   e.stopPropagation();
-  if(bgMusic.paused){
-    bgMusic.play();
-    musicBtn.innerHTML="🔊 DARK ARIA Lv2";
-    localStorage.setItem('aria-playing','true');
-  }
-  else {
-    bgMusic.pause();
-    musicBtn.innerHTML="🔇 PAUSED";
-    localStorage.setItem('aria-playing','false');
-  }
+  if(bgMusic.paused){ bgMusic.play(); musicBtn.innerHTML="🔊 DARK ARIA Lv2"; localStorage.setItem('aria-playing','true'); }
+  else { bgMusic.pause(); musicBtn.innerHTML="🔇 PAUSED"; localStorage.setItem('aria-playing','false'); }
 };
-
 document.querySelectorAll('.workout-card').forEach(card => {
   card.addEventListener('click', () => {
     const title = card.querySelector('h3').innerText;
@@ -400,24 +302,108 @@ document.querySelectorAll('.workout-card').forEach(card => {
     document.getElementById('detail-desc').innerText = workouts[title].desc;
     document.getElementById('detail-list').innerHTML = workouts[title].list.map(i=>`<li><span>${i.split(' - ')[0]}</span><span style="color:#00e5ff;font-size:14px;">${i.split(' - ')[1]}</span></li>`).join('');
     const ov = document.getElementById('portal-overlay');
-    ov.classList.remove('active');
-    void ov.offsetWidth;
-    ov.classList.add('active');
+    ov.classList.remove('active'); void ov.offsetWidth; ov.classList.add('active');
     document.body.style.overflow = 'hidden';
   });
 });
-
 document.getElementById('close-portal').onclick = () => {
   document.getElementById('portal-overlay').classList.remove('active');
   document.body.style.overflow = 'auto';
 };
-
 document.getElementById('portal-overlay').addEventListener('click', (e) => {
   if(e.target.id === 'portal-overlay') {
     document.getElementById('portal-overlay').classList.remove('active');
     document.body.style.overflow = 'auto';
   }
 });
+const DAYS = ["MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY","SUNDAY"];
+const CATS = ["ALL","PUSH","PULL","LEGS","CORE","FULL"];
+  const LIB = [
+  {n:"Standard Pushup",c:"PUSH",m:"Chest"}, {n:"Diamond Pushup",c:"PUSH",m:"Triceps"}, {n:"Wide Pushup",c:"PUSH",m:"Chest"},
+  {n:"Archer Pushup",c:"PUSH",m:"Chest"}, {n:"Pike Pushup",c:"PUSH",m:"Shoulders"}, {n:"Pseudo Planche Pushup",c:"PUSH",m:"Chest"},
+  {n:"Decline Pushup",c:"PUSH",m:"Upper Chest"}, {n:"Spiderman Pushup",c:"PUSH",m:"Core+Chest"},
+  {n:"Tricep Dips (Chair)",c:"PUSH",m:"Triceps"}, {n:"Handstand Pushup Neg",c:"PUSH",m:"Shoulders"},
+  {n:"Pullup",c:"PULL",m:"Lats"}, {n:"Chinup",c:"PULL",m:"Biceps"}, {n:"Wide Pullup",c:"PULL",m:"Back"},
+  {n:"Towel Row",c:"PULL",m:"Back"}, {n:"Inverted Row",c:"PULL",m:"Back"}, {n:"Doorframe Row",c:"PULL",m:"Back"},
+  {n:"Superman Hold",c:"PULL",m:"Lower Back"}, {n:"Towel Bicep Curl",c:"PULL",m:"Biceps"},
+  {n:"Bodyweight Squat",c:"LEGS",m:"Quads"}, {n:"Pistol Squat",c:"LEGS",m:"Quads"}, {n:"Bulgarian Split Squat",c:"LEGS",m:"Glutes"},
+  {n:"Lunges",c:"LEGS",m:"Legs"}, {n:"Jump Squat",c:"LEGS",m:"Explosive"}, {n:"Wall Sit",c:"LEGS",m:"Quads"},
+  {n:"Calf Raises",c:"LEGS",m:"Calves"}, {n:"Glute Bridge",c:"LEGS",m:"Glutes"}, {n:"Single Leg Deadlift",c:"LEGS",m:"Hamstrings"},
+  {n:"Cossack Squat",c:"LEGS",m:"Mobility"},
+  {n:"Plank Hold",c:"CORE",m:"Abs"}, {n:"Side Plank",c:"CORE",m:"Obliques"}, {n:"Leg Raises",c:"CORE",m:"Lower Abs"},
+  {n:"Hanging Knee Raise",c:"CORE",m:"Abs"}, {n:"L-Sit Hold",c:"CORE",m:"Core"}, {n:"Hollow Body Hold",c:"CORE",m:"Core"},
+  {n:"Russian Twist",c:"CORE",m:"Obliques"}, {n:"Mountain Climber",c:"CORE",m:"Cardio+Core"}, {n:"Dead Bug",c:"CORE",m:"Core"},
+  {n:"Burpees",c:"FULL",m:"Full Body"}, {n:"Jumping Jacks",c:"FULL",m:"Cardio"}, {n:"High Knees",c:"FULL",m:"Cardio"},
+  {n:"Bear Crawl",c:"FULL",m:"Full Body"}, {n:"Shoulder Tap Plank",c:"FULL",m:"Core+Push"}, {n:"Inchworm",c:"FULL",m:"Full Body"},
+  {n:"Squat to Calf Raise",c:"FULL",m:"Legs+Calf"}
+];
+let currentDay = "MONDAY";
+let currentCat = "ALL";
+let customData = JSON.parse(localStorage.getItem('ARISE_CUSTOM_V1')||'{}');
+DAYS.forEach(d=>{ if(!customData[d]) customData[d]=[]; });
+function saveCustom(){
+  localStorage.setItem('ARISE_CUSTOM_V1', JSON.stringify(customData));
+  let msg=document.getElementById('saveMsg'); msg.classList.add('show');
+  setTimeout(()=>msg.classList.remove('show'),1500);
+}
+function renderTabs(){
+  document.getElementById('dayTabs').innerHTML = DAYS.map(d=>`<div class="day-tab ${d===currentDay?'active':''}" onclick="switchDay('${d}')">${d} [${customData[d].length}]</div>`).join('');
+  document.getElementById('catFilters').innerHTML = CATS.map(c=>`<div class="cat-btn ${c===currentCat?'active':''}" onclick="switchCat('${c}')">${c}</div>`).join('');
+  document.getElementById('planTitle').innerText = currentDay + " PLAN • " + customData[currentDay].length + " EX";
+}
+function switchDay(d){ currentDay=d; renderAll(); }
+function switchCat(c){ currentCat=c; renderLib(); renderTabs(); }
+function renderLib(){
+  let q = document.getElementById('searchEx').value.toLowerCase();
+  let filtered = LIB.filter(x=>{
+    let catOk = currentCat==="ALL" || x.c===currentCat;
+    let qOk = x.n.toLowerCase().includes(q) || x.m.toLowerCase().includes(q);
+    return catOk && qOk;
+  });
+  document.getElementById('exList').innerHTML = filtered.map((x,i)=>`
+    <div class="ex-item">
+      <div><b>${x.n}</b><span>${x.c} • ${x.m}</span></div>
+      <button class="add-btn" onclick="addExercise('${x.n.replace(/'/g,"\\'")}')">+ ADD</button>
+    </div>`).join('');
+}
+function addExercise(name){
+  customData[currentDay].push({name:name, sets:3, reps:12});
+  saveCustom(); renderAll();
+}
+function renderPlan(){
+  let list = document.getElementById('planList');
+  if(customData[currentDay].length===0){
+    list.innerHTML = `<p style="color:#5a7a8a; font-size:12px; letter-spacing:1px; text-align:center; padding:20px;">No exercises yet. Add from left library →</p>`;
+    return;
+  }
+  list.innerHTML = customData[currentDay].map((ex,idx)=>`
+    <div class="plan-item">
+      <div>
+        <b>${idx+1}. ${ex.name}</b>
+        <div class="plan-controls">
+          <label>SETS</label><input type="number" value="${ex.sets}" min="1" max="20" onchange="updateSet(${idx},'sets',this.value)">
+          <label>REPS</label><input type="number" value="${ex.reps}" min="1" max="100" onchange="updateSet(${idx},'reps',this.value)">
+          <label>or SEC</label>
+        </div>
+      </div>
+      <button class="del-btn" onclick="removeEx(${idx})">✕</button>
+    </div>
+  `).join('');
+}
+function updateSet(idx,field,val){
+  customData[currentDay][idx][field]=parseInt(val)||1;
+  saveCustom(); renderTabs();
+}
+function removeEx(idx){
+  customData[currentDay].splice(idx,1);
+  saveCustom(); renderAll();
+}
+function clearDay(){
+  if(confirm(currentDay + " clear karna hai?")){ customData[currentDay]=[]; saveCustom(); renderAll(); }
+}
+function renderAll(){ renderTabs(); renderLib(); renderPlan(); }
+document.getElementById('searchEx').addEventListener('input', renderLib);
+renderAll();
 </script>
 </body>
 </html>
