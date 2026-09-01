@@ -12,6 +12,12 @@
       font-size:12px; letter-spacing:2px; cursor:pointer;
       backdrop-filter:blur(10px); font-family: sans-serif;
     }
+    #indexLevelBox{
+      margin:28px auto 0; display:inline-flex; gap:14px; align-items:center;
+      background:rgba(0,229,255,0.08); border:1px solid rgba(0,229,255,0.35);
+      padding:12px 22px; border-radius:40px; backdrop-filter:blur(12px);
+      box-shadow:0 0 25px rgba(0,229,255,0.15);
+    }
   </style>
 </head>
 <body>
@@ -24,12 +30,22 @@
   <div>
     <a href="index.html">Home</a>
     <a href="workout.html">Workout</a>
+    <a href="stats.html">Stats</a>
     <a href="about.html">About</a>
   </div>
 </nav>
 <div class="hero">
   <h1>ARISE FITNESS</h1>
   <p>DISCIPLINE // POWER // ARISE</p>
+
+  <!-- LEVEL BADGE - NAYA ADD KIYA -->
+  <div id="indexLevelBox">
+    <span style="color:#00e5ff; font-size:11px; letter-spacing:3px; font-weight:900;" id="indexRank">E-RANK</span>
+    <span style="color:#fff; font-weight:900; letter-spacing:2px; font-size:14px;" id="indexLvl">Lv 0</span>
+    <span style="color:#7aa; font-size:11px; letter-spacing:1px;" id="indexXp">0 XP</span>
+    <span style="color:#00ff88; font-size:10px; letter-spacing:2px; margin-left:4px;">● ARISEN</span>
+  </div>
+  <br><br>
   <a href="workout.html" class="btn">START TRAINING</a>
 </div>
 
@@ -61,6 +77,23 @@ musicBtn.onclick = (e)=>{
   else { bgMusic.pause(); musicBtn.innerHTML="🔇 PAUSED"; localStorage.setItem('aria-playing','false'); }
 };
 playMusic();
+
+// LEVEL SYSTEM - INDEX KE LIYE
+function getRank(lvl){
+  if(lvl<=10) return "E-RANK";
+  if(lvl<=25) return "D-RANK";
+  if(lvl<=45) return "C-RANK";
+  if(lvl<=70) return "B-RANK";
+  if(lvl<=100) return "A-RANK";
+  if(lvl<=130) return "S-RANK";
+  if(lvl<=154) return "MONARCH";
+  return "SHADOW MONARCH";
+}
+let xp = localStorage.getItem('ARISE_TOTAL_XP')||'0';
+let lvl = localStorage.getItem('ARISE_LEVEL')||'0';
+document.getElementById('indexLvl').innerText = "Lv " + lvl;
+document.getElementById('indexXp').innerText = xp + " XP";
+document.getElementById('indexRank').innerText = getRank(parseInt(lvl));
 </script>
 
 </body>
