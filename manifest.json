@@ -1,19 +1,26 @@
 {
-  "name": "ARISE FITNESS",
-  "short_name": "ARISE",
-  "start_url": "/Arise-system-/",
+  "name": "Arise Fitness - Solo Leveling System",
+  "short_name": "Arise",
+  "description": "Turn your real life workout into Solo Leveling Arise System",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "display_override": ["standalone", "window-controls-overlay"],
   "background_color": "#000000",
+  "theme_color": "#6a5af9",
+  "orientation": "portrait",
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "icon-512.png",
+      "src": "/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
