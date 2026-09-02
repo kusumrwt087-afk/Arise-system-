@@ -2,7 +2,7 @@
   "name": "Arise Fitness - Solo Leveling System",
   "short_name": "Arise",
   "description": "Turn your real life workout into Solo Leveling Arise System",
-  "start_url": "/",
+  "start_url": "./index.html",
   "scope": "/",
   "display": "standalone",
   "display_override": ["standalone", "window-controls-overlay"],
