@@ -251,7 +251,14 @@ const DIFF = {
 "Deadlift Lv1 [20-30kg]":22, "Deadlift Lv2 [30-50kg]":35, "Deadlift Lv3 [50-70kg]":52, "Deadlift Lv4 [70-90kg]":74, "Deadlift Lv5 [90-120kg+]":100,
 "Hip Thrust Lv1 [20-30kg]":18, "Hip Thrust Lv2 [30-50kg]":28, "Hip Thrust Lv3 [50-70kg]":42, "Hip Thrust Lv4 [70-90kg]":60, "Hip Thrust Lv5 [90-120kg+]":82
 };
-function calcXP(ex){ let base=DIFF[ex.name]||5; let reps=Math.min(ex.reps,60); return Math.floor(ex.sets*(reps*0.3+base)); }
+function calcXP(ex){ 
+  let base=DIFF[ex.name]||5; 
+  let r = parseInt(ex.reps)||1;
+  // Ab reps ka pura hisab lagega, cap nahi
+  // Formula: (base XP + reps) * sets
+  // Jitne zyada reps, utna zyada XP
+  return Math.floor(ex.sets * (base + r * 0.8)); 
+}
 function getXPForLevel(lvl){ if(lvl<=1) return 1000; return Math.floor(1000*Math.pow(lvl,1.35)+lvl*350); }
 let currentDay = "MONDAY"; let currentCat = "ALL";
 let customData = JSON.parse(localStorage.getItem('ARISE_CUSTOM_V1')||'{}');
@@ -335,6 +342,8 @@ function startRestPhase(isNextEx){
 function skipRest(){ clearInterval(timerInt); if(curExIdx >= activeList.length-1 && curSetNum >= activeList[curExIdx].sets){ finishBattle(); return; } let ex = activeList[curExIdx]; if(curSetNum < ex.sets){ curSetNum++; } else { curExIdx++; curSetNum=1; } renderActiveQuest(); }
 function finishBattle(){
   clearInterval(timerInt);
+  
+  // XP CALCULATE
   let totalXp = parseInt(localStorage.getItem('ARISE_TOTAL_XP')||'0') + totalBattleXP;
   let totalSets = parseInt(localStorage.getItem('ARISE_SETS')||'0') + activeList.reduce((s,x)=>s+x.sets,0);
   let battles = parseInt(localStorage.getItem('ARISE_BATTLES')||'0') + 1;
@@ -347,20 +356,30 @@ function finishBattle(){
     if(tempXp >= need){ tempXp -= need; calcLvl++; } else break;
   }
   localStorage.setItem('ARISE_LEVEL', calcLvl);
-  
-  // SOUND FIX
-  try{
-    bgMusic.pause();
+
+  // --- ARISE SOUND FIX FINAL ---
+  try {
+    if(bgMusic) bgMusic.pause();
     ariseSfx.currentTime = 0;
     ariseSfx.volume = 1;
-    ariseSfx.play().then(()=>{ console.log("ARISE PLAYED"); }).catch(e=>{ console.log("Sound blocked", e); });
-  }catch(e){ console.log(e); }
+    ariseSfx.muted = false;
+    let playPromise = ariseSfx.play();
+    if(playPromise !== undefined){
+      playPromise.then(()=>{ console.log("ARISE BAJA!"); }).catch(err=>{
+        console.log("Sound block:", err);
+        // fallback: user ko click karne pe bajega
+        document.body.addEventListener('click', ()=>{ ariseSfx.play(); }, {once:true});
+      });
+    }
+  } catch(e){ console.log(e); }
 
   closePortal();
+  
+  // Alert ko 1.5 sec delay diya taaki sound baj jaye
   setTimeout(()=>{
-    alert("BATTLE COMPLETE! +" + totalBattleXP + " XP\nNew Level: " + calcLvl + "\nRedirecting to STATS...");
+    alert("BATTLE COMPLETE! +" + totalBattleXP + " XP\nNew Level: " + calcLvl);
     location.href="stats.html";
-  }, 800);
+  }, 1500);
 }
 function setRestTime(s){ restDefault=s; restLeft=s; document.getElementById('mainTimer').innerText = formatTime(restLeft); document.querySelectorAll('.rest-ctrl button').forEach(b=>b.classList.remove('active')); document.getElementById('r'+s).classList.add('active'); }
 function formatTime(s){ let m=String(Math.floor(s/60)).padStart(2,'0'); let sc=String(s%60).padStart(2,'0'); return `${m}:${sc}`; }
