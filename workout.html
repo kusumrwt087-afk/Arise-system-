@@ -449,7 +449,13 @@ function finishBattle(){
   alert("BATTLE COMPLETE! +" + totalBattleXP + " XP\nNew Level: " + calcLvl + "\nRedirecting to STATS...");
   location.href="stats.html";
 }
-function setRestTime(s){ restDefault=s; document.querySelectorAll('.rest-ctrl button').forEach(b=>b.classList.remove('active')); document.getElementById('r'+s).classList.add('active'); }
+function setRestTime(s){ 
+  restDefault=s; 
+  restLeft=s; 
+  document.getElementById('mainTimer').innerText = formatTime(restLeft);
+  document.querySelectorAll('.rest-ctrl button').forEach(b=>b.classList.remove('active')); 
+  document.getElementById('r'+s).classList.add('active'); 
+}
 function formatTime(s){ let m=String(Math.floor(s/60)).padStart(2,'0'); let sc=String(s%60).padStart(2,'0'); return `${m}:${sc}`; }
 </script>
 </body>
