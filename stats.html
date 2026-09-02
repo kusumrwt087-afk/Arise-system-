@@ -129,6 +129,54 @@ document.getElementById('xpText').innerText=tempXp+" / "+nextNeed+" XP ("+perc+"
 let nextRank=getRank(calcLvl+1)[0];
 document.getElementById('nextInfo').innerText=(nextNeed-tempXp)+" XP TO "+nextRank+" • "+(156-calcLvl)+" LEVELS TO SHADOW MONARCH";
 }
+  document.getElementById('shareBtn').onclick = async ()=>{
+  let lvl = localStorage.getItem('ARISE_LEVEL')||'0';
+  let xp = localStorage.getItem('ARISE_TOTAL_XP')||'0';
+  let battles = localStorage.getItem('ARISE_BATTLES')||'0';
+  let canvas = document.getElementById('shareCanvas');
+  let ctx = canvas.getContext('2d');
+
+  // bg
+  let grad = ctx.createLinearGradient(0,0,0,1350);
+  grad.addColorStop(0,'#020a14'); grad.addColorStop(1,'#001a33');
+  ctx.fillStyle=grad; ctx.fillRect(0,0,1080,1350);
+
+  // glow border
+  ctx.strokeStyle='#00e5ff'; ctx.lineWidth=12; ctx.shadowBlur=30; ctx.shadowColor='#00e5ff';
+  ctx.strokeRect(20,20,1040,1310); ctx.shadowBlur=0;
+
+  ctx.fillStyle='#fff'; ctx.font='900 80px sans-serif'; ctx.textAlign='center';
+  ctx.fillText('ARISE FITNESS',540,200);
+  ctx.fillStyle='#00e5ff'; ctx.font='700 30px sans-serif'; ctx.letterSpacing='5px';
+  ctx.fillText('SHADOW MONARCH',540,260);
+
+  ctx.fillStyle='#fff'; ctx.font='900 180px sans-serif';
+  ctx.fillText('Lv.'+lvl,540,550);
+
+  ctx.fillStyle='#8ab'; ctx.font='600 40px sans-serif';
+  ctx.fillText(xp+' TOTAL XP • '+battles+' BATTLES',540,650);
+
+  ctx.fillStyle='rgba(0,229,255,0.1)'; ctx.fillRect(100,750,880,200);
+  ctx.strokeStyle='rgba(0,229,255,0.3)'; ctx.strokeRect(100,750,880,200);
+  ctx.fillStyle='#00e5ff'; ctx.font='800 28px sans-serif'; ctx.textAlign='left';
+  ctx.fillText('SYSTEM: YOU HAVE LEVELED UP',140,810);
+  ctx.fillStyle='#e0efff'; ctx.font='400 24px sans-serif';
+  ctx.fillText('"The weak stay weak. The strong ARISE."',140,870);
+
+  ctx.textAlign='center'; ctx.fillStyle='#5a7a8a'; ctx.font='400 22px sans-serif';
+  ctx.fillText('arise.isroot.in',540,1250);
+
+  let link = document.createElement('a');
+  link.download = `ARISE-Lv${lvl}.png`;
+  link.href = canvas.toDataURL();
+  link.click();
+
+  if(navigator.share){
+    let blob = await (await fetch(canvas.toDataURL())).blob();
+    let file = new File([blob], `ARISE-Lv${lvl}.png`, {type:'image/png'});
+    navigator.share({title:'My ARISE Card', files:[file]});
+  }
+  }
 </script>
   <button id="shareBtn" style="width:100%;margin-top:20px;background:linear-gradient(90deg,#00e5ff,#00aaff);color:#000;padding:16px;border-radius:14px;font-weight:900;letter-spacing:2px;border:none;cursor:pointer;box-shadow:0 0 30px rgba(0,229,255,0.6)">SHARE ARISE CARD ⚡</button>
 <canvas id="shareCanvas" width="1080" height="1350" style="display:none"></canvas>
