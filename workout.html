@@ -160,6 +160,7 @@
 
 <script>
 const bgMusic = document.getElementById('bg-music');
+<audio id="arise-sfx" src="arise.mp3" preload="auto"></audio>
 const musicBtn = document.getElementById('music-btn');
 bgMusic.volume = 0.25;
 let savedTime = localStorage.getItem('aria-time');
@@ -446,6 +447,7 @@ function finishBattle(){
   }
   localStorage.setItem('ARISE_LEVEL', calcLvl);
   closePortal();
+  document.getElementById('arise-sfx').play();
   alert("BATTLE COMPLETE! +" + totalBattleXP + " XP\nNew Level: " + calcLvl + "\nRedirecting to STATS...");
   location.href="stats.html";
 }
