@@ -151,7 +151,7 @@ const LIB = [
   {n:"Russian Twist",c:"CORE",m:"Obliques"}, {n:"Mountain Climber",c:"CORE",m:"Cardio+Core"}, {n:"Dead Bug",c:"CORE",m:"Core"},
   {n:"Burpees",c:"FULL",m:"Full Body"}, {n:"Jumping Jacks",c:"FULL",m:"Cardio"}, {n:"High Knees",c:"FULL",m:"Cardio"},
   {n:"Bear Crawl",c:"FULL",m:"Full Body"}, {n:"Shoulder Tap Plank",c:"FULL",m:"Core+Push"}, {n:"Inchworm",c:"FULL",m:"Full Body"},
-  {n:"Squat to Calf Raise",c:"FULL",m:"Legs+Calf"}
+  {n:"Squat to Calf Raise",c:"FULL",m:"Legs+Calf"}, {n:"Decline Diamond Pushups",c:"PUSH",m:"Shoulder & Chest"}, {n:"Explosive Bulgarian Split Squats",c:"LEGS",m:"Quads"},{n:"Feet Elevated Pike Pushups",c:"PUSH",m:"Shoulder"},{n:"Hammer Backpack Cruls",c:"PULL",m:"Biceps"},{n:"Backpack Biceps Curls",c:"PULL",m:"Biceps"}
 ];
 
 // KAM XP WALA MAP - NAYA
@@ -162,6 +162,9 @@ const DIFF = {
 "Bodyweight Squat":5, "Pistol Squat":15, "Bulgarian Split Squat":10, "Lunges":6, "Jump Squat":9, "Wall Sit":5, "Calf Raises":3, "Glute Bridge":5, "Single Leg Deadlift":10, "Cossack Squat":11,
 "Plank Hold":5, "Side Plank":6, "Leg Raises":7, "Hanging Knee Raise":9, "L-Sit Hold":15, "Hollow Body Hold":10, "Russian Twist":6, "Mountain Climber":7, "Dead Bug":4,
 "Burpees":15, "Jumping Jacks":3, "High Knees":4, "Bear Crawl":8, "Shoulder Tap Plank":7, "Inchworm":6, "Squat to Calf Raise":7
+"Decline Diamond Pushups":14,
+"Explosive Bulgarian Split Squats":14,
+"Feet Elevated Pike Pushups":12
 };
 function calcXP(ex){ let base=DIFF[ex.name]||5; let reps=Math.min(ex.reps,60); return Math.floor(ex.sets*(reps*0.3+base)); }
 function getXPForLevel(lvl){ if(lvl<=1) return 1000; return Math.floor(1000*Math.pow(lvl,1.35)+lvl*350); }
