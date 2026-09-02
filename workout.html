@@ -131,7 +131,7 @@ const CATS = ["ALL","PUSH","PULL","LEGS","CORE","FULL"];
 const LIB = [
   {n:"Standard Pushup",c:"PUSH",m:"Chest"}, {n:"Diamond Pushup",c:"PUSH",m:"Triceps"}, {n:"Wide Pushup",c:"PUSH",m:"Chest"},
   {n:"Archer Pushup",c:"PUSH",m:"Chest"}, {n:"Pike Pushup",c:"PUSH",m:"Shoulders"}, {n:"Pseudo Planche Pushup",c:"PUSH",m:"Chest"},
-  {n:"Decline Pushup",c:"PUSH",m:"Upper Chest"}, {n:"Spiderman Pushup",c:"PUSH",m:"Core+Chest"},
+  {n:"Decline Pushup",c:"PUSH",m:"Upper Chest"}, {n:"Spiderman Pushup",c:"PUSH",m:"Core+Chest"},{n:"Dips",c:"PUSH",m:"Chest & Triceps"},
   {n:"Tricep Dips (Chair)",c:"PUSH",m:"Triceps"}, {n:"Handstand Pushup Neg",c:"PUSH",m:"Shoulders"},
   {n:"Pullup",c:"PULL",m:"Lats"}, {n:"Chinup",c:"PULL",m:"Biceps"}, {n:"Wide Pullup",c:"PULL",m:"Back"},
   {n:"Towel Row",c:"PULL",m:"Back"}, {n:"Inverted Row",c:"PULL",m:"Back"}, {n:"Doorframe Row",c:"PULL",m:"Back"},
@@ -165,7 +165,8 @@ const DIFF = {
 "Explosive Bulgarian Split Squats":14,
 "Feet Elevated Pike Pushups":12,
 "Hammer Backpack Cruls":8,
-"Backpack Biceps Curls":8
+"Backpack Biceps Curls":8,
+"Dips":10
 };
 
 function calcXP(ex){ let base=DIFF[ex.name]||5; let reps=Math.min(ex.reps,60); return Math.floor(ex.sets*(reps*0.3+base)); }
