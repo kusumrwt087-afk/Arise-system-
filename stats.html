@@ -70,6 +70,7 @@ MAX LEVEL 156 - SHADOW MONARCH<br>
 <span style="color:#ffaa00;">HARD GRIND • NO EASY WAY • ARISE OR DIE</span>
 </p>
 <a href="workout.html" class="back-btn">ENTER GATE →</a>
+<a onclick="resetXP()" style="margin-top:15px; display:inline-block; border:1px solid #ff3b3b; color:#ff3b3b; padding:10px 26px; border-radius:30px; letter-spacing:3px; font-size:11px; text-decoration:none; cursor:pointer; box-shadow:0 0 20px rgba(255,59,59,0.3);">RESET XP - Lv 0</a>
 </div>
 </div>
 
@@ -84,6 +85,15 @@ if(wasPlaying) playMusic();
 document.addEventListener('click',function firstClick(){playMusic();document.removeEventListener('click',firstClick);},{once:true});
 musicBtn.onclick=(e)=>{e.stopPropagation(); if(bgMusic.paused){bgMusic.play();musicBtn.innerHTML="🔊 DARK ARIA Lv2";localStorage.setItem('aria-playing','true');}else{bgMusic.pause();musicBtn.innerHTML="🔇 PAUSED";localStorage.setItem('aria-playing','false');}};
 
+function resetXP(){
+  if(confirm("Sach me XP zero karna hai?")){
+    localStorage.setItem('ARISE_TOTAL_XP','0');
+    localStorage.setItem('ARISE_LEVEL','0');
+    localStorage.setItem('ARISE_SETS','0');
+    localStorage.setItem('ARISE_BATTLES','0');
+    location.reload();
+  }
+}  
 function getXPForLevel(lvl){if(lvl<=1)return 1000;return Math.floor(1000*Math.pow(lvl,1.35)+lvl*350);}
 function getRank(lvl){
 if(lvl<=10)return["E-RANK",""]; if(lvl<=25)return["D-RANK",""]; if(lvl<=45)return["C-RANK",""];
