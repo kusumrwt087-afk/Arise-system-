@@ -6,12 +6,7 @@
   <link rel="stylesheet" href="style.css">
   <style>
 .workout-container{max-width:900px;margin:40px auto;padding:0 20px; display:grid; gap:22px;}
-.workout-card{
-      background: linear-gradient(145deg, rgba(10,20,30,0.9), rgba(5,7,10,0.8));
-      border: 1px solid rgba(0,229,255,0.3); backdrop-filter: blur(15px);
-      padding: 35px 30px; border-radius: 16px; cursor: pointer;
-      transition: all 0.4s ease; position: relative; overflow: hidden;
-  }
+.workout-card{ background: linear-gradient(145deg, rgba(10,20,30,0.9), rgba(5,7,10,0.8)); border: 1px solid rgba(0,229,255,0.3); backdrop-filter: blur(15px); padding: 35px 30px; border-radius: 16px; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; }
 .workout-card::before{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(0,229,255,0.2),transparent);transition:0.6s;}
 .workout-card:hover::before{left:100%;}
 .workout-card:hover{border-color:#00e5ff;box-shadow:0 0 40px rgba(0,229,255,0.5);transform:translateY(-8px);}
@@ -44,7 +39,7 @@
 .btn-battle{display:block;width:100%;text-align:center;margin-top:25px;background:linear-gradient(90deg,#00e5ff,#00aaff);color:#000;padding:18px!important;border-radius:14px;font-weight:900;font-size:18px!important;text-decoration:none;letter-spacing:2px;box-shadow:0 0 30px rgba(0,229,255,0.6);transition:0.3s;}
 .btn-battle:hover{transform:scale(1.02);box-shadow:0 0 50px rgba(0,229,255,0.9);}
   #music-btn{position:fixed;bottom:20px;right:20px;z-index:10000;background:rgba(0,229,255,0.15);border:1px solid #00e5ff;color:#00e5ff;padding:8px 14px;border-radius:30px;font-size:10px;letter-spacing:1px;cursor:pointer;backdrop-filter:blur(10px);}
-   .builder-wrap{max-width:1100px;margin:60px auto 80px;padding:0 20px;border-top:1px solid rgba(0,229,255,0.2);padding-top:50px;}
+  .builder-wrap{max-width:1100px;margin:60px auto 80px;padding:0 20px;border-top:1px solid rgba(0,229,255,0.2);padding-top:50px;}
 .builder-title{text-align:center;color:#fff;font-size:34px;font-weight:900;letter-spacing:5px;text-shadow:0 0 20px #00e5ff;margin:0;}
 .builder-sub{text-align:center;color:#00e5ff;letter-spacing:5px;font-size:12px;margin-top:8px;}
 .day-tabs{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:30px 0;}
@@ -101,7 +96,7 @@
   <div class="day-tabs" id="dayTabs"></div>
   <div class="builder-grid">
     <div class="lib-box">
-      <div class="lib-head"><h3>EXERCISE LIBRARY [45]</h3><input id="searchEx" class="search" placeholder="Search... pushup etc"></div>
+      <div class="lib-head"><h3 id="libCount">EXERCISE LIBRARY</h3><input id="searchEx" class="search" placeholder="Search... pushup etc"></div>
       <div class="cat-filters" id="catFilters"></div>
       <div class="ex-list" id="exList"></div>
     </div>
@@ -131,7 +126,6 @@ setInterval(()=>{ if(!bgMusic.paused) localStorage.setItem('aria-time', bgMusic.
 if(wasPlaying) playMusic();
 document.addEventListener('click', function firstClick(){ playMusic(); document.removeEventListener('click', firstClick); }, {once:true});
 musicBtn.onclick = (e)=>{ e.stopPropagation(); if(bgMusic.paused){ bgMusic.play(); musicBtn.innerHTML="🔊 DARK ARIA Lv2"; localStorage.setItem('aria-playing','true'); } else { bgMusic.pause(); musicBtn.innerHTML="🔇 PAUSED"; localStorage.setItem('aria-playing','false'); } };
-
 const DAYS = ["MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY","SUNDAY"];
 const CATS = ["ALL","PUSH","PULL","LEGS","CORE","FULL"];
 const LIB = [
@@ -151,21 +145,29 @@ const LIB = [
   {n:"Russian Twist",c:"CORE",m:"Obliques"}, {n:"Mountain Climber",c:"CORE",m:"Cardio+Core"}, {n:"Dead Bug",c:"CORE",m:"Core"},
   {n:"Burpees",c:"FULL",m:"Full Body"}, {n:"Jumping Jacks",c:"FULL",m:"Cardio"}, {n:"High Knees",c:"FULL",m:"Cardio"},
   {n:"Bear Crawl",c:"FULL",m:"Full Body"}, {n:"Shoulder Tap Plank",c:"FULL",m:"Core+Push"}, {n:"Inchworm",c:"FULL",m:"Full Body"},
-  {n:"Squat to Calf Raise",c:"FULL",m:"Legs+Calf"}, {n:"Decline Diamond Pushups",c:"PUSH",m:"Shoulder & Chest"}, {n:"Explosive Bulgarian Split Squats",c:"LEGS",m:"Quads"},{n:"Feet Elevated Pike Pushups",c:"PUSH",m:"Shoulder"},{n:"Hammer Backpack Cruls",c:"PULL",m:"Biceps"},{n:"Backpack Biceps Curls",c:"PULL",m:"Biceps"}
+  {n:"Squat to Calf Raise",c:"FULL",m:"Legs+Calf"},
+  {n:"Decline Diamond Pushups",c:"PUSH",m:"Shoulder & Chest"},
+  {n:"Explosive Bulgarian Split Squats",c:"LEGS",m:"Quads"},
+  {n:"Feet Elevated Pike Pushups",c:"PUSH",m:"Shoulder"},
+  {n:"Hammer Backpack Cruls",c:"PULL",m:"Biceps"},
+  {n:"Backpack Biceps Curls",c:"PULL",m:"Biceps"}
 ];
 
-// KAM XP WALA MAP - NAYA
+// FIXED DIFF - COMMA LAGAYA
 const DIFF = {
 "Standard Pushup":6, "Diamond Pushup":10, "Wide Pushup":7, "Archer Pushup":15, "Pike Pushup":8, "Pseudo Planche Pushup":12, "Decline Pushup":7, "Spiderman Pushup":9,
 "Tricep Dips (Chair)":8, "Handstand Pushup Neg":15,
 "Pullup":10, "Chinup":9, "Wide Pullup":11, "Towel Row":6, "Inverted Row":6, "Doorframe Row":6, "Superman Hold":5, "Towel Bicep Curl":5,
 "Bodyweight Squat":5, "Pistol Squat":15, "Bulgarian Split Squat":10, "Lunges":6, "Jump Squat":9, "Wall Sit":5, "Calf Raises":3, "Glute Bridge":5, "Single Leg Deadlift":10, "Cossack Squat":11,
 "Plank Hold":5, "Side Plank":6, "Leg Raises":7, "Hanging Knee Raise":9, "L-Sit Hold":15, "Hollow Body Hold":10, "Russian Twist":6, "Mountain Climber":7, "Dead Bug":4,
-"Burpees":15, "Jumping Jacks":3, "High Knees":4, "Bear Crawl":8, "Shoulder Tap Plank":7, "Inchworm":6, "Squat to Calf Raise":7
+"Burpees":15, "Jumping Jacks":3, "High Knees":4, "Bear Crawl":8, "Shoulder Tap Plank":7, "Inchworm":6, "Squat to Calf Raise":7,
 "Decline Diamond Pushups":14,
 "Explosive Bulgarian Split Squats":14,
-"Feet Elevated Pike Pushups":12
+"Feet Elevated Pike Pushups":12,
+"Hammer Backpack Cruls":8,
+"Backpack Biceps Curls":8
 };
+
 function calcXP(ex){ let base=DIFF[ex.name]||5; let reps=Math.min(ex.reps,60); return Math.floor(ex.sets*(reps*0.3+base)); }
 function getXPForLevel(lvl){ if(lvl<=1) return 1000; return Math.floor(1000*Math.pow(lvl,1.35)+lvl*350); }
 
@@ -195,7 +197,6 @@ function saveCustom(){
       <div class="ex-count">${count} EX • ${totalSets} SETS • ${totalXP} XP • CLICK TO VIEW</div>
     </div>`;
   }).join('');
-  // mini level update
   let lvl = localStorage.getItem('ARISE_LEVEL')||'0';
   let xp = localStorage.getItem('ARISE_TOTAL_XP')||'0';
   let el = document.getElementById('miniLvl'); if(el) el.innerText = lvl;
@@ -210,7 +211,6 @@ function openDayPortal(day){
   const ov = document.getElementById('portal-overlay');
   ov.classList.remove('active'); void ov.offsetWidth; ov.classList.add('active');
   document.body.style.overflow = 'hidden';
-  // XP ADD ON BATTLE
   document.getElementById('battleBtn').onclick = (e)=>{
     e.preventDefault();
     let totalXp = parseInt(localStorage.getItem('ARISE_TOTAL_XP')||'0') + dayXP;
@@ -237,6 +237,7 @@ function renderTabs(){
   document.getElementById('dayTabs').innerHTML = DAYS.map(d=>`<div class="day-tab ${d===currentDay?'active':''}" onclick="switchDay('${d}')">${d} [${customData[d].length}]</div>`).join('');
   document.getElementById('catFilters').innerHTML = CATS.map(c=>`<div class="cat-btn ${c===currentCat?'active':''}" onclick="switchCat('${c}')">${c}</div>`).join('');
   document.getElementById('planTitle').innerText = currentDay + " PLAN • " + customData[currentDay].length + " EX";
+  document.getElementById('libCount').innerText = `EXERCISE LIBRARY [${LIB.length}]`;
 }
 function switchDay(d){ currentDay=d; renderAll(); }
 function switchCat(c){ currentCat=c; renderLib(); renderTabs(); }
