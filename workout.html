@@ -39,7 +39,7 @@
 .btn-battle{display:block;width:100%;text-align:center;margin-top:25px;background:linear-gradient(90deg,#00e5ff,#00aaff);color:#000;padding:18px!important;border-radius:14px;font-weight:900;font-size:18px!important;text-decoration:none;letter-spacing:2px;box-shadow:0 0 30px rgba(0,229,255,0.6);transition:0.3s;}
 .btn-battle:hover{transform:scale(1.02);box-shadow:0 0 50px rgba(0,229,255,0.9);}
   #music-btn{position:fixed;bottom:20px;right:20px;z-index:10000;background:rgba(0,229,255,0.15);border:1px solid #00e5ff;color:#00e5ff;padding:8px 14px;border-radius:30px;font-size:10px;letter-spacing:1px;cursor:pointer;backdrop-filter:blur(10px);}
-  .builder-wrap{max-width:1100px;margin:60px auto 80px;padding:0 20px;border-top:1px solid rgba(0,229,255,0.2);padding-top:50px;}
+ .builder-wrap{max-width:1100px;margin:60px auto 80px;padding:0 20px;border-top:1px solid rgba(0,229,255,0.2);padding-top:50px;}
 .builder-title{text-align:center;color:#fff;font-size:34px;font-weight:900;letter-spacing:5px;text-shadow:0 0 20px #00e5ff;margin:0;}
 .builder-sub{text-align:center;color:#00e5ff;letter-spacing:5px;font-size:12px;margin-top:8px;}
 .day-tabs{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:30px 0;}
@@ -149,8 +149,7 @@ const LIB = [
   {n:"Decline Diamond Pushups",c:"PUSH",m:"Shoulder & Chest"},
   {n:"Explosive Bulgarian Split Squats",c:"LEGS",m:"Quads"},
   {n:"Feet Elevated Pike Pushups",c:"PUSH",m:"Shoulder"},
-
-// === CHEST ===
+  // === CHEST ===
 {n:"Bench Press Lv1 [10-20kg]",c:"PUSH",m:"Chest"}, {n:"Bench Press Lv2 [20-35kg]",c:"PUSH",m:"Chest"}, {n:"Bench Press Lv3 [35-50kg]",c:"PUSH",m:"Chest"}, {n:"Bench Press Lv4 [50-70kg]",c:"PUSH",m:"Chest"}, {n:"Bench Press Lv5 [70-90kg+]",c:"PUSH",m:"Chest"},
 {n:"Incline Press Lv1 [10-20kg]",c:"PUSH",m:"Chest"}, {n:"Incline Press Lv2 [20-35kg]",c:"PUSH",m:"Chest"}, {n:"Incline Press Lv3 [35-50kg]",c:"PUSH",m:"Chest"}, {n:"Incline Press Lv4 [50-70kg]",c:"PUSH",m:"Chest"}, {n:"Incline Press Lv5 [70-90kg+]",c:"PUSH",m:"Chest"},
 {n:"Decline Press Lv1 [10-20kg]",c:"PUSH",m:"Chest"}, {n:"Decline Press Lv2 [20-35kg]",c:"PUSH",m:"Chest"}, {n:"Decline Press Lv3 [35-50kg]",c:"PUSH",m:"Chest"}, {n:"Decline Press Lv4 [50-70kg]",c:"PUSH",m:"Chest"}, {n:"Decline Press Lv5 [70-90kg+]",c:"PUSH",m:"Chest"},
@@ -187,7 +186,6 @@ const LIB = [
 {n:"Hip Thrust Lv1 [20-30kg]",c:"LEGS",m:"Legs"}, {n:"Hip Thrust Lv2 [30-50kg]",c:"LEGS",m:"Legs"}, {n:"Hip Thrust Lv3 [50-70kg]",c:"LEGS",m:"Legs"}, {n:"Hip Thrust Lv4 [70-90kg]",c:"LEGS",m:"Legs"}, {n:"Hip Thrust Lv5 [90-120kg+]",c:"LEGS",m:"Legs"},
 ];
 
-// FIXED DIFF - COMMA LAGAYA
 const DIFF = {
 "Standard Pushup":6, "Diamond Pushup":10, "Wide Pushup":7, "Archer Pushup":15, "Pike Pushup":8, "Pseudo Planche Pushup":12, "Decline Pushup":7, "Spiderman Pushup":9,
 "Tricep Dips (Chair)":8, "Handstand Pushup Neg":15,
@@ -200,7 +198,8 @@ const DIFF = {
 "Feet Elevated Pike Pushups":12,
 "Hammer Backpack Cruls":8,
 "Backpack Biceps Curls":8,
-"Dips":10
+"Dips":10,
+// FIX - COMMA ADDED ABOVE
 // CHEST
 "Bench Press Lv1 [10-20kg]":16, "Bench Press Lv2 [20-35kg]":24, "Bench Press Lv3 [35-50kg]":35, "Bench Press Lv4 [50-70kg]":50, "Bench Press Lv5 [70-90kg+]":68,
 "Incline Press Lv1 [10-20kg]":15, "Incline Press Lv2 [20-35kg]":23, "Incline Press Lv3 [35-50kg]":33, "Incline Press Lv4 [50-70kg]":48, "Incline Press Lv5 [70-90kg+]":65,
@@ -230,7 +229,7 @@ const DIFF = {
 "Squat Lv1 [20-30kg]":20, "Squat Lv2 [30-50kg]":32, "Squat Lv3 [50-70kg]":48, "Squat Lv4 [70-90kg]":68, "Squat Lv5 [90-120kg+]":90,
 "RDL Lv1 [20-30kg]":20, "RDL Lv2 [30-50kg]":32, "RDL Lv3 [50-70kg]":48, "RDL Lv4 [70-90kg]":68, "RDL Lv5 [90-120kg+]":90,
 "Deadlift Lv1 [20-30kg]":22, "Deadlift Lv2 [30-50kg]":35, "Deadlift Lv3 [50-70kg]":52, "Deadlift Lv4 [70-90kg]":74, "Deadlift Lv5 [90-120kg+]":100,
-"Hip Thrust Lv1 [20-30kg]":18, "Hip Thrust Lv2 [30-50kg]":28, "Hip Thrust Lv3 [50-70kg]":42, "Hip Thrust Lv4 [70-90kg]":60, "Hip Thrust Lv5 [90-120kg+]":82,  
+"Hip Thrust Lv1 [20-30kg]":18, "Hip Thrust Lv2 [30-50kg]":28, "Hip Thrust Lv3 [50-70kg]":42, "Hip Thrust Lv4 [70-90kg]":60, "Hip Thrust Lv5 [90-120kg+]":82
 };
 
 function calcXP(ex){ let base=DIFF[ex.name]||5; let reps=Math.min(ex.reps,60); return Math.floor(ex.sets*(reps*0.3+base)); }
@@ -245,7 +244,7 @@ function saveCustom(){
   let msg=document.getElementById('saveMsg'); msg.classList.add('show');
   setTimeout(()=>msg.classList.remove('show'),1500);
 }
-  function renderTopCards(){
+function renderTopCards(){
   let top = document.getElementById('topCards');
   let hasAny = DAYS.some(d=>customData[d].length>0);
   if(!hasAny){
