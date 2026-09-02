@@ -338,12 +338,29 @@ function finishBattle(){
   let totalXp = parseInt(localStorage.getItem('ARISE_TOTAL_XP')||'0') + totalBattleXP;
   let totalSets = parseInt(localStorage.getItem('ARISE_SETS')||'0') + activeList.reduce((s,x)=>s+x.sets,0);
   let battles = parseInt(localStorage.getItem('ARISE_BATTLES')||'0') + 1;
-  localStorage.setItem('ARISE_TOTAL_XP', totalXp); localStorage.setItem('ARISE_SETS', totalSets); localStorage.setItem('ARISE_BATTLES', battles);
+  localStorage.setItem('ARISE_TOTAL_XP', totalXp);
+  localStorage.setItem('ARISE_SETS', totalSets);
+  localStorage.setItem('ARISE_BATTLES', battles);
   let tempXp = totalXp; let calcLvl=0;
-  while(calcLvl < 156){ let need = getXPForLevel(calcLvl+1); if(tempXp >= need){ tempXp -= need; calcLvl++; } else break; }
-  localStorage.setItem('ARISE_LEVEL', calcLvl); closePortal();
-  ariseSfx.play().catch(()=>{});
-  alert("BATTLE COMPLETE! +" + totalBattleXP + " XP\nNew Level: " + calcLvl + "\nRedirecting to STATS..."); location.href="stats.html";
+  while(calcLvl < 156){
+    let need = getXPForLevel(calcLvl+1);
+    if(tempXp >= need){ tempXp -= need; calcLvl++; } else break;
+  }
+  localStorage.setItem('ARISE_LEVEL', calcLvl);
+  
+  // SOUND FIX
+  try{
+    bgMusic.pause();
+    ariseSfx.currentTime = 0;
+    ariseSfx.volume = 1;
+    ariseSfx.play().then(()=>{ console.log("ARISE PLAYED"); }).catch(e=>{ console.log("Sound blocked", e); });
+  }catch(e){ console.log(e); }
+
+  closePortal();
+  setTimeout(()=>{
+    alert("BATTLE COMPLETE! +" + totalBattleXP + " XP\nNew Level: " + calcLvl + "\nRedirecting to STATS...");
+    location.href="stats.html";
+  }, 800);
 }
 function setRestTime(s){ restDefault=s; restLeft=s; document.getElementById('mainTimer').innerText = formatTime(restLeft); document.querySelectorAll('.rest-ctrl button').forEach(b=>b.classList.remove('active')); document.getElementById('r'+s).classList.add('active'); }
 function formatTime(s){ let m=String(Math.floor(s/60)).padStart(2,'0'); let sc=String(s%60).padStart(2,'0'); return `${m}:${sc}`; }
