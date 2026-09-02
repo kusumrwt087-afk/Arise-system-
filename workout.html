@@ -41,7 +41,7 @@
 .btn-battle{display:block;width:100%;text-align:center;margin-top:25px;background:linear-gradient(90deg,#00e5ff,#00aaff);color:#000;padding:18px!important;border-radius:14px;font-weight:900;font-size:18px!important;text-decoration:none;letter-spacing:2px;box-shadow:0 0 30px rgba(0,229,255,0.6);transition:0.3s;}
 .btn-battle:hover{transform:scale(1.02);box-shadow:0 0 50px rgba(0,229,255,0.9);}
   #music-btn{position:fixed;bottom:20px;right:20px;z-index:10000;background:rgba(0,229,255,0.15);border:1px solid #00e5ff;color:#00e5ff;padding:8px 14px;border-radius:30px;font-size:10px;letter-spacing:1px;cursor:pointer;backdrop-filter:blur(10px);}
- .builder-wrap{max-width:1100px;margin:60px auto 80px;padding:0 20px;border-top:1px solid rgba(0,229,255,0.2);padding-top:50px;}
+.builder-wrap{max-width:1100px;margin:60px auto 80px;padding:0 20px;border-top:1px solid rgba(0,229,255,0.2);padding-top:50px;}
 .builder-title{text-align:center;color:#fff;font-size:34px;font-weight:900;letter-spacing:5px;text-shadow:0 0 20px #00e5ff;margin:0;}
 .builder-sub{text-align:center;color:#00e5ff;letter-spacing:5px;font-size:12px;margin-top:8px;}
 .day-tabs{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:30px 0;}
@@ -75,6 +75,25 @@
 .save-msg{text-align:center;margin-top:15px;color:#00ff88;font-size:11px;letter-spacing:2px;opacity:0;transition:0.5s;}
 .save-msg.show{opacity:1;}
 .empty-msg{text-align:center; color:#5a7a8a; padding:40px 20px; border:1px dashed rgba(0,229,255,0.2); border-radius:16px; letter-spacing:2px; font-size:13px;}
+/* === NEW BATTLE FLOW === */
+#detail-intro{transition:0.5s}
+#battle-active{display:none; padding:30px 35px; animation:slideBattle.5s ease}
+#battle-active.active{display:block}
+@keyframes slideBattle{from{transform:translateX(100%); opacity:0} to{transform:translateX(0); opacity:1}}
+@keyframes slideLeft{from{transform:translateX(0); opacity:1} to{transform:translateX(-100%); opacity:0}}
+.q-top{color:#00e5ff; font-size:10px; letter-spacing:4px}
+.q-name{color:#fff; font-size:26px; font-weight:900; margin:10px 0 6px; line-height:1.2}
+.q-meta{color:#5a7a8a; font-size:12px; letter-spacing:2px}
+.timer-box{text-align:center; margin:35px 0 20px}
+.timer-main{font-size:72px; font-weight:900; color:#00e5ff; text-shadow:0 0 30px #00e5ff}
+.timer-label{color:#6b7280; font-size:11px; letter-spacing:3px; margin-top:6px}
+.rest-ctrl{display:flex; gap:8px; justify-content:center; margin:18px 0}
+.rest-ctrl button{background:rgba(10,20,30,0.8); border:1px solid rgba(0,229,255,0.25); color:#8ab; padding:8px 14px; border-radius:20px; font-size:11px; cursor:pointer}
+.rest-ctrl button.active{background:#00e5ff; color:#000; box-shadow:0 0 15px #00e5ff}
+.btn-complete{width:100%; background:linear-gradient(90deg,#22ff88,#00e5ff); color:#000; padding:18px; border:none; border-radius:14px; font-weight:900; font-size:16px; letter-spacing:2px; cursor:pointer; box-shadow:0 0 25px rgba(0,229,255,0.5)}
+.btn-skip{width:100%; background:transparent; border:none; color:#5a7a8a; margin-top:10px; letter-spacing:2px; font-size:11px; cursor:pointer}
+.progress-bar{height:4px; background:rgba(0,229,255,0.15); border-radius:10px; overflow:hidden; margin:15px 0}
+.progress-fill{height:100%; background:linear-gradient(90deg,#00e5ff,#22ff88); width:0%; transition:width 0.4s}
   </style>
 </head>
 <body>
@@ -109,13 +128,36 @@
     </div>
   </div>
 </div>
+
 <div id="portal-overlay">
   <div class="portal"><div class="portal-ring"></div><div class="portal-ring"></div></div>
   <div id="workout-detail">
     <div class="detail-header"><span id="close-portal">&times;</span><h2 id="detail-title"></h2><p id="detail-desc"></p></div>
-    <div class="detail-body"><ul id="detail-list"></ul><a href="#" class="btn-battle" id="battleBtn">START BATTLE ⚔️</a></div>
+    <div id="detail-intro" class="detail-body">
+      <ul id="detail-list"></ul>
+      <a href="#" class="btn-battle" id="battleBtn">START BATTLE ⚔️</a>
+    </div>
+    <div id="battle-active">
+      <div class="q-top" id="qTop">QUEST 1/7 • SET 1/3</div>
+      <div class="q-name" id="qName">Pseudo Planche Pushup</div>
+      <div class="q-meta" id="qMeta">10 reps • 12 base • 45 XP</div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="timer-box">
+        <div class="timer-main" id="mainTimer">00:00</div>
+        <div class="timer-label" id="timerLabel">PERFORMING</div>
+      </div>
+      <div class="rest-ctrl" id="restCtrl" style="display:none">
+        <button onclick="setRestTime(30)" id="r30">30s</button>
+        <button onclick="setRestTime(60)" id="r60" class="active">60s</button>
+        <button onclick="setRestTime(90)" id="r90">90s</button>
+        <button onclick="setRestTime(120)" id="r120">120s</button>
+      </div>
+      <button class="btn-complete" id="completeBtn" onclick="completeSet()">COMPLETE SET ✓</button>
+      <button class="btn-skip" id="skipBtn" onclick="skipRest()" style="display:none">SKIP REST →</button>
+    </div>
   </div>
 </div>
+
 <script>
 const bgMusic = document.getElementById('bg-music');
 const musicBtn = document.getElementById('music-btn');
@@ -151,43 +193,31 @@ const LIB = [
   {n:"Decline Diamond Pushups",c:"PUSH",m:"Shoulder & Chest"},
   {n:"Explosive Bulgarian Split Squats",c:"LEGS",m:"Quads"},
   {n:"Feet Elevated Pike Pushups",c:"PUSH",m:"Shoulder"},
-  // === CHEST ===
 {n:"Bench Press Lv1 [10-20kg]",c:"PUSH",m:"Chest"}, {n:"Bench Press Lv2 [20-35kg]",c:"PUSH",m:"Chest"}, {n:"Bench Press Lv3 [35-50kg]",c:"PUSH",m:"Chest"}, {n:"Bench Press Lv4 [50-70kg]",c:"PUSH",m:"Chest"}, {n:"Bench Press Lv5 [70-90kg+]",c:"PUSH",m:"Chest"},
 {n:"Incline Press Lv1 [10-20kg]",c:"PUSH",m:"Chest"}, {n:"Incline Press Lv2 [20-35kg]",c:"PUSH",m:"Chest"}, {n:"Incline Press Lv3 [35-50kg]",c:"PUSH",m:"Chest"}, {n:"Incline Press Lv4 [50-70kg]",c:"PUSH",m:"Chest"}, {n:"Incline Press Lv5 [70-90kg+]",c:"PUSH",m:"Chest"},
 {n:"Decline Press Lv1 [10-20kg]",c:"PUSH",m:"Chest"}, {n:"Decline Press Lv2 [20-35kg]",c:"PUSH",m:"Chest"}, {n:"Decline Press Lv3 [35-50kg]",c:"PUSH",m:"Chest"}, {n:"Decline Press Lv4 [50-70kg]",c:"PUSH",m:"Chest"}, {n:"Decline Press Lv5 [70-90kg+]",c:"PUSH",m:"Chest"},
 {n:"Chest Fly Lv1 [5-15kg]",c:"PUSH",m:"Chest"}, {n:"Chest Fly Lv2 [15-25kg]",c:"PUSH",m:"Chest"}, {n:"Chest Fly Lv3 [25-35kg]",c:"PUSH",m:"Chest"}, {n:"Chest Fly Lv4 [35-50kg]",c:"PUSH",m:"Chest"}, {n:"Chest Fly Lv5 [50-70kg+]",c:"PUSH",m:"Chest"},
 {n:"Pullover Lv1 [5-15kg]",c:"PUSH",m:"Chest"}, {n:"Pullover Lv2 [15-25kg]",c:"PUSH",m:"Chest"}, {n:"Pullover Lv3 [25-35kg]",c:"PUSH",m:"Chest"}, {n:"Pullover Lv4 [35-50kg]",c:"PUSH",m:"Chest"}, {n:"Pullover Lv5 [50-70kg+]",c:"PUSH",m:"Chest"},
-
-// === BACK ===
 {n:"Bent Row Lv1 [10-20kg]",c:"PULL",m:"Back"}, {n:"Bent Row Lv2 [20-35kg]",c:"PULL",m:"Back"}, {n:"Bent Row Lv3 [35-50kg]",c:"PULL",m:"Back"}, {n:"Bent Row Lv4 [50-70kg]",c:"PULL",m:"Back"}, {n:"Bent Row Lv5 [70-90kg+]",c:"PULL",m:"Back"},
 {n:"Single Arm Row Lv1 [10-20kg]",c:"PULL",m:"Back"}, {n:"Single Arm Row Lv2 [20-35kg]",c:"PULL",m:"Back"}, {n:"Single Arm Row Lv3 [35-50kg]",c:"PULL",m:"Back"}, {n:"Single Arm Row Lv4 [50-70kg]",c:"PULL",m:"Back"}, {n:"Single Arm Row Lv5 [70-90kg+]",c:"PULL",m:"Back"},
 {n:"Lat Pulldown Lv1 [10-20kg]",c:"PULL",m:"Back"}, {n:"Lat Pulldown Lv2 [20-35kg]",c:"PULL",m:"Back"}, {n:"Lat Pulldown Lv3 [35-50kg]",c:"PULL",m:"Back"}, {n:"Lat Pulldown Lv4 [50-70kg]",c:"PULL",m:"Back"}, {n:"Lat Pulldown Lv5 [70-90kg+]",c:"PULL",m:"Back"},
 {n:"Seated Row Lv1 [10-20kg]",c:"PULL",m:"Back"}, {n:"Seated Row Lv2 [20-35kg]",c:"PULL",m:"Back"}, {n:"Seated Row Lv3 [35-50kg]",c:"PULL",m:"Back"}, {n:"Seated Row Lv4 [50-70kg]",c:"PULL",m:"Back"}, {n:"Seated Row Lv5 [70-90kg+]",c:"PULL",m:"Back"},
 {n:"Shrugs Lv1 [10-20kg]",c:"PULL",m:"Back"}, {n:"Shrugs Lv2 [20-35kg]",c:"PULL",m:"Back"}, {n:"Shrugs Lv3 [35-50kg]",c:"PULL",m:"Back"}, {n:"Shrugs Lv4 [50-70kg]",c:"PULL",m:"Back"}, {n:"Shrugs Lv5 [70-90kg+]",c:"PULL",m:"Back"},
-
-// === SHOULDER ===
 {n:"Shoulder Press Lv1 [10-20kg]",c:"PUSH",m:"Shoulder"}, {n:"Shoulder Press Lv2 [20-35kg]",c:"PUSH",m:"Shoulder"}, {n:"Shoulder Press Lv3 [35-50kg]",c:"PUSH",m:"Shoulder"}, {n:"Shoulder Press Lv4 [50-70kg]",c:"PUSH",m:"Shoulder"}, {n:"Shoulder Press Lv5 [70-90kg+]",c:"PUSH",m:"Shoulder"},
 {n:"Arnold Press Lv1 [5-15kg]",c:"PUSH",m:"Shoulder"}, {n:"Arnold Press Lv2 [15-25kg]",c:"PUSH",m:"Shoulder"}, {n:"Arnold Press Lv3 [25-35kg]",c:"PUSH",m:"Shoulder"}, {n:"Arnold Press Lv4 [35-50kg]",c:"PUSH",m:"Shoulder"}, {n:"Arnold Press Lv5 [50-70kg+]",c:"PUSH",m:"Shoulder"},
 {n:"Lateral Raise Lv1 [1-5kg]",c:"PUSH",m:"Shoulder"}, {n:"Lateral Raise Lv2 [5-8kg]",c:"PUSH",m:"Shoulder"}, {n:"Lateral Raise Lv3 [8-12kg]",c:"PUSH",m:"Shoulder"}, {n:"Lateral Raise Lv4 [12-17kg]",c:"PUSH",m:"Shoulder"}, {n:"Lateral Raise Lv5 [17-22kg]",c:"PUSH",m:"Shoulder"},
 {n:"Front Raise Lv1 [1-5kg]",c:"PUSH",m:"Shoulder"}, {n:"Front Raise Lv2 [5-8kg]",c:"PUSH",m:"Shoulder"}, {n:"Front Raise Lv3 [8-12kg]",c:"PUSH",m:"Shoulder"}, {n:"Front Raise Lv4 [12-17kg]",c:"PUSH",m:"Shoulder"}, {n:"Front Raise Lv5 [17-22kg]",c:"PUSH",m:"Shoulder"},
 {n:"Rear Delt Fly Lv1 [1-5kg]",c:"PULL",m:"Shoulder"}, {n:"Rear Delt Fly Lv2 [5-8kg]",c:"PULL",m:"Shoulder"}, {n:"Rear Delt Fly Lv3 [8-12kg]",c:"PULL",m:"Shoulder"}, {n:"Rear Delt Fly Lv4 [12-17kg]",c:"PULL",m:"Shoulder"}, {n:"Rear Delt Fly Lv5 [17-22kg]",c:"PULL",m:"Shoulder"},
-
-// === BICEPS ===
 {n:"Hammer Curl Lv1 [1-5kg]",c:"PULL",m:"Biceps"}, {n:"Hammer Curl Lv2 [5-8kg]",c:"PULL",m:"Biceps"}, {n:"Hammer Curl Lv3 [8-12kg]",c:"PULL",m:"Biceps"}, {n:"Hammer Curl Lv4 [12-17kg]",c:"PULL",m:"Biceps"}, {n:"Hammer Curl Lv5 [17-22kg]",c:"PULL",m:"Biceps"},
 {n:"Bicep Curl Lv1 [1-5kg]",c:"PULL",m:"Biceps"}, {n:"Bicep Curl Lv2 [5-8kg]",c:"PULL",m:"Biceps"}, {n:"Bicep Curl Lv3 [8-12kg]",c:"PULL",m:"Biceps"}, {n:"Bicep Curl Lv4 [12-17kg]",c:"PULL",m:"Biceps"}, {n:"Bicep Curl Lv5 [17-22kg]",c:"PULL",m:"Biceps"},
 {n:"Preacher Curl Lv1 [1-5kg]",c:"PULL",m:"Biceps"}, {n:"Preacher Curl Lv2 [5-8kg]",c:"PULL",m:"Biceps"}, {n:"Preacher Curl Lv3 [8-12kg]",c:"PULL",m:"Biceps"}, {n:"Preacher Curl Lv4 [12-17kg]",c:"PULL",m:"Biceps"}, {n:"Preacher Curl Lv5 [17-22kg]",c:"PULL",m:"Biceps"},
-
-// === TRICEPS ===
 {n:"Tricep Ext Lv1 [1-5kg]",c:"PUSH",m:"Triceps"}, {n:"Tricep Ext Lv2 [5-8kg]",c:"PUSH",m:"Triceps"}, {n:"Tricep Ext Lv3 [8-12kg]",c:"PUSH",m:"Triceps"}, {n:"Tricep Ext Lv4 [12-17kg]",c:"PUSH",m:"Triceps"}, {n:"Tricep Ext Lv5 [17-22kg]",c:"PUSH",m:"Triceps"},
 {n:"Skullcrusher Lv1 [5-15kg]",c:"PUSH",m:"Triceps"}, {n:"Skullcrusher Lv2 [15-25kg]",c:"PUSH",m:"Triceps"}, {n:"Skullcrusher Lv3 [25-35kg]",c:"PUSH",m:"Triceps"}, {n:"Skullcrusher Lv4 [35-50kg]",c:"PUSH",m:"Triceps"}, {n:"Skullcrusher Lv5 [50-70kg+]",c:"PUSH",m:"Triceps"},
-
-// === LEGS / POWER ===
 {n:"Squat Lv1 [20-30kg]",c:"LEGS",m:"Legs"}, {n:"Squat Lv2 [30-50kg]",c:"LEGS",m:"Legs"}, {n:"Squat Lv3 [50-70kg]",c:"LEGS",m:"Legs"}, {n:"Squat Lv4 [70-90kg]",c:"LEGS",m:"Legs"}, {n:"Squat Lv5 [90-120kg+]",c:"LEGS",m:"Legs"},
 {n:"RDL Lv1 [20-30kg]",c:"LEGS",m:"Legs"}, {n:"RDL Lv2 [30-50kg]",c:"LEGS",m:"Legs"}, {n:"RDL Lv3 [50-70kg]",c:"LEGS",m:"Legs"}, {n:"RDL Lv4 [70-90kg]",c:"LEGS",m:"Legs"}, {n:"RDL Lv5 [90-120kg+]",c:"LEGS",m:"Legs"},
 {n:"Deadlift Lv1 [20-30kg]",c:"PULL",m:"Back"}, {n:"Deadlift Lv2 [30-50kg]",c:"PULL",m:"Back"}, {n:"Deadlift Lv3 [50-70kg]",c:"PULL",m:"Back"}, {n:"Deadlift Lv4 [70-90kg]",c:"PULL",m:"Back"}, {n:"Deadlift Lv5 [90-120kg+]",c:"PULL",m:"Back"},
 {n:"Hip Thrust Lv1 [20-30kg]",c:"LEGS",m:"Legs"}, {n:"Hip Thrust Lv2 [30-50kg]",c:"LEGS",m:"Legs"}, {n:"Hip Thrust Lv3 [50-70kg]",c:"LEGS",m:"Legs"}, {n:"Hip Thrust Lv4 [70-90kg]",c:"LEGS",m:"Legs"}, {n:"Hip Thrust Lv5 [90-120kg+]",c:"LEGS",m:"Legs"},
 ];
-
 const DIFF = {
 "Standard Pushup":6, "Diamond Pushup":10, "Wide Pushup":7, "Archer Pushup":15, "Pike Pushup":8, "Pseudo Planche Pushup":12, "Decline Pushup":7, "Spiderman Pushup":9,
 "Tricep Dips (Chair)":8, "Handstand Pushup Neg":15,
@@ -195,39 +225,27 @@ const DIFF = {
 "Bodyweight Squat":5, "Pistol Squat":15, "Bulgarian Split Squat":10, "Lunges":6, "Jump Squat":9, "Wall Sit":5, "Calf Raises":3, "Glute Bridge":5, "Single Leg Deadlift":10, "Cossack Squat":11,
 "Plank Hold":5, "Side Plank":6, "Leg Raises":7, "Hanging Knee Raise":9, "L-Sit Hold":15, "Hollow Body Hold":10, "Russian Twist":6, "Mountain Climber":7, "Dead Bug":4,
 "Burpees":15, "Jumping Jacks":3, "High Knees":4, "Bear Crawl":8, "Shoulder Tap Plank":7, "Inchworm":6, "Squat to Calf Raise":7,
-"Decline Diamond Pushups":14,
-"Explosive Bulgarian Split Squats":14,
-"Feet Elevated Pike Pushups":12,
-"Hammer Backpack Cruls":8,
-"Backpack Biceps Curls":8,
-"Dips":10,
-// FIX - COMMA ADDED ABOVE
-// CHEST
+"Decline Diamond Pushups":14, "Explosive Bulgarian Split Squats":14, "Feet Elevated Pike Pushups":12, "Hammer Backpack Cruls":8, "Backpack Biceps Curls":8, "Dips":10,
 "Bench Press Lv1 [10-20kg]":16, "Bench Press Lv2 [20-35kg]":24, "Bench Press Lv3 [35-50kg]":35, "Bench Press Lv4 [50-70kg]":50, "Bench Press Lv5 [70-90kg+]":68,
 "Incline Press Lv1 [10-20kg]":15, "Incline Press Lv2 [20-35kg]":23, "Incline Press Lv3 [35-50kg]":33, "Incline Press Lv4 [50-70kg]":48, "Incline Press Lv5 [70-90kg+]":65,
 "Decline Press Lv1 [10-20kg]":15, "Decline Press Lv2 [20-35kg]":23, "Decline Press Lv3 [35-50kg]":33, "Decline Press Lv4 [50-70kg]":48, "Decline Press Lv5 [70-90kg+]":65,
 "Chest Fly Lv1 [5-15kg]":12, "Chest Fly Lv2 [15-25kg]":18, "Chest Fly Lv3 [25-35kg]":26, "Chest Fly Lv4 [35-50kg]":38, "Chest Fly Lv5 [50-70kg+]":52,
 "Pullover Lv1 [5-15kg]":11, "Pullover Lv2 [15-25kg]":17, "Pullover Lv3 [25-35kg]":25, "Pullover Lv4 [35-50kg]":36, "Pullover Lv5 [50-70kg+]":50,
-// BACK
 "Bent Row Lv1 [10-20kg]":15, "Bent Row Lv2 [20-35kg]":22, "Bent Row Lv3 [35-50kg]":32, "Bent Row Lv4 [50-70kg]":46, "Bent Row Lv5 [70-90kg+]":62,
 "Single Arm Row Lv1 [10-20kg]":14, "Single Arm Row Lv2 [20-35kg]":21, "Single Arm Row Lv3 [35-50kg]":30, "Single Arm Row Lv4 [50-70kg]":43, "Single Arm Row Lv5 [70-90kg+]":58,
 "Lat Pulldown Lv1 [10-20kg]":13, "Lat Pulldown Lv2 [20-35kg]":19, "Lat Pulldown Lv3 [35-50kg]":28, "Lat Pulldown Lv4 [50-70kg]":40, "Lat Pulldown Lv5 [70-90kg+]":55,
 "Seated Row Lv1 [10-20kg]":13, "Seated Row Lv2 [20-35kg]":19, "Seated Row Lv3 [35-50kg]":28, "Seated Row Lv4 [50-70kg]":40, "Seated Row Lv5 [70-90kg+]":55,
 "Shrugs Lv1 [10-20kg]":12, "Shrugs Lv2 [20-35kg]":18, "Shrugs Lv3 [35-50kg]":26, "Shrugs Lv4 [50-70kg]":38, "Shrugs Lv5 [70-90kg+]":52,
-// SHOULDER
 "Shoulder Press Lv1 [10-20kg]":14, "Shoulder Press Lv2 [20-35kg]":21, "Shoulder Press Lv3 [35-50kg]":30, "Shoulder Press Lv4 [50-70kg]":43, "Shoulder Press Lv5 [70-90kg+]":58,
 "Arnold Press Lv1 [5-15kg]":13, "Arnold Press Lv2 [15-25kg]":19, "Arnold Press Lv3 [25-35kg]":28, "Arnold Press Lv4 [35-50kg]":40, "Arnold Press Lv5 [50-70kg+]":55,
 "Lateral Raise Lv1 [1-5kg]":9, "Lateral Raise Lv2 [5-8kg]":13, "Lateral Raise Lv3 [8-12kg]":19, "Lateral Raise Lv4 [12-17kg]":27, "Lateral Raise Lv5 [17-22kg]":38,
 "Front Raise Lv1 [1-5kg]":9, "Front Raise Lv2 [5-8kg]":13, "Front Raise Lv3 [8-12kg]":19, "Front Raise Lv4 [12-17kg]":27, "Front Raise Lv5 [17-22kg]":38,
 "Rear Delt Fly Lv1 [1-5kg]":9, "Rear Delt Fly Lv2 [5-8kg]":13, "Rear Delt Fly Lv3 [8-12kg]":19, "Rear Delt Fly Lv4 [12-17kg]":27, "Rear Delt Fly Lv5 [17-22kg]":38,
-// BICEPS
 "Hammer Curl Lv1 [1-5kg]":10, "Hammer Curl Lv2 [5-8kg]":15, "Hammer Curl Lv3 [8-12kg]":22, "Hammer Curl Lv4 [12-17kg]":32, "Hammer Curl Lv5 [17-22kg]":45,
 "Bicep Curl Lv1 [1-5kg]":10, "Bicep Curl Lv2 [5-8kg]":15, "Bicep Curl Lv3 [8-12kg]":22, "Bicep Curl Lv4 [12-17kg]":32, "Bicep Curl Lv5 [17-22kg]":45,
 "Preacher Curl Lv1 [1-5kg]":11, "Preacher Curl Lv2 [5-8kg]":16, "Preacher Curl Lv3 [8-12kg]":24, "Preacher Curl Lv4 [12-17kg]":34, "Preacher Curl Lv5 [17-22kg]":47,
-// TRICEPS
 "Tricep Ext Lv1 [1-5kg]":10, "Tricep Ext Lv2 [5-8kg]":15, "Tricep Ext Lv3 [8-12kg]":22, "Tricep Ext Lv4 [12-17kg]":32, "Tricep Ext Lv5 [17-22kg]":45,
 "Skullcrusher Lv1 [5-15kg]":13, "Skullcrusher Lv2 [15-25kg]":20, "Skullcrusher Lv3 [25-35kg]":29, "Skullcrusher Lv4 [35-50kg]":42, "Skullcrusher Lv5 [50-70kg+]":57,
-// LEGS
 "Squat Lv1 [20-30kg]":20, "Squat Lv2 [30-50kg]":32, "Squat Lv3 [50-70kg]":48, "Squat Lv4 [70-90kg]":68, "Squat Lv5 [90-120kg+]":90,
 "RDL Lv1 [20-30kg]":20, "RDL Lv2 [30-50kg]":32, "RDL Lv3 [50-70kg]":48, "RDL Lv4 [70-90kg]":68, "RDL Lv5 [90-120kg+]":90,
 "Deadlift Lv1 [20-30kg]":22, "Deadlift Lv2 [30-50kg]":35, "Deadlift Lv3 [50-70kg]":52, "Deadlift Lv4 [70-90kg]":74, "Deadlift Lv5 [90-120kg+]":100,
@@ -268,35 +286,7 @@ function renderTopCards(){
   let el = document.getElementById('miniLvl'); if(el) el.innerText = lvl;
   let el2 = document.getElementById('miniXp'); if(el2) el2.innerText = xp + " XP";
 }
-function openDayPortal(day){
-  let list = customData[day];
-  let dayXP = list.reduce((s,e)=>s+calcXP(e),0);
-  document.getElementById('detail-title').innerText = day + " BATTLE";
-  document.getElementById('detail-desc').innerText = day + " • " + list.length + " EXERCISES • +" + dayXP + " XP REWARD";
-  document.getElementById('detail-list').innerHTML = list.map(i=>`<li><span>${i.name} <small style="color:#5a7a8a">(${DIFF[i.name]||5} base)</small></span><span style="color:#00e5ff;font-size:13px;">${i.sets} x ${i.reps} = ${calcXP(i)} XP</span></li>`).join('') + `<li style="border-color:#00ff88; background:rgba(0,255,136,0.1);"><span style="color:#00ff88">TOTAL REWARD</span><span style="color:#00ff88">${dayXP} XP</span></li>`;
-  const ov = document.getElementById('portal-overlay');
-  ov.classList.remove('active'); void ov.offsetWidth; ov.classList.add('active');
-  document.body.style.overflow = 'hidden';
-  document.getElementById('battleBtn').onclick = (e)=>{
-    e.preventDefault();
-    let totalXp = parseInt(localStorage.getItem('ARISE_TOTAL_XP')||'0') + dayXP;
-    let totalSets = parseInt(localStorage.getItem('ARISE_SETS')||'0') + list.reduce((s,x)=>s+x.sets,0);
-    let battles = parseInt(localStorage.getItem('ARISE_BATTLES')||'0') + 1;
-    localStorage.setItem('ARISE_TOTAL_XP', totalXp);
-    localStorage.setItem('ARISE_SETS', totalSets);
-    localStorage.setItem('ARISE_BATTLES', battles);
-    let tempXp = totalXp; let calcLvl=0;
-    while(calcLvl < 156){
-      let need = getXPForLevel(calcLvl+1);
-      if(tempXp >= need){ tempXp -= need; calcLvl++; } else break;
-    }
-    localStorage.setItem('ARISE_LEVEL', calcLvl);
-    alert("BATTLE COMPLETE! +" + dayXP + " XP\nNew Level: " + calcLvl + "\nRedirecting to STATS...");
-    closePortal();
-    location.href="stats.html";
-  };
-}
-function closePortal(){ document.getElementById('portal-overlay').classList.remove('active'); document.body.style.overflow='auto'; }
+function closePortal(){ document.getElementById('portal-overlay').classList.remove('active'); document.body.style.overflow='auto'; clearInterval(timerInt); document.getElementById('detail-intro').style.animation=''; }
 document.getElementById('close-portal').onclick = closePortal;
 document.getElementById('portal-overlay').addEventListener('click',(e)=>{ if(e.target.id==='portal-overlay') closePortal(); });
 function renderTabs(){
@@ -341,6 +331,126 @@ function clearDay(){ if(confirm(currentDay + " clear karna hai?")){ customData[c
 function renderAll(){ renderTabs(); renderLib(); renderPlan(); renderTopCards(); }
 document.getElementById('searchEx').addEventListener('input', renderLib);
 renderAll();
+
+// === NEW BATTLE FLOW LOGIC ===
+let activeList = [];
+let curExIdx = 0;
+let curSetNum = 1;
+let restDefault = 60;
+let restLeft = 60;
+let workoutSec = 0;
+let timerInt = null;
+let inRestPhase = false;
+let totalBattleXP = 0;
+function openDayPortal(day){
+  let list = customData[day];
+  activeList = list;
+  totalBattleXP = list.reduce((s,e)=>s+calcXP(e),0);
+  document.getElementById('detail-title').innerText = day + " BATTLE";
+  document.getElementById('detail-desc').innerText = day + " • " + list.length + " EXERCISES • +" + totalBattleXP + " XP REWARD";
+  document.getElementById('detail-list').innerHTML = list.map(i=>`<li><span>${i.name} <small style="color:#5a7a8a">(${DIFF[i.name]||5} base)</small></span><span style="color:#00e5ff;font-size:13px;">${i.sets} x ${i.reps} = ${calcXP(i)} XP</span></li>`).join('') + `<li style="border-color:#00ff88; background:rgba(0,255,136,0.1);"><span style="color:#00ff88">TOTAL REWARD</span><span style="color:#00ff88">${totalBattleXP} XP</span></li>`;
+  document.getElementById('detail-intro').style.display='block';
+  document.getElementById('detail-intro').style.animation='';
+  document.getElementById('battle-active').classList.remove('active');
+  const ov = document.getElementById('portal-overlay');
+  ov.classList.remove('active'); void ov.offsetWidth; ov.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('battleBtn').onclick = (e)=>{
+    e.preventDefault();
+    startActiveBattle();
+  };
+}
+function startActiveBattle(){
+  curExIdx = 0; curSetNum = 1;
+  document.getElementById('detail-intro').style.animation='slideLeft 0.4s forwards';
+  setTimeout(()=>{
+    document.getElementById('detail-intro').style.display='none';
+    document.getElementById('battle-active').classList.add('active');
+    renderActiveQuest();
+  },350);
+}
+function renderActiveQuest(){
+  inRestPhase = false;
+  let ex = activeList[curExIdx];
+  document.getElementById('qTop').innerText = `QUEST ${curExIdx+1}/${activeList.length} • SET ${curSetNum}/${ex.sets}`;
+  document.getElementById('qName').innerText = ex.name;
+  document.getElementById('qMeta').innerText = `${ex.reps} reps • ${DIFF[ex.name]||5} base • +${calcXP(ex)} XP`;
+  document.getElementById('timerLabel').innerText = 'PERFORMING';
+  document.getElementById('completeBtn').innerText = `COMPLETE SET ${curSetNum} ✓`;
+  document.getElementById('completeBtn').style.display='block';
+  document.getElementById('completeBtn').onclick = completeSet;
+  document.getElementById('restCtrl').style.display='none';
+  document.getElementById('skipBtn').style.display='none';
+  let progress = ((curExIdx + (curSetNum-1)/ex.sets) / activeList.length)*100;
+  document.getElementById('progressFill').style.width = progress+'%';
+  startWorkoutTimer();
+}
+function startWorkoutTimer(){
+  workoutSec=0; clearInterval(timerInt);
+  document.getElementById('mainTimer').innerText='00:00';
+  timerInt=setInterval(()=>{
+    workoutSec++;
+    document.getElementById('mainTimer').innerText = formatTime(workoutSec);
+  },1000);
+}
+function completeSet(){
+  clearInterval(timerInt);
+  let ex = activeList[curExIdx];
+  if(curSetNum < ex.sets){
+    startRestPhase(false);
+  } else {
+    if(curExIdx < activeList.length - 1){
+      startRestPhase(true);
+    } else {
+      finishBattle();
+    }
+  }
+}
+function startRestPhase(isNextEx){
+  inRestPhase = true;
+  restLeft = restDefault;
+  document.getElementById('timerLabel').innerText = isNextEx? 'REST • NEXT QUEST COMING' : 'REST - RECOVERING MANA';
+  document.getElementById('completeBtn').style.display='none';
+  document.getElementById('restCtrl').style.display='flex';
+  document.getElementById('skipBtn').style.display='block';
+  document.getElementById('mainTimer').innerText = formatTime(restLeft);
+  timerInt=setInterval(()=>{
+    restLeft--;
+    document.getElementById('mainTimer').innerText = formatTime(restLeft);
+    if(restLeft<=0){
+      clearInterval(timerInt);
+      if(isNextEx){ curExIdx++; curSetNum=1; } else { curSetNum++; }
+      renderActiveQuest();
+    }
+  },1000);
+}
+function skipRest(){
+  clearInterval(timerInt);
+  if(curExIdx >= activeList.length-1 && curSetNum >= activeList[curExIdx].sets){ finishBattle(); return; }
+  let ex = activeList[curExIdx];
+  if(curSetNum < ex.sets){ curSetNum++; } else { curExIdx++; curSetNum=1; }
+  renderActiveQuest();
+}
+function finishBattle(){
+  clearInterval(timerInt);
+  let totalXp = parseInt(localStorage.getItem('ARISE_TOTAL_XP')||'0') + totalBattleXP;
+  let totalSets = parseInt(localStorage.getItem('ARISE_SETS')||'0') + activeList.reduce((s,x)=>s+x.sets,0);
+  let battles = parseInt(localStorage.getItem('ARISE_BATTLES')||'0') + 1;
+  localStorage.setItem('ARISE_TOTAL_XP', totalXp);
+  localStorage.setItem('ARISE_SETS', totalSets);
+  localStorage.setItem('ARISE_BATTLES', battles);
+  let tempXp = totalXp; let calcLvl=0;
+  while(calcLvl < 156){
+    let need = getXPForLevel(calcLvl+1);
+    if(tempXp >= need){ tempXp -= need; calcLvl++; } else break;
+  }
+  localStorage.setItem('ARISE_LEVEL', calcLvl);
+  closePortal();
+  alert("BATTLE COMPLETE! +" + totalBattleXP + " XP\nNew Level: " + calcLvl + "\nRedirecting to STATS...");
+  location.href="stats.html";
+}
+function setRestTime(s){ restDefault=s; document.querySelectorAll('.rest-ctrl button').forEach(b=>b.classList.remove('active')); document.getElementById('r'+s).classList.add('active'); }
+function formatTime(s){ let m=String(Math.floor(s/60)).padStart(2,'0'); let sc=String(s%60).padStart(2,'0'); return `${m}:${sc}`; }
 </script>
 </body>
 </html>
