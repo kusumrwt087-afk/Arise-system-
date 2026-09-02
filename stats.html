@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="manifest" href="manifest.json">
+<link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#00e5ff">
 <title>Stats - SHADOW MONARCH</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,17 +10,8 @@
 #music-btn{position:fixed;bottom:20px;right:20px;z-index:99999;background:rgba(0,229,255,0.15);border:1px solid #00e5ff;color:#00e5ff;padding:10px 16px;border-radius:30px;font-size:12px;letter-spacing:2px;cursor:pointer;backdrop-filter:blur(10px);}
 body{background:radial-gradient(ellipse at center, #0a1a24 0%, #020508 100%); min-height:100vh;}
 .stats-wrap{max-width:900px;margin:40px auto;padding:15px;}
-.level-card{
-background:linear-gradient(180deg, rgba(15,30,45,0.95) 0%, rgba(5,10,15,0.98) 100%);
-border:2px solid #00e5ff; border-radius:28px; padding:45px 30px; text-align:center;
-box-shadow:0 0 80px rgba(0,229,255,0.5), inset 0 0 40px rgba(0,229,255,0.08), 0 0 0 1px rgba(0,229,255,0.3);
-position:relative; overflow:hidden;
-}
-.level-card::before{
-content:""; position:absolute; top:-50%; left:-50%; width:200%; height:200%;
-background:linear-gradient(120deg, transparent 30%, rgba(0,229,255,0.08) 50%, transparent 70%);
-animation:shine 4s infinite;
-}
+.level-card{background:linear-gradient(180deg, rgba(15,30,45,0.95) 0%, rgba(5,10,15,0.98) 100%);border:2px solid #00e5ff; border-radius:28px; padding:45px 30px; text-align:center;box-shadow:0 0 80px rgba(0,229,255,0.5), inset 0 0 40px rgba(0,229,255,0.08), 0 0 0 1px rgba(0,229,255,0.3);position:relative; overflow:hidden;}
+.level-card::before{content:""; position:absolute; top:-50%; left:-50%; width:200%; height:200%;background:linear-gradient(120deg, transparent 30%, rgba(0,229,255,0.08) 50%, transparent 70%);animation:shine 4s infinite;}
 @keyframes shine{0%{transform:translateX(-100%) rotate(20deg);}100%{transform:translateX(100%) rotate(20deg);}}
 .level-num{font-size:92px;font-weight:900;color:#fff;text-shadow:0 0 20px #00e5ff, 0 0 40px #00e5ff, 0 0 60px #00aaff;letter-spacing:8px;line-height:1;position:relative;z-index:1;}
 .rank{color:#00e5ff;letter-spacing:10px;font-size:20px;font-weight:900;margin-top:14px;text-shadow:0 0 20px #00e5ff;position:relative;z-index:1;}
@@ -41,30 +32,23 @@ animation:shine 4s infinite;
 .stat-box span{color:#7aa;font-size:10px;letter-spacing:3px;font-weight:700;margin-top:4px;display:block;}
 .back-btn{display:inline-block;margin-top:36px;background:linear-gradient(90deg,#00e5ff,#0099ff);color:#000;padding:14px 36px;border-radius:40px;letter-spacing:4px;font-size:13px;font-weight:900;text-decoration:none;box-shadow:0 0 30px rgba(0,229,255,0.6);transition:0.3s;position:relative;z-index:1;}
 .back-btn:hover{transform:scale(1.05);box-shadow:0 0 50px rgba(0,229,255,0.8);}
-</style>
-<style>
 #ANIME_LVL{position:fixed;inset:0;z-index:99999999;background:#000;display:none;overflow:hidden;cursor:none}
 #ANIME_LVL.locked{display:block}
 #animeCanvas{position:absolute;inset:0;width:100%;height:100%}
 .scene{position:absolute;inset:0;display:grid;place-items:center;z-index:2}
-
 .knight-stack{position:relative;width:220px;height:320px;filter:drop-shadow(0 20px 30px #000)}
 .knight-dead{position:absolute;inset:0;background:linear-gradient(180deg,#2b3545 0%, #141a24 100%);clip-path:polygon(30% 0,70% 0,80% 18%,78% 60%,68% 100%,32% 100%,22% 60%,20% 18%);transition:1s;transform:rotate(-10deg) translateY(15px)}
 .knight-dead::before{content:'';position:absolute;top:-22px;left:50%;width:72px;height:72px;background:#1f2835;border:2px solid #3a4a5e;border-radius:14px;transform:translateX(-50%)}
 .knight-dead.fade{opacity:0;filter:blur(12px) brightness(0);transform:rotate(-15deg) translateY(40px) scale(0.9)}
-
 .knight-shadow{position:absolute;inset:0;background:linear-gradient(180deg,#00e5ff 0%, #7a00ff 100%);clip-path:polygon(30% 0,70% 0,80% 18%,78% 60%,68% 100%,32% 100%,22% 60%,20% 18%);box-shadow:0 0 30px #00e5ff, 0 0 100px #7a00ff;opacity:0;transform:translateY(40px) scale(0.85);filter:blur(2px)}
 .knight-shadow.rise{animation:animeRise 1.8s cubic-bezier(0.16,1,0.3,1) forwards}
 @keyframes animeRise{0%{opacity:0;transform:translateY(40px) scale(0.7) rotateX(60deg);filter:blur(20px)}30%{opacity:1;transform:translateY(-10px) scale(1.1)}100%{opacity:1;transform:translateY(-140px) scale(1.15);filter:blur(0) brightness(1.4) drop-shadow(0 0 40px #00e5ff)}}
-
 .arise-anime{position:absolute;top:14%;left:50%;transform:translateX(-50%) scale(0);font-size:84px;font-weight:900;letter-spacing:18px;color:#fff;z-index:5;text-shadow:0 0 10px #fff,0 0 40px #00e5ff,0 0 100px #7a00ff;opacity:0}
 .arise-anime.go{animation:ariseAnime 0.9s cubic-bezier(0.175,0.885,0.32,1.275) forwards}
 @keyframes ariseAnime{0%{opacity:0;transform:translateX(-50%) scale(0) rotate(-10deg);filter:blur(30px)}60%{opacity:1;transform:translateX(-50%) scale(1.35) rotate(2deg)}100%{opacity:1;transform:translateX(-50%) scale(1) rotate(0);filter:blur(0)}}
-
 .impact-ring{position:absolute;left:50%;top:58%;width:10px;height:10px;border:2px solid #00e5ff;border-radius:50%;transform:translate(-50%,-50%);opacity:0;box-shadow:0 0 30px #00e5ff}
 .impact-ring.go{animation:ringBlast 0.9s 0.8s ease-out forwards}
 @keyframes ringBlast{0%{width:10px;height:10px;opacity:1}100%{width:800px;height:800px;opacity:0;border-width:1px}}
-
 .lvl-anime{position:absolute;bottom:10%;left:50%;transform:translateX(-50%) translateY(60px);text-align:center;opacity:0;z-index:5}
 .lvl-anime.go{animation:lvlAnimeIn 0.8s 2.1s cubic-bezier(0.16,1,0.3,1) forwards}
 @keyframes lvlAnimeIn{to{opacity:1;transform:translateX(-50%) translateY(0)}}
@@ -89,12 +73,10 @@ animation:shine 4s infinite;
 <div class="stat-box"><b id="totalBattles">0</b><span>BATTLES WON</span></div>
 <div class="stat-box"><b id="totalSets">0</b><span>TOTAL SETS</span></div>
 </div>
-
 <div style="margin-top:32px;display:grid;grid-template-columns:1fr 1fr;gap:14px;position:relative;z-index:1;">
 <div class="stat-box"><b id="avgXp" style="font-size:20px;">0</b><span>AVG XP / BATTLE</span></div>
 <div class="stat-box"><b id="toMax" style="font-size:20px;color:#ffaa00;">156</b><span>LEVELS TO MAX</span></div>
 </div>
-
 <p style="color:#3a5a6a;margin-top:34px;font-size:10px;letter-spacing:3px;line-height:1.8;position:relative;z-index:1;">
 MAX LEVEL 156 - SHADOW MONARCH<br>
 <span style="color:#00e5ff;">0-10 E | 11-25 D | 26-45 C | 46-70 B | 71-100 A | 101-130 S | 131-154 MONARCH | 155-156 SHADOW MONARCH</span><br>
@@ -106,6 +88,20 @@ MAX LEVEL 156 - SHADOW MONARCH<br>
 </div>
 <button id="shareBtn" style="width:100%;margin-top:20px;background:linear-gradient(90deg,#00e5ff,#00aaff);color:#000;padding:16px;border-radius:14px;font-weight:900;letter-spacing:2px;border:none;cursor:pointer;box-shadow:0 0 30px rgba(0,229,255,0.6)">SHARE ARISE CARD ⚡</button>
 <canvas id="shareCanvas" width="1080" height="1350" style="display:none"></canvas>
+
+<div id="ANIME_LVL">
+  <canvas id="animeCanvas"></canvas>
+  <div class="scene">
+    <div class="arise-anime" id="A_ANIME">ARISE</div>
+    <div class="impact-ring" id="A_RING"></div>
+    <div class="knight-stack">
+      <div class="knight-dead" id="K_DEAD"></div>
+      <div class="knight-shadow" id="K_SHAD"></div>
+    </div>
+    <div class="lvl-anime" id="A_LVL"><p>SHADOW EXTRACTION SUCCESSFUL</p><b id="A_NUM">18</b><p style="letter-spacing:12px">LEVEL UP</p></div>
+  </div>
+</div>
+<audio id="animeSfx" src="arise.mp3" preload="auto"></audio>
 <script>
 // MUSIC
 const bgMusic=document.getElementById('bg-music'); const musicBtn=document.getElementById('music-btn');
@@ -125,7 +121,7 @@ function resetXP(){
     localStorage.setItem('ARISE_BATTLES','0');
     location.reload();
   }
-}  
+}
 function getXPForLevel(lvl){if(lvl<=1)return 1000;return Math.floor(1000*Math.pow(lvl,1.35)+lvl*350);}
 function getRank(lvl){
 if(lvl<=10)return["E-RANK",""]; if(lvl<=25)return["D-RANK",""]; if(lvl<=45)return["C-RANK",""];
@@ -159,7 +155,9 @@ document.getElementById('xpText').innerText=tempXp+" / "+nextNeed+" XP ("+perc+"
 let nextRank=getRank(calcLvl+1)[0];
 document.getElementById('nextInfo').innerText=(nextNeed-tempXp)+" XP TO "+nextRank+" • "+(156-calcLvl)+" LEVELS TO SHADOW MONARCH";
 }
-  document.getElementById('shareBtn').onclick = async ()=>{
+
+// SHARE - SINGLE CLEAN
+document.getElementById('shareBtn').onclick = ()=>{
   let lvl = localStorage.getItem('ARISE_LEVEL')||'0';
   let xp = localStorage.getItem('ARISE_TOTAL_XP')||'0';
   let battles = localStorage.getItem('ARISE_BATTLES')||'0';
@@ -178,6 +176,12 @@ document.getElementById('nextInfo').innerText=(nextNeed-tempXp)+" XP TO "+nextRa
   ctx.fillText('Lv.'+lvl,540,550);
   ctx.fillStyle='#8ab'; ctx.font='600 40px sans-serif';
   ctx.fillText(xp+' TOTAL XP • '+battles+' BATTLES',540,650);
+  ctx.fillStyle='rgba(0,229,255,0.1)'; ctx.fillRect(100,750,880,200);
+  ctx.strokeStyle='rgba(0,229,255,0.3)'; ctx.strokeRect(100,750,880,200);
+  ctx.fillStyle='#00e5ff'; ctx.font='800 28px sans-serif'; ctx.textAlign='left';
+  ctx.fillText('SYSTEM: YOU HAVE LEVELED UP',140,810);
+  ctx.fillStyle='#e0efff'; ctx.font='400 24px sans-serif';
+  ctx.fillText('"The weak stay weak. The strong ARISE."',140,870);
   ctx.textAlign='center'; ctx.fillStyle='#5a7a8a'; ctx.font='400 22px sans-serif';
   ctx.fillText('arise.isroot.in',540,1250);
   let link = document.createElement('a');
@@ -186,40 +190,11 @@ document.getElementById('nextInfo').innerText=(nextNeed-tempXp)+" XP TO "+nextRa
   link.click();
 };
 
-  // bg
-  let grad = ctx.createLinearGradient(0,0,0,1350);
-  grad.addColorStop(0,'#020a14'); grad.addColorStop(1,'#001a33');
-  ctx.fillStyle=grad; ctx.fillRect(0,0,1080,1350);
-
-  // glow border
-  ctx.strokeStyle='#00e5ff'; ctx.lineWidth=12; ctx.shadowBlur=30; ctx.shadowColor='#00e5ff';
-  ctx.strokeRect(20,20,1040,1310); ctx.shadowBlur=0;
-
-  ctx.fillStyle='#fff'; ctx.font='900 80px sans-serif'; ctx.textAlign='center';
-  ctx.fillText('ARISE FITNESS',540,200);
-  ctx.fillStyle='#00e5ff'; ctx.font='700 30px sans-serif'; ctx.letterSpacing='5px';
-  ctx.fillText('SHADOW MONARCH',540,260);
-
-  ctx.fillStyle='#fff'; ctx.font='900 180px sans-serif';
-  ctx.fillText('Lv.'+lvl,540,550);
-
-  ctx.fillStyle='#8ab'; ctx.font='600 40px sans-serif';
-  ctx.fillText(xp+' TOTAL XP • '+battles+' BATTLES',540,650);
-
-  ctx.fillStyle='rgba(0,229,255,0.1)'; ctx.fillRect(100,750,880,200);
-  ctx.strokeStyle='rgba(0,229,255,0.3)'; ctx.strokeRect(100,750,880,200);
-  ctx.fillStyle='#00e5ff'; ctx.font='800 28px sans-serif'; ctx.textAlign='left';
-  ctx.fillText('SYSTEM: YOU HAVE LEVELED UP',140,810);
-  ctx.fillStyle='#e0efff'; ctx.font='400 24px sans-serif';
-  ctx.fillText('"The weak stay weak. The strong ARISE."',140,870);
-
-  ctx.textAlign='center'; ctx.fillStyle='#5a7a8a'; ctx.font='400 22px sans-serif';
-  ctx.fillText('arise.isroot.in',540,1250);
-
 // --- ANIME LEVEL UP ENGINE ---
 const animeCanvas = document.getElementById('animeCanvas');
 const animeCtx = animeCanvas.getContext('2d');
-function animeResize(){ animeCanvas.width=innerWidth; animeCanvas.height=innerHeight; } animeResize(); addEventListener('resize',animeResize);
+function animeResize(){ animeCanvas.width=innerWidth; animeCanvas.height=innerHeight; }
+animeResize(); addEventListener('resize',animeResize);
 let particles=[];
 function spawnAura(x,y,n=40){
   for(let i=0;i<n;i++){
@@ -249,7 +224,7 @@ function ANIME_LEVELUP(lvl){
   document.getElementById('A_LVL').className='lvl-anime';
   setTimeout(()=>{
     document.getElementById('A_ANIME').classList.add('go');
-    try{animeSfx.currentTime=0; animeSfx.volume=1; animeSfx.play();}catch(e){}
+    try{let a=document.getElementById('animeSfx'); a.currentTime=0; a.volume=1; a.play();}catch(e){}
     if(navigator.vibrate) navigator.vibrate([100,40,200]);
     spawnAura(innerWidth/2, innerHeight*0.58, 60);
   },200);
@@ -269,19 +244,5 @@ function ANIME_LEVELUP(lvl){
 let L=localStorage.getItem('LAST_SHOWN_LVL')||0, C=localStorage.getItem('ARISE_LEVEL')||0;
 if(+C>+L && +C>0){ setTimeout(()=>ANIME_LEVELUP(C),500); localStorage.setItem('LAST_SHOWN_LVL',C); }
 </script>
-
-<div id="ANIME_LVL">
-  <canvas id="animeCanvas"></canvas>
-  <div class="scene">
-    <div class="arise-anime" id="A_ANIME">ARISE</div>
-    <div class="impact-ring" id="A_RING"></div>
-    <div class="knight-stack">
-      <div class="knight-dead" id="K_DEAD"></div>
-      <div class="knight-shadow" id="K_SHAD"></div>
-    </div>
-    <div class="lvl-anime" id="A_LVL"><p>SHADOW EXTRACTION SUCCESSFUL</p><b id="A_NUM">18</b><p style="letter-spacing:12px">LEVEL UP</p></div>
-  </div>
-</div>
-<audio id="animeSfx" src="arise.mp3" preload="auto"></audio>
 </body>
 </html>
