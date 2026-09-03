@@ -69,7 +69,7 @@
 .plan-item{background:linear-gradient(90deg,rgba(0,229,255,0.08),transparent);border:1px solid rgba(0,229,255,0.2);border-radius:12px;padding:12px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;}
 .plan-item b{color:#fff;font-size:13px;}
 .plan-controls{display:flex;gap:8px;align-items:center;margin-top:6px;flex-wrap:wrap;}
-.plan-controls input{width:55px;background:#000;border:1px solid rgba(0,229,255,0.3);color:#00e5ff;padding:5px;border-radius:8px;text-align:center;font-weight:800;font-size:12px;}
+.plan-controls input{width:65px;background:#000;border:1px solid rgba(0,229,255,0.3);color:#00e5ff;padding:5px;border-radius:8px;text-align:center;font-weight:800;font-size:12px;}
 .plan-controls label{font-size:9px;color:#7aa;letter-spacing:1px;}
 .del-btn{background:transparent;border:none;color:#ff5a5a;cursor:pointer;font-size:18px;}
 .save-msg{text-align:center;margin-top:15px;color:#00ff88;font-size:11px;letter-spacing:2px;opacity:0;transition:0.5s;}
@@ -98,6 +98,7 @@
 <body>
 <audio id="bg-music" src="dark-aria.mp3" loop preload="auto"></audio>
 <audio id="arise-sfx" src="arise.mp3" preload="auto"></audio>
+<audio id="rest-bell" src="rest-bell.mp3" preload="auto"></audio>
 <div id="music-btn">🎧 DARK ARIA Lv2</div>
 <nav>
   <div class="logo">ARISE FITNESS</div>
@@ -113,7 +114,7 @@
 <div class="workout-container" id="topCards"></div>
 <div class="builder-wrap">
   <h2 class="builder-title">CUSTOM ARISE BUILDER</h2>
-  <p class="builder-sub">CHOOSE EXERCISE • SET DAY • EDIT REPS</p>
+  <p class="builder-sub">CHOOSE EXERCISE • SET DAY • EDIT REPS / SEC / METERS</p>
   <div class="day-tabs" id="dayTabs"></div>
   <div class="builder-grid">
     <div class="lib-box">
@@ -159,9 +160,11 @@
 <script>
 const bgMusic = document.getElementById('bg-music');
 const ariseSfx = document.getElementById('arise-sfx');
+const restBell = document.getElementById('rest-bell');
 const musicBtn = document.getElementById('music-btn');
 bgMusic.volume = 0.25;
 ariseSfx.volume = 0.9;
+restBell.volume = 1.0;
 let savedTime = localStorage.getItem('aria-time');
 if(savedTime) bgMusic.currentTime = parseFloat(savedTime);
 let wasPlaying = localStorage.getItem('aria-playing') === 'true';
@@ -170,6 +173,9 @@ setInterval(()=>{ if(!bgMusic.paused) localStorage.setItem('aria-time', bgMusic.
 if(wasPlaying) playMusic();
 document.addEventListener('click', function firstClick(){ playMusic(); document.removeEventListener('click', firstClick); }, {once:true});
 musicBtn.onclick = (e)=>{ e.stopPropagation(); if(bgMusic.paused){ bgMusic.play(); musicBtn.innerHTML="🔊 DARK ARIA Lv2"; localStorage.setItem('aria-playing','true'); } else { bgMusic.pause(); musicBtn.innerHTML="🔇 PAUSED"; localStorage.setItem('aria-playing','false'); } };
+
+const SEC_ONLY = ["Plank Hold","Side Plank","Hollow Body Hold","Superman Hold","L-Sit Hold","Wall Sit","Shadow Boxing"];
+const METER_ONLY = ["Running"];
 const DAYS = ["MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY","SUNDAY"];
 const CATS = ["ALL","PUSH","PULL","LEGS","CORE","FULL"];
 const LIB = [
@@ -193,6 +199,8 @@ const LIB = [
   {n:"Decline Diamond Pushups",c:"PUSH",m:"Shoulder & Chest"},
   {n:"Explosive Bulgarian Split Squats",c:"LEGS",m:"Quads"},
   {n:"Feet Elevated Pike Pushups",c:"PUSH",m:"Shoulder"},
+  {n:"Shadow Boxing",c:"FULL",m:"Cardio • SEC"},
+  {n:"Running",c:"FULL",m:"Cardio • METERS"},
   {n:"Bench Press Lv1 [10-20kg]",c:"PUSH",m:"Chest"}, {n:"Bench Press Lv2 [20-35kg]",c:"PUSH",m:"Chest"}, {n:"Bench Press Lv3 [35-50kg]",c:"PUSH",m:"Chest"}, {n:"Bench Press Lv4 [50-70kg]",c:"PUSH",m:"Chest"}, {n:"Bench Press Lv5 [70-90kg+]",c:"PUSH",m:"Chest"},
   {n:"Incline Press Lv1 [10-20kg]",c:"PUSH",m:"Chest"}, {n:"Incline Press Lv2 [20-35kg]",c:"PUSH",m:"Chest"}, {n:"Incline Press Lv3 [35-50kg]",c:"PUSH",m:"Chest"}, {n:"Incline Press Lv4 [50-70kg]",c:"PUSH",m:"Chest"}, {n:"Incline Press Lv5 [70-90kg+]",c:"PUSH",m:"Chest"},
   {n:"Decline Press Lv1 [10-20kg]",c:"PUSH",m:"Chest"}, {n:"Decline Press Lv2 [20-35kg]",c:"PUSH",m:"Chest"}, {n:"Decline Press Lv3 [35-50kg]",c:"PUSH",m:"Chest"}, {n:"Decline Press Lv4 [50-70kg]",c:"PUSH",m:"Chest"}, {n:"Decline Press Lv5 [70-90kg+]",c:"PUSH",m:"Chest"},
@@ -226,6 +234,7 @@ const DIFF = {
 "Plank Hold":5, "Side Plank":6, "Leg Raises":7, "Hanging Knee Raise":9, "L-Sit Hold":15, "Hollow Body Hold":10, "Russian Twist":6, "Mountain Climber":7, "Dead Bug":4,
 "Burpees":15, "Jumping Jacks":3, "High Knees":4, "Bear Crawl":8, "Shoulder Tap Plank":7, "Inchworm":6, "Squat to Calf Raise":7,
 "Decline Diamond Pushups":14, "Explosive Bulgarian Split Squats":14, "Feet Elevated Pike Pushups":12,
+"Shadow Boxing":14, "Running":20,
 "Bench Press Lv1 [10-20kg]":16, "Bench Press Lv2 [20-35kg]":24, "Bench Press Lv3 [35-50kg]":35, "Bench Press Lv4 [50-70kg]":50, "Bench Press Lv5 [70-90kg+]":68,
 "Incline Press Lv1 [10-20kg]":15, "Incline Press Lv2 [20-35kg]":23, "Incline Press Lv3 [35-50kg]":33, "Incline Press Lv4 [50-70kg]":48, "Incline Press Lv5 [70-90kg+]":65,
 "Decline Press Lv1 [10-20kg]":15, "Decline Press Lv2 [20-35kg]":23, "Decline Press Lv3 [35-50kg]":33, "Decline Press Lv4 [50-70kg]":48, "Decline Press Lv5 [70-90kg+]":65,
@@ -251,18 +260,32 @@ const DIFF = {
 "Deadlift Lv1 [20-30kg]":22, "Deadlift Lv2 [30-50kg]":35, "Deadlift Lv3 [50-70kg]":52, "Deadlift Lv4 [70-90kg]":74, "Deadlift Lv5 [90-120kg+]":100,
 "Hip Thrust Lv1 [20-30kg]":18, "Hip Thrust Lv2 [30-50kg]":28, "Hip Thrust Lv3 [50-70kg]":42, "Hip Thrust Lv4 [70-90kg]":60, "Hip Thrust Lv5 [90-120kg+]":82
 };
-function calcXP(ex){ 
-  let base=DIFF[ex.name]||5; 
-  let r = parseInt(ex.reps)||1;
-  // Ab reps ka pura hisab lagega, cap nahi
-  // Formula: (base XP + reps) * sets
-  // Jitne zyada reps, utna zyada XP
-  return Math.floor(ex.sets * (base + r * 0.8)); 
+function calcXP(ex){
+  let base=DIFF[ex.name]||5;
+  let sets = ex.sets||1;
+  if(METER_ONLY.includes(ex.name)){
+    let meters = ex.meters||ex.reps||100;
+    return Math.floor(sets * meters * 0.25 + base*sets);
+  }
+  if(SEC_ONLY.includes(ex.name)){
+    let sec = ex.sec||ex.reps||60;
+    let perSec = ex.name==="Shadow Boxing"? 1.2 : 2.2;
+    return Math.floor(sets * sec * perSec + base*sets);
+  }
+  let r = ex.reps||12;
+  return Math.floor(sets * (base + r * 0.8));
 }
 function getXPForLevel(lvl){ if(lvl<=1) return 1000; return Math.floor(1000*Math.pow(lvl,1.35)+lvl*350); }
 let currentDay = "MONDAY"; let currentCat = "ALL";
 let customData = JSON.parse(localStorage.getItem('ARISE_CUSTOM_V1')||'{}');
 DAYS.forEach(d=>{ if(!customData[d]) customData[d]=[]; });
+DAYS.forEach(d=>{
+  customData[d] = customData[d].map(e=>{
+    if(e.sec===undefined && SEC_ONLY.includes(e.name)) e.sec = e.reps||60;
+    if(e.meters===undefined && METER_ONLY.includes(e.name)) e.meters = e.reps||1000;
+    return e;
+  });
+});
 function saveCustom(){ localStorage.setItem('ARISE_CUSTOM_V1', JSON.stringify(customData)); let msg=document.getElementById('saveMsg'); msg.classList.add('show'); setTimeout(()=>msg.classList.remove('show'),1500); }
 function renderTopCards(){
   let top = document.getElementById('topCards');
@@ -295,34 +318,59 @@ function renderLib(){
   let filtered = LIB.filter(x=>{ let catOk = currentCat==="ALL" || x.c===currentCat; let qOk = x.n.toLowerCase().includes(q) || x.m.toLowerCase().includes(q); return catOk && qOk; });
   document.getElementById('exList').innerHTML = filtered.map((x,i)=>`<div class="ex-item"><div><b>${x.n}</b><span>${x.c} • ${x.m} • ${DIFF[x.n]||5} XP base</span></div><button class="add-btn" onclick="addExercise('${x.n.replace(/'/g,"\\'")}')">+ ADD</button></div>`).join('');
 }
-function addExercise(name){ customData[currentDay].push({name:name, sets:3, reps:12}); saveCustom(); renderAll(); }
+function getDefaultEx(name){
+  if(METER_ONLY.includes(name)) return {name:name, sets:3, meters:100, reps:100};
+  if(SEC_ONLY.includes(name)) return {name:name, sets:3, sec:60, reps:60};
+  return {name:name, sets:3, reps:12};
+}
+function addExercise(name){ customData[currentDay].push(getDefaultEx(name)); saveCustom(); renderAll(); }
 function renderPlan(){
   let list = document.getElementById('planList');
   if(customData[currentDay].length===0){ list.innerHTML = `<p style="color:#5a7a8a; font-size:12px; letter-spacing:1px; text-align:center; padding:20px;">No exercises yet. Add from left library →</p>`; return; }
-  list.innerHTML = customData[currentDay].map((ex,idx)=>`<div class="plan-item"><div><b>${idx+1}. ${ex.name}</b> <small style="color:#00e5ff;">${calcXP(ex)} XP</small><div class="plan-controls"><label>SETS</label><input type="number" value="${ex.sets}" min="1" max="50" onchange="updateSet(${idx},'sets',this.value)"><label>REPS</label><input type="number" value="${ex.reps}" min="1" max="500" onchange="updateSet(${idx},'reps',this.value)"><label>or SEC</label></div></div><button class="del-btn" onclick="removeEx(${idx})">✕</button></div>`).join('');
+  list.innerHTML = customData[currentDay].map((ex,idx)=>{
+    let inputHtml = '';
+    if(METER_ONLY.includes(ex.name)){
+      inputHtml = `<label>SETS</label><input type="number" value="${ex.sets}" min="1" max="20" onchange="updateSet(${idx},'sets',this.value)"><label>METERS</label><input type="number" value="${ex.meters||ex.reps||100}" min="10" max="20000" step="10" placeholder="780" onchange="updateSet(${idx},'meters',this.value)"><small style="color:#5a7a8a;font-size:8px;">CUSTOM</small>`;
+    } else if(SEC_ONLY.includes(ex.name)){
+      inputHtml = `<label>SETS</label><input type="number" value="${ex.sets}" min="1" max="20" onchange="updateSet(${idx},'sets',this.value)"><label>SEC</label><input type="number" value="${ex.sec||ex.reps||60}" min="5" max="600" onchange="updateSet(${idx},'sec',this.value)">`;
+    } else {
+      inputHtml = `<label>SETS</label><input type="number" value="${ex.sets}" min="1" max="50" onchange="updateSet(${idx},'sets',this.value)"><label>REPS</label><input type="number" value="${ex.reps}" min="1" max="500" onchange="updateSet(${idx},'reps',this.value)">`;
+    }
+    return `<div class="plan-item"><div><b>${idx+1}. ${ex.name}</b> <small style="color:#00e5ff;">${calcXP(ex)} XP</small><div class="plan-controls">${inputHtml}</div></div><button class="del-btn" onclick="removeEx(${idx})">✕</button></div>`;
+  }).join('');
 }
-function updateSet(idx,field,val){ customData[currentDay][idx][field]=parseInt(val)||1; saveCustom(); renderTopCards(); renderTabs(); renderPlan(); }
+function updateSet(idx,field,val){ customData[currentDay][idx][field]=parseInt(val)||1; if(field==='meters') customData[currentDay][idx].reps = parseInt(val)||1; if(field==='sec') customData[currentDay][idx].reps = parseInt(val)||1; saveCustom(); renderTopCards(); renderTabs(); renderPlan(); }
 function removeEx(idx){ customData[currentDay].splice(idx,1); saveCustom(); renderAll(); }
 function clearDay(){ if(confirm(currentDay + " clear karna hai?")){ customData[currentDay]=[]; saveCustom(); renderAll(); } }
 function renderAll(){ renderTabs(); renderLib(); renderPlan(); renderTopCards(); }
 document.getElementById('searchEx').addEventListener('input', renderLib);
 renderAll();
 let activeList = []; let curExIdx = 0; let curSetNum = 1; let restDefault = 60; let restLeft = 60; let workoutSec = 0; let timerInt = null; let inRestPhase = false; let totalBattleXP = 0;
+function formatDetailLine(ex){
+  if(METER_ONLY.includes(ex.name)) return `${ex.sets} x ${ex.meters||ex.reps}m = ${calcXP(ex)} XP`;
+  if(SEC_ONLY.includes(ex.name)) return `${ex.sets} x ${ex.sec||ex.reps}s = ${calcXP(ex)} XP`;
+  return `${ex.sets} x ${ex.reps} = ${calcXP(ex)} XP`;
+}
 function openDayPortal(day){
   let list = customData[day]; activeList = list; totalBattleXP = list.reduce((s,e)=>s+calcXP(e),0);
   document.getElementById('detail-title').innerText = day + " BATTLE";
   document.getElementById('detail-desc').innerText = day + " • " + list.length + " EXERCISES • +" + totalBattleXP + " XP REWARD";
-  document.getElementById('detail-list').innerHTML = list.map(i=>`<li><span>${i.name} <small style="color:#5a7a8a">(${DIFF[i.name]||5} base)</small></span><span style="color:#00e5ff;font-size:13px;">${i.sets} x ${i.reps} = ${calcXP(i)} XP</span></li>`).join('') + `<li style="border-color:#00ff88; background:rgba(0,255,136,0.1);"><span style="color:#00ff88">TOTAL REWARD</span><span style="color:#00ff88">${totalBattleXP} XP</span></li>`;
+  document.getElementById('detail-list').innerHTML = list.map(i=>`<li><span>${i.name} <small style="color:#5a7a8a">(${DIFF[i.name]||5} base)</small></span><span style="color:#00e5ff;font-size:13px;">${formatDetailLine(i)}</span></li>`).join('') + `<li style="border-color:#00ff88; background:rgba(0,255,136,0.1);"><span style="color:#00ff88">TOTAL REWARD</span><span style="color:#00ff88">${totalBattleXP} XP</span></li>`;
   document.getElementById('detail-intro').style.display='block'; document.getElementById('detail-intro').style.animation=''; document.getElementById('battle-active').classList.remove('active');
   const ov = document.getElementById('portal-overlay'); ov.classList.remove('active'); void ov.offsetWidth; ov.classList.add('active'); document.body.style.overflow = 'hidden';
   document.getElementById('battleBtn').onclick = (e)=>{ e.preventDefault(); startActiveBattle(); };
 }
 function startActiveBattle(){ curExIdx = 0; curSetNum = 1; document.getElementById('detail-intro').style.animation='slideLeft 0.4s forwards'; setTimeout(()=>{ document.getElementById('detail-intro').style.display='none'; document.getElementById('battle-active').classList.add('active'); renderActiveQuest(); },350); }
+function getQuestMeta(ex){
+  if(METER_ONLY.includes(ex.name)) return `${ex.meters||ex.reps} meters • ${DIFF[ex.name]||5} base • +${calcXP(ex)} XP`;
+  if(SEC_ONLY.includes(ex.name)) return `${ex.sec||ex.reps} sec • ${DIFF[ex.name]||5} base • +${calcXP(ex)} XP`;
+  return `${ex.reps} reps • ${DIFF[ex.name]||5} base • +${calcXP(ex)} XP`;
+}
 function renderActiveQuest(){
   inRestPhase = false; let ex = activeList[curExIdx];
   document.getElementById('qTop').innerText = `QUEST ${curExIdx+1}/${activeList.length} • SET ${curSetNum}/${ex.sets}`;
   document.getElementById('qName').innerText = ex.name;
-  document.getElementById('qMeta').innerText = `${ex.reps} reps • ${DIFF[ex.name]||5} base • +${calcXP(ex)} XP`;
+  document.getElementById('qMeta').innerText = getQuestMeta(ex);
   document.getElementById('timerLabel').innerText = 'PERFORMING';
   document.getElementById('completeBtn').innerText = `COMPLETE SET ${curSetNum} ✓`;
   document.getElementById('completeBtn').style.display='block'; document.getElementById('completeBtn').onclick = completeSet;
@@ -337,13 +385,20 @@ function startRestPhase(isNextEx){
   document.getElementById('timerLabel').innerText = isNextEx? 'REST • NEXT QUEST COMING' : 'REST - RECOVERING MANA';
   document.getElementById('completeBtn').style.display='none'; document.getElementById('restCtrl').style.display='flex'; document.getElementById('skipBtn').style.display='block';
   document.getElementById('mainTimer').innerText = formatTime(restLeft);
-  timerInt=setInterval(()=>{ restLeft--; document.getElementById('mainTimer').innerText = formatTime(restLeft); if(restLeft<=0){ clearInterval(timerInt); if(isNextEx){ curExIdx++; curSetNum=1; } else { curSetNum++; } renderActiveQuest(); } },1000);
+  timerInt=setInterval(()=>{
+    restLeft--;
+    document.getElementById('mainTimer').innerText = formatTime(restLeft);
+    if(restLeft<=0){
+      clearInterval(timerInt);
+      try{ restBell.currentTime=0; restBell.play(); if(navigator.vibrate) navigator.vibrate([200,100,200,100,400]); }catch(e){}
+      if(isNextEx){ curExIdx++; curSetNum=1; } else { curSetNum++; }
+      renderActiveQuest();
+    }
+  },1000);
 }
 function skipRest(){ clearInterval(timerInt); if(curExIdx >= activeList.length-1 && curSetNum >= activeList[curExIdx].sets){ finishBattle(); return; } let ex = activeList[curExIdx]; if(curSetNum < ex.sets){ curSetNum++; } else { curExIdx++; curSetNum=1; } renderActiveQuest(); }
 function finishBattle(){
   clearInterval(timerInt);
-  
-  // XP CALCULATE
   let totalXp = parseInt(localStorage.getItem('ARISE_TOTAL_XP')||'0') + totalBattleXP;
   let totalSets = parseInt(localStorage.getItem('ARISE_SETS')||'0') + activeList.reduce((s,x)=>s+x.sets,0);
   let battles = parseInt(localStorage.getItem('ARISE_BATTLES')||'0') + 1;
@@ -356,26 +411,19 @@ function finishBattle(){
     if(tempXp >= need){ tempXp -= need; calcLvl++; } else break;
   }
   localStorage.setItem('ARISE_LEVEL', calcLvl);
-
-  // --- ARISE SOUND FIX FINAL ---
   try {
     if(bgMusic) bgMusic.pause();
     ariseSfx.currentTime = 0;
     ariseSfx.volume = 1;
     ariseSfx.muted = false;
     let playPromise = ariseSfx.play();
-    if(playPromise !== undefined){
+    if(playPromise!== undefined){
       playPromise.then(()=>{ console.log("ARISE BAJA!"); }).catch(err=>{
-        console.log("Sound block:", err);
-        // fallback: user ko click karne pe bajega
         document.body.addEventListener('click', ()=>{ ariseSfx.play(); }, {once:true});
       });
     }
   } catch(e){ console.log(e); }
-
   closePortal();
-  
-  // Alert ko 1.5 sec delay diya taaki sound baj jaye
   setTimeout(()=>{
     alert("BATTLE COMPLETE! +" + totalBattleXP + " XP\nNew Level: " + calcLvl);
     location.href="stats.html";
@@ -385,4 +433,4 @@ function setRestTime(s){ restDefault=s; restLeft=s; document.getElementById('mai
 function formatTime(s){ let m=String(Math.floor(s/60)).padStart(2,'0'); let sc=String(s%60).padStart(2,'0'); return `${m}:${sc}`; }
 </script>
 </body>
-</html>
+</html>  
