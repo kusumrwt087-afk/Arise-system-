@@ -147,5 +147,6 @@ function ANIME_LEVELUP(lvl){
 }
 let L=localStorage.getItem('LAST_SHOWN_LVL')||0, C=localStorage.getItem('ARISE_LEVEL')||0; if(+C>+L && +C>0){ setTimeout(()=>ANIME_LEVELUP(C),600); localStorage.setItem('LAST_SHOWN_LVL',C); }
 </script>
+<button onclick="ANIME_LEVELUP(2)" style="position:fixed;top:10px;left:10px;z-index:9999999;background:red;color:white;padding:10px;">TEST IGRIS</button>
 </body>
 </html>
