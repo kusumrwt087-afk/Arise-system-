@@ -98,7 +98,10 @@ if(wasPlaying) playMusic();
 document.addEventListener('click',function firstClick(){playMusic();document.removeEventListener('click',firstClick);},{once:true});
 musicBtn.onclick=(e)=>{e.stopPropagation(); if(bgMusic.paused){bgMusic.play();musicBtn.innerHTML="🔊 DARK ARIA Lv2";localStorage.setItem('aria-playing','true');}else{bgMusic.pause();musicBtn.innerHTML="🔇 PAUSED";localStorage.setItem('aria-playing','false');}};
 function resetXP(){ if(confirm("Sach me XP zero karna hai?")){ localStorage.setItem('ARISE_TOTAL_XP','0'); localStorage.setItem('ARISE_LEVEL','0'); localStorage.setItem('ARISE_SETS','0'); localStorage.setItem('ARISE_BATTLES','0'); localStorage.removeItem('LAST_SHOWN_LVL'); location.reload(); } }
-function getXPForLevel(lvl){if(lvl<=1)return 1000;return Math.floor(1000*Math.pow(lvl,1.35)+lvl*350);}
+function getXPForLevel(lvl){
+  if(lvl<=1) return 1000;
+  return Math.floor(900*lvl + Math.pow(lvl, 1.5)*150);
+}
 function getRank(lvl){ if(lvl<=10)return["E-RANK",""]; if(lvl<=25)return["D-RANK",""]; if(lvl<=45)return["C-RANK",""]; if(lvl<=70)return["B-RANK",""]; if(lvl<=100)return["A-RANK",""]; if(lvl<=130)return["S-RANK",""]; if(lvl<=154)return["MONARCH","monarch"]; return["SHADOW MONARCH","shadow"]; }
 let xp=parseInt(localStorage.getItem('ARISE_TOTAL_XP')||'0'); let battles=parseInt(localStorage.getItem('ARISE_BATTLES')||'0'); let sets=parseInt(localStorage.getItem('ARISE_SETS')||'0');
 let tempXp=xp; let calcLvl=0; while(calcLvl<156){let need=getXPForLevel(calcLvl+1); if(tempXp>=need){tempXp-=need;calcLvl++;}else break;}
