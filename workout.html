@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="manifest" href="manifest.json">
+<link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#00e5ff">
-  <title>Workouts - ARISE FITNESS</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <style>
+<title>Workouts - ARISE FITNESS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<style>
 .workout-container{max-width:900px;margin:40px auto;padding:0 20px; display:grid; gap:22px;}
 .workout-card{ background: linear-gradient(145deg, rgba(10,20,30,0.9), rgba(5,7,10,0.8)); border: 1px solid rgba(0,229,255,0.3); backdrop-filter: blur(15px); padding: 35px 30px; border-radius: 16px; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; }
 .workout-card::before{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(0,229,255,0.2),transparent);transition:0.6s;}
@@ -15,32 +15,32 @@
 .workout-card h3{color:#00e5ff;margin:0 0 10px 0;letter-spacing:2px;font-size:22px;font-weight:900;}
 .workout-card p{color:#a0b8d0;margin:0;font-size:15px;}
 .workout-card.ex-count{color:#00e5ff; font-size:11px; letter-spacing:3px; margin-top:10px; font-weight:800;}
-  #portal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.88);backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);display:none;justify-content:center;align-items:center;z-index:9999;padding:20px;overflow:hidden;}
-  #portal-overlay.active{display:flex;}
+#portal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.88);backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);display:none;justify-content:center;align-items:center;z-index:9999;padding:20px;overflow:hidden;}
+#portal-overlay.active{display:flex;}
 .portal{position:absolute;width:130vmax;height:130vmax;max-width:1200px;max-height:1200px;border-radius:50%;animation:openGate 2.5s ease-out forwards;display:grid;place-items:center;}
 .portal::before{content:"";position:absolute;inset:0;background:conic-gradient(from 0deg,#00e5ff 0%,#ffffff 15%,#0088ff 25%,#00e5ff 40%,#ffffff 55%,#00aaff 70%,#00e5ff 85%,#fff 100%);border-radius:50%;filter:blur(8px) brightness(1.5);animation:swirlSpin 0.35s linear infinite;}
 .portal::after{content:"";position:absolute;inset:18%;background:radial-gradient(circle,#ffffff 0%,#c9f7ff 20%,#00d0ff 45%,#002a44 75%);border-radius:50%;box-shadow:0 0 100px #00e5ff,0 0 200px #00aaff,inset 0 0 60px #fff;animation:corePulse 0.4s ease-in-out infinite alternate;}
 .portal-ring{position:absolute;border-radius:50%;border:4px solid rgba(0,229,255,0.9);box-shadow:0 0 40px #00e5ff,inset 0 0 40px #00e5ff;}
 .portal-ring:nth-child(1){inset:8%;animation:swirlSpin 0.6s linear infinite reverse;}
 .portal-ring:nth-child(2){inset:-3%;border-color:rgba(0,229,255,0.4);border-style:dashed;border-width:3px;animation:swirlSpin 1.2s linear infinite;}
-  @keyframes swirlSpin{to{transform:rotate(360deg);}}
-  @keyframes corePulse{from{transform:scale(0.9);}to{transform:scale(1.1);}}
-  @keyframes openGate{0%{transform:scale(0);opacity:0;filter:blur(50px);}20%{opacity:1;filter:blur(0);}50%{transform:scale(1.1);opacity:1;}80%{transform:scale(1.1);opacity:1;}100%{transform:scale(1.5);opacity:0;filter:blur(40px);}}
-  @keyframes cardArise{0%{opacity:0;transform:scale(0.6) translateY(80px);filter:blur(20px);}100%{opacity:1;transform:scale(1) translateY(0);filter:blur(0);}}
-  #workout-detail{position:relative;z-index:10;background:rgba(8,15,25,0.98);border:2px solid #00e5ff;padding:0;border-radius:24px;width:100%;max-width:620px;box-shadow:0 0 120px rgba(0,229,255,0.7),inset 0 0 30px rgba(0,229,255,0.1);opacity:0;overflow:hidden;}
-  #portal-overlay.active #workout-detail{animation:cardArise 0.7s 2.2s forwards;}
+@keyframes swirlSpin{to{transform:rotate(360deg);}}
+@keyframes corePulse{from{transform:scale(0.9);}to{transform:scale(1.1);}}
+@keyframes openGate{0%{transform:scale(0);opacity:0;filter:blur(50px);}20%{opacity:1;filter:blur(0);}50%{transform:scale(1.1);opacity:1;}80%{transform:scale(1.1);opacity:1;}100%{transform:scale(1.5);opacity:0;filter:blur(40px);}}
+@keyframes cardArise{0%{opacity:0;transform:scale(0.6) translateY(80px);filter:blur(20px);}100%{opacity:1;transform:scale(1) translateY(0);filter:blur(0);}}
+#workout-detail{position:relative;z-index:10;background:rgba(8,15,25,0.98);border:2px solid #00e5ff;padding:0;border-radius:24px;width:100%;max-width:620px;box-shadow:0 0 120px rgba(0,229,255,0.7),inset 0 0 30px rgba(0,229,255,0.1);opacity:0;overflow:hidden;}
+#portal-overlay.active #workout-detail{animation:cardArise 0.7s 2.2s forwards;}
 .detail-header{background:linear-gradient(90deg,rgba(0,229,255,0.15),transparent);padding:35px 35px 20px;border-bottom:1px solid rgba(0,229,255,0.2);position:relative;}
-  #close-portal{position:absolute;top:18px;right:22px;color:#00e5ff;font-size:32px;cursor:pointer;width:40px;height:40px;display:grid;place-items:center;border-radius:50%;transition:0.3s;}
-  #close-portal:hover{background:rgba(0,229,255,0.2);transform:rotate(90deg);}
-  #detail-title{color:#fff;font-size:30px!important;font-weight:900;letter-spacing:2px;margin:0;text-shadow:0 0 20px #00e5ff;}
-  #detail-desc{color:#00e5ff;font-size:13px;letter-spacing:4px;margin-top:8px;font-weight:700;}
+#close-portal{position:absolute;top:18px;right:22px;color:#00e5ff;font-size:32px;cursor:pointer;width:40px;height:40px;display:grid;place-items:center;border-radius:50%;transition:0.3s;}
+#close-portal:hover{background:rgba(0,229,255,0.2);transform:rotate(90deg);}
+#detail-title{color:#fff;font-size:30px!important;font-weight:900;letter-spacing:2px;margin:0;text-shadow:0 0 20px #00e5ff;}
+#detail-desc{color:#00e5ff;font-size:13px;letter-spacing:4px;margin-top:8px;font-weight:700;}
 .detail-body{padding:30px 35px;}
-  #detail-list{padding:0;margin:0;list-style:none;}
-  #detail-list li{color:#e0efff;font-size:16px!important;padding:14px 15px;background:rgba(0,229,255,0.05);border:1px solid rgba(0,229,255,0.15);border-radius:12px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;}
-  #detail-list li::before{content:"▸";color:#00e5ff;font-weight:900;margin-right:10px;}
+#detail-list{padding:0;margin:0;list-style:none;}
+#detail-list li{color:#e0efff;font-size:16px!important;padding:14px 15px;background:rgba(0,229,255,0.05);border:1px solid rgba(0,229,255,0.15);border-radius:12px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;}
+#detail-list li::before{content:"▸";color:#00e5ff;font-weight:900;margin-right:10px;}
 .btn-battle{display:block;width:100%;text-align:center;margin-top:25px;background:linear-gradient(90deg,#00e5ff,#00aaff);color:#000;padding:18px!important;border-radius:14px;font-weight:900;font-size:18px!important;text-decoration:none;letter-spacing:2px;box-shadow:0 0 30px rgba(0,229,255,0.6);transition:0.3s;}
 .btn-battle:hover{transform:scale(1.02);box-shadow:0 0 50px rgba(0,229,255,0.9);}
-  #music-btn{position:fixed;bottom:20px;right:20px;z-index:10000;background:rgba(0,229,255,0.15);border:1px solid #00e5ff;color:#00e5ff;padding:8px 14px;border-radius:30px;font-size:10px;letter-spacing:1px;cursor:pointer;backdrop-filter:blur(10px);}
+#music-btn{position:fixed;bottom:20px;right:20px;z-index:10000;background:rgba(0,229,255,0.15);border:1px solid #00e5ff;color:#00e5ff;padding:8px 14px;border-radius:30px;font-size:10px;letter-spacing:1px;cursor:pointer;backdrop-filter:blur(10px);}
 .builder-wrap{max-width:1100px;margin:60px auto 80px;padding:0 20px;border-top:1px solid rgba(0,229,255,0.2);padding-top:50px;}
 .builder-title{text-align:center;color:#fff;font-size:34px;font-weight:900;letter-spacing:5px;text-shadow:0 0 20px #00e5ff;margin:0;}
 .builder-sub{text-align:center;color:#00e5ff;letter-spacing:5px;font-size:12px;margin-top:8px;}
@@ -48,7 +48,7 @@
 .day-tab{background:rgba(10,20,30,0.8);border:1px solid rgba(0,229,255,0.25);color:#8ab;padding:10px 18px;border-radius:30px;cursor:pointer;letter-spacing:2px;font-size:12px;font-weight:800;transition:0.3s;}
 .day-tab.active{background:#00e5ff;color:#000;box-shadow:0 0 25px #00e5ff;}
 .builder-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:20px;}
-  @media(max-width:800px){.builder-grid{grid-template-columns:1fr;}}
+@media(max-width:800px){.builder-grid{grid-template-columns:1fr;}}
 .lib-box,.plan-box{background:rgba(8,15,25,0.92);border:1px solid rgba(0,229,255,0.25);border-radius:18px;padding:20px;backdrop-filter:blur(15px);}
 .lib-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;flex-wrap:wrap;gap:10px;}
 .lib-head h3{color:#00e5ff;margin:0;letter-spacing:2px;font-size:14px;}
@@ -93,78 +93,73 @@
 .btn-skip{width:100%; background:transparent; border:none; color:#5a7a8a; margin-top:10px; letter-spacing:2px; font-size:11px; cursor:pointer}
 .progress-bar{height:4px; background:rgba(0,229,255,0.15); border-radius:10px; overflow:hidden; margin:15px 0}
 .progress-fill{height:100%; background:linear-gradient(90deg,#00e5ff,#22ff88); width:0%; transition:width 0.4s}
-  </style>
+</style>
 </head>
 <body>
 <audio id="bg-music" src="dark-aria.mp3" loop preload="auto"></audio>
 <audio id="arise-sfx" src="arise.mp3" preload="auto"></audio>
 <audio id="rest-bell" src="rest-bell.mp3" preload="auto"></audio>
 <div id="music-btn">🎧 DARK ARIA Lv2</div>
-<nav>
-  <div class="logo">ARISE FITNESS</div>
-  <div><a href="index.html">Home</a><a href="workout.html">Workout</a><a href="stats.html">Stats</a><a href="about.html">About</a></div>
-</nav>
+<nav><div class="logo">ARISE FITNESS</div><div><a href="index.html">Home</a><a href="workout.html">Workout</a><a href="stats.html">Stats</a><a href="about.html">About</a></div></nav>
 <div class="hero" style="padding: 70px 20px 10px;">
-  <h1 style="font-size: 52px; letter-spacing: 5px;">WORKOUTS</h1>
-  <p style="letter-spacing: 6px; color: #00e5ff;">YOUR CUSTOM BATTLES</p>
-  <div style="text-align:center; margin-top:22px;">
-    <a href="stats.html" style="display:inline-block; border:1px solid #00e5ff; color:#00e5ff; padding:10px 26px; border-radius:30px; letter-spacing:3px; font-size:11px; text-decoration:none; box-shadow:0 0 20px rgba(0,229,255,0.3);">VIEW STATS - Lv <span id="miniLvl">0</span> ⚡ <span id="miniXp" style="color:#7aa;">0 XP</span></a>
-  </div>
+<h1 style="font-size: 52px; letter-spacing: 5px;">WORKOUTS</h1>
+<p style="letter-spacing: 6px; color: #00e5ff;">YOUR CUSTOM BATTLES</p>
+<div style="text-align:center; margin-top:22px;">
+<a href="stats.html" style="display:inline-block; border:1px solid #00e5ff; color:#00e5ff; padding:10px 26px; border-radius:30px; letter-spacing:3px; font-size:11px; text-decoration:none; box-shadow:0 0 20px rgba(0,229,255,0.3);">VIEW STATS - Lv <span id="miniLvl">0</span> ⚡ <span id="miniXp" style="color:#7aa;">0 XP</span></a>
+</div>
 </div>
 <div class="workout-container" id="topCards"></div>
 <div class="builder-wrap">
-  <h2 class="builder-title">CUSTOM ARISE BUILDER</h2>
-  <p class="builder-sub">CHOOSE EXERCISE • SET DAY • EDIT REPS / SEC / METERS</p>
-  <div class="day-tabs" id="dayTabs"></div>
-  <div class="builder-grid">
-    <div class="lib-box">
-      <div class="lib-head"><h3 id="libCount">EXERCISE LIBRARY</h3><input id="searchEx" class="search" placeholder="Search... pushup etc"></div>
-      <div class="cat-filters" id="catFilters"></div>
-      <div class="ex-list" id="exList"></div>
-    </div>
-    <div class="plan-box">
-      <div class="plan-head"><h3 id="planTitle">MONDAY PLAN</h3><button class="clear-btn" onclick="clearDay()">CLEAR DAY</button></div>
-      <div class="plan-list" id="planList"></div>
-      <div class="save-msg" id="saveMsg">SAVED TO SHADOW VAULT ✓</div>
-    </div>
-  </div>
+<h2 class="builder-title">CUSTOM ARISE BUILDER</h2>
+<p class="builder-sub">CHOOSE EXERCISE • SET DAY • EDIT REPS / SEC / METERS</p>
+<div class="day-tabs" id="dayTabs"></div>
+<div class="builder-grid">
+<div class="lib-box">
+<div class="lib-head"><h3 id="libCount">EXERCISE LIBRARY</h3><input id="searchEx" class="search" placeholder="Search... pushup etc"></div>
+<div class="cat-filters" id="catFilters"></div>
+<div class="ex-list" id="exList"></div>
+</div>
+<div class="plan-box">
+<div class="plan-head"><h3 id="planTitle">MONDAY PLAN</h3><button class="clear-btn" onclick="clearDay()">CLEAR DAY</button></div>
+<div class="plan-list" id="planList"></div>
+<div class="save-msg" id="saveMsg">SAVED TO SHADOW VAULT ✓</div>
+</div>
+</div>
 </div>
 <div id="portal-overlay">
-  <div class="portal"><div class="portal-ring"></div><div class="portal-ring"></div></div>
-  <div id="workout-detail">
-    <div class="detail-header"><span id="close-portal">&times;</span><h2 id="detail-title"></h2><p id="detail-desc"></p></div>
-    <div id="detail-intro" class="detail-body">
-      <ul id="detail-list"></ul>
-      <a href="#" class="btn-battle" id="battleBtn">START BATTLE ⚔️</a>
-    </div>
-    <div id="battle-active">
-      <div class="q-top" id="qTop">QUEST 1/7 • SET 1/3</div>
-      <div class="q-name" id="qName">Pseudo Planche Pushup</div>
-      <div class="q-meta" id="qMeta">10 reps • 12 base • 45 XP</div>
-      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-      <div class="timer-box">
-        <div class="timer-main" id="mainTimer">00:00</div>
-        <div class="timer-label" id="timerLabel">PERFORMING</div>
-      </div>
-      <div class="rest-ctrl" id="restCtrl" style="display:none">
-        <button onclick="setRestTime(30)" id="r30">30s</button>
-        <button onclick="setRestTime(60)" id="r60" class="active">60s</button>
-        <button onclick="setRestTime(90)" id="r90">90s</button>
-        <button onclick="setRestTime(120)" id="r120">120s</button>
-      </div>
-      <button class="btn-complete" id="completeBtn" onclick="completeSet()">COMPLETE SET ✓</button>
-      <button class="btn-skip" id="skipBtn" onclick="skipRest()" style="display:none">SKIP REST →</button>
-    </div>
-  </div>
+<div class="portal"><div class="portal-ring"></div><div class="portal-ring"></div></div>
+<div id="workout-detail">
+<div class="detail-header"><span id="close-portal">&times;</span><h2 id="detail-title"></h2><p id="detail-desc"></p></div>
+<div id="detail-intro" class="detail-body">
+<ul id="detail-list"></ul>
+<a href="#" class="btn-battle" id="battleBtn">START BATTLE ⚔️</a>
+</div>
+<div id="battle-active">
+<div class="q-top" id="qTop"></div>
+<div class="q-name" id="qName"></div>
+<div class="q-meta" id="qMeta"></div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<div class="timer-box">
+<div class="timer-main" id="mainTimer">00:00</div>
+<div class="timer-label" id="timerLabel">PERFORMING</div>
+</div>
+<div class="rest-ctrl" id="restCtrl" style="display:none">
+<button onclick="setRestTime(30)" id="r30">30s</button>
+<button onclick="setRestTime(60)" id="r60" class="active">60s</button>
+<button onclick="setRestTime(90)" id="r90">90s</button>
+<button onclick="setRestTime(120)" id="r120">120s</button>
+</div>
+<button class="btn-complete" id="completeBtn" onclick="completeSet()">COMPLETE SET ✓</button>
+<button class="btn-skip" id="skipBtn" onclick="skipRest()" style="display:none">SKIP REST →</button>
+</div>
+</div>
 </div>
 <script>
 const bgMusic = document.getElementById('bg-music');
 const ariseSfx = document.getElementById('arise-sfx');
 const restBell = document.getElementById('rest-bell');
 const musicBtn = document.getElementById('music-btn');
-bgMusic.volume = 0.25;
-ariseSfx.volume = 0.9;
-restBell.volume = 1.0;
+bgMusic.volume = 0.25; ariseSfx.volume = 0.9; restBell.volume = 1.0;
 let savedTime = localStorage.getItem('aria-time');
 if(savedTime) bgMusic.currentTime = parseFloat(savedTime);
 let wasPlaying = localStorage.getItem('aria-playing') === 'true';
@@ -173,43 +168,58 @@ setInterval(()=>{ if(!bgMusic.paused) localStorage.setItem('aria-time', bgMusic.
 if(wasPlaying) playMusic();
 document.addEventListener('click', function firstClick(){ playMusic(); document.removeEventListener('click', firstClick); }, {once:true});
 musicBtn.onclick = (e)=>{ e.stopPropagation(); if(bgMusic.paused){ bgMusic.play(); musicBtn.innerHTML="🔊 DARK ARIA Lv2"; localStorage.setItem('aria-playing','true'); } else { bgMusic.pause(); musicBtn.innerHTML="🔇 PAUSED"; localStorage.setItem('aria-playing','false'); } };
-
 const SEC_ONLY = ["Plank Hold","Side Plank","Hollow Body Hold","Superman Hold","L-Sit Hold","Wall Sit","Shadow Boxing"];
 const METER_ONLY = ["Running"];
 const DAYS = ["MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY","SUNDAY"];
 const CATS = ["ALL","PUSH","PULL","LEGS","CORE","FULL"];
 const LIB = [
-  {n:"Standard Pushup",c:"PUSH",m:"Chest"}, {n:"Diamond Pushup",c:"PUSH",m:"Triceps"}, {n:"Wide Pushup",c:"PUSH",m:"Chest"},
-  {n:"Archer Pushup",c:"PUSH",m:"Chest"}, {n:"Pike Pushup",c:"PUSH",m:"Shoulders"}, {n:"Pseudo Planche Pushup",c:"PUSH",m:"Chest"},
-  {n:"Decline Pushup",c:"PUSH",m:"Upper Chest"}, {n:"Spiderman Pushup",c:"PUSH",m:"Core+Chest"},{n:"Dips",c:"PUSH",m:"Chest & Triceps"},
-  {n:"Tricep Dips (Chair)",c:"PUSH",m:"Triceps"}, {n:"Handstand Pushup Neg",c:"PUSH",m:"Shoulders"},
-  {n:"Pullup",c:"PULL",m:"Lats"}, {n:"Chinup",c:"PULL",m:"Biceps"}, {n:"Wide Pullup",c:"PULL",m:"Back"},
-  {n:"Towel Row",c:"PULL",m:"Back"}, {n:"Inverted Row",c:"PULL",m:"Back"}, {n:"Doorframe Row",c:"PULL",m:"Back"},
-  {n:"Superman Hold",c:"PULL",m:"Lower Back"}, {n:"Towel Bicep Curl",c:"PULL",m:"Biceps"},
-  {n:"Bodyweight Squat",c:"LEGS",m:"Quads"}, {n:"Pistol Squat",c:"LEGS",m:"Quads"}, {n:"Bulgarian Split Squat",c:"LEGS",m:"Glutes"},
-  {n:"Lunges",c:"LEGS",m:"Legs"}, {n:"Jump Squat",c:"LEGS",m:"Explosive"}, {n:"Wall Sit",c:"LEGS",m:"Quads"},
-  {n:"Calf Raises",c:"LEGS",m:"Calves"}, {n:"Glute Bridge",c:"LEGS",m:"Glutes"}, {n:"Single Leg Deadlift",c:"LEGS",m:"Hamstrings"},
-  {n:"Cossack Squat",c:"LEGS",m:"Mobility"},
-  {n:"Plank Hold",c:"CORE",m:"Abs"}, {n:"Side Plank",c:"CORE",m:"Obliques"}, {n:"Leg Raises",c:"CORE",m:"Lower Abs"},
-  {n:"Hanging Knee Raise",c:"CORE",m:"Abs"}, {n:"L-Sit Hold",c:"CORE",m:"Core"}, {n:"Hollow Body Hold",c:"CORE",m:"Core"},
-  {n:"Russian Twist",c:"CORE",m:"Obliques"}, {n:"Mountain Climber",c:"CORE",m:"Cardio+Core"}, {n:"Dead Bug",c:"CORE",m:"Core"},
-  {n:"Burpees",c:"FULL",m:"Full Body"}, {n:"Jumping Jacks",c:"FULL",m:"Cardio"}, {n:"High Knees",c:"FULL",m:"Cardio"},
-  {n:"Bear Crawl",c:"FULL",m:"Full Body"}, {n:"Shoulder Tap Plank",c:"FULL",m:"Core+Push"}, {n:"Inchworm",c:"FULL",m:"Full Body"},
-  {n:"Squat to Calf Raise",c:"FULL",m:"Legs+Calf"},
-  {n:"Decline Diamond Pushups",c:"PUSH",m:"Shoulder & Chest"},
-  {n:"Explosive Bulgarian Split Squats",c:"LEGS",m:"Quads"},
-  {n:"Feet Elevated Pike Pushups",c:"PUSH",m:"Shoulder"},
-  {n:"Shadow Boxing",c:"FULL",m:"Cardio • SEC"},
-  {n:"Running",c:"FULL",m:"Cardio • METERS"},
-  {n:"Bench Press Lv1 [10-20kg]",c:"PUSH",m:"Chest"}, {n:"Bench Press Lv2 [20-35kg]",c:"PUSH",m:"Chest"}, {n:"Bench Press Lv3 [35-50kg]",c:"PUSH",m:"Chest"}, {n:"Bench Press Lv4 [50-70kg]",c:"PUSH",m:"Chest"}, {n:"Bench Press Lv5 [70-90kg+]",c:"PUSH",m:"Chest"},
-  {n:"Incline Press Lv1 [10-20kg]",c:"PUSH",m:"Chest"}, {n:"Incline Press Lv2 [20-35kg]",c:"PUSH",m:"Chest"}, {n:"Incline Press Lv3 [35-50kg]",c:"PUSH",m:"Chest"}, {n:"Incline Press Lv4 [50-70kg]",c:"PUSH",m:"Chest"}, {n:"Incline Press Lv5 [70-90kg+]",c:"PUSH",m:"Chest"},
-  {n:"Decline Press Lv1 [10-20kg]",c:"PUSH",m:"Chest"}, {n:"Decline Press Lv2 [20-35kg]",c:"PUSH",m:"Chest"}, {n:"Decline Press Lv3 [35-50kg]",c:"PUSH",m:"Chest"}, {n:"Decline Press Lv4 [50-70kg]",c:"PUSH",m:"Chest"}, {n:"Decline Press Lv5 [70-90kg+]",c:"PUSH",m:"Chest"},
-  {n:"Chest Fly Lv1 [5-15kg]",c:"PUSH",m:"Chest"}, {n:"Chest Fly Lv2 [15-25kg]",c:"PUSH",m:"Chest"}, {n:"Chest Fly Lv3 [25-35kg]",c:"PUSH",m:"Chest"}, {n:"Chest Fly Lv4 [35-50kg]",c:"PUSH",m:"Chest"}, {n:"Chest Fly Lv5 [50-70kg+]",c:"PUSH",m:"Chest"},
-  {n:"Pullover Lv1 [5-15kg]",c:"PUSH",m:"Chest"}, {n:"Pullover Lv2 [15-25kg]",c:"PUSH",m:"Chest"}, {n:"Pullover Lv3 [25-35kg]",c:"PUSH",m:"Chest"}, {n:"Pullover Lv4 [35-50kg]",c:"PUSH",m:"Chest"}, {n:"Pullover Lv5 [50-70kg+]",c:"PUSH",m:"Chest"},
-  {n:"Bent Row Lv1 [10-20kg]",c:"PULL",m:"Back"}, {n:"Bent Row Lv2 [20-35kg]",c:"PULL",m:"Back"}, {n:"Bent Row Lv3 [35-50kg]",c:"PULL",m:"Back"}, {n:"Bent Row Lv4 [50-70kg]",c:"PULL",m:"Back"}, {n:"Bent Row Lv5 [70-90kg+]",c:"PULL",m:"Back"},
-  {n:"Single Arm Row Lv1 [10-20kg]",c:"PULL",m:"Back"}, {n:"Single Arm Row Lv2 [20-35kg]",c:"PULL",m:"Back"}, {n:"Single Arm Row Lv3 [35-50kg]",c:"PULL",m:"Back"}, {n:"Single Arm Row Lv4 [50-70kg]",c:"PULL",m:"Back"}, {n:"Single Arm Row Lv5 [70-90kg+]",c:"PULL",m:"Back"},
-  {n:"Lat Pulldown Lv1 [10-20kg]",c:"PULL",m:"Back"}, {n:"Lat Pulldown Lv2 [20-35kg]",c:"PULL",m:"Back"}, {n:"Lat Pulldown Lv3 [35-50kg]",c:"PULL",m:"Back"}, {n:"Lat Pulldown Lv4 [50-70kg]",c:"PULL",m:"Back"}, {n:"Lat Pulldown Lv5 [70-90kg+]",c:"PULL",m:"Back"},
-  {n:"Seated Row Lv1 [10-20kg]",c:"PULL",m:"Back"}, {n:"Seated Row Lv2 [20-35kg]",c:"PULL",m:"Back"}, {n:"Seated Row Lv3 [35-50kg]",c:"PULL",m:"Back"}, {n:"Seated Row Lv4 [50-70kg]",
+{n:"Standard Pushup",c:"PUSH",m:"Chest"}, {n:"Diamond Pushup",c:"PUSH",m:"Triceps"}, {n:"Wide Pushup",c:"PUSH",m:"Chest"},
+{n:"Archer Pushup",c:"PUSH",m:"Chest"}, {n:"Pike Pushup",c:"PUSH",m:"Shoulders"}, {n:"Pseudo Planche Pushup",c:"PUSH",m:"Chest"},
+{n:"Decline Pushup",c:"PUSH",m:"Upper Chest"}, {n:"Spiderman Pushup",c:"PUSH",m:"Core+Chest"},{n:"Dips",c:"PUSH",m:"Chest & Triceps"},
+{n:"Tricep Dips (Chair)",c:"PUSH",m:"Triceps"}, {n:"Handstand Pushup Neg",c:"PUSH",m:"Shoulders"},
+{n:"Pullup",c:"PULL",m:"Lats"}, {n:"Chinup",c:"PULL",m:"Biceps"}, {n:"Wide Pullup",c:"PULL",m:"Back"},
+{n:"Towel Row",c:"PULL",m:"Back"}, {n:"Inverted Row",c:"PULL",m:"Back"}, {n:"Doorframe Row",c:"PULL",m:"Back"},
+{n:"Superman Hold",c:"PULL",m:"Lower Back"}, {n:"Towel Bicep Curl",c:"PULL",m:"Biceps"},
+{n:"Bodyweight Squat",c:"LEGS",m:"Quads"}, {n:"Pistol Squat",c:"LEGS",m:"Quads"}, {n:"Bulgarian Split Squat",c:"LEGS",m:"Glutes"},
+{n:"Lunges",c:"LEGS",m:"Legs"}, {n:"Jump Squat",c:"LEGS",m:"Explosive"}, {n:"Wall Sit",c:"LEGS",m:"Quads"},
+{n:"Calf Raises",c:"LEGS",m:"Calves"}, {n:"Glute Bridge",c:"LEGS",m:"Glutes"}, {n:"Single Leg Deadlift",c:"LEGS",m:"Hamstrings"},
+{n:"Cossack Squat",c:"LEGS",m:"Mobility"},
+{n:"Plank Hold",c:"CORE",m:"Abs"}, {n:"Side Plank",c:"CORE",m:"Obliques"}, {n:"Leg Raises",c:"CORE",m:"Lower Abs"},
+{n:"Hanging Knee Raise",c:"CORE",m:"Abs"}, {n:"L-Sit Hold",c:"CORE",m:"Core"}, {n:"Hollow Body Hold",c:"CORE",m:"Core"},
+{n:"Russian Twist",c:"CORE",m:"Obliques"}, {n:"Mountain Climber",c:"CORE",m:"Cardio+Core"}, {n:"Dead Bug",c:"CORE",m:"Core"},
+{n:"Burpees",c:"FULL",m:"Full Body"}, {n:"Jumping Jacks",c:"FULL",m:"Cardio"}, {n:"High Knees",c:"FULL",m:"Cardio"},
+{n:"Bear Crawl",c:"FULL",m:"Full Body"}, {n:"Shoulder Tap Plank",c:"FULL",m:"Core+Push"}, {n:"Inchworm",c:"FULL",m:"Full Body"},
+{n:"Squat to Calf Raise",c:"FULL",m:"Legs+Calf"},
+{n:"Decline Diamond Pushups",c:"PUSH",m:"Shoulder & Chest"},
+{n:"Explosive Bulgarian Split Squats",c:"LEGS",m:"Quads"},
+{n:"Feet Elevated Pike Pushups",c:"PUSH",m:"Shoulder"},
+{n:"Shadow Boxing",c:"FULL",m:"Cardio • SEC"},
+{n:"Running",c:"FULL",m:"Cardio • METERS"},
+{n:"Bench Press Lv1 [10-20kg]",c:"PUSH",m:"Chest"}, {n:"Bench Press Lv2 [20-35kg]",c:"PUSH",m:"Chest"}, {n:"Bench Press Lv3 [35-50kg]",c:"PUSH",m:"Chest"}, {n:"Bench Press Lv4 [50-70kg]",c:"PUSH",m:"Chest"}, {n:"Bench Press Lv5 [70-90kg+]",c:"PUSH",m:"Chest"},
+{n:"Incline Press Lv1 [10-20kg]",c:"PUSH",m:"Chest"}, {n:"Incline Press Lv2 [20-35kg]",c:"PUSH",m:"Chest"}, {n:"Incline Press Lv3 [35-50kg]",c:"PUSH",m:"Chest"}, {n:"Incline Press Lv4 [50-70kg]",c:"PUSH",m:"Chest"}, {n:"Incline Press Lv5 [70-90kg+]",c:"PUSH",m:"Chest"},
+{n:"Decline Press Lv1 [10-20kg]",c:"PUSH",m:"Chest"}, {n:"Decline Press Lv2 [20-35kg]",c:"PUSH",m:"Chest"}, {n:"Decline Press Lv3 [35-50kg]",c:"PUSH",m:"Chest"}, {n:"Decline Press Lv4 [50-70kg]",c:"PUSH",m:"Chest"}, {n:"Decline Press Lv5 [70-90kg+]",c:"PUSH",m:"Chest"},
+{n:"Chest Fly Lv1 [5-15kg]",c:"PUSH",m:"Chest"}, {n:"Chest Fly Lv2 [15-25kg]",c:"PUSH",m:"Chest"}, {n:"Chest Fly Lv3 [25-35kg]",c:"PUSH",m:"Chest"}, {n:"Chest Fly Lv4 [35-50kg]",c:"PUSH",m:"Chest"}, {n:"Chest Fly Lv5 [50-70kg+]",c:"PUSH",m:"Chest"},
+{n:"Pullover Lv1 [5-15kg]",c:"PUSH",m:"Chest"}, {n:"Pullover Lv2 [15-25kg]",c:"PUSH",m:"Chest"}, {n:"Pullover Lv3 [25-35kg]",c:"PUSH",m:"Chest"}, {n:"Pullover Lv4 [35-50kg]",c:"PUSH",m:"Chest"}, {n:"Pullover Lv5 [50-70kg+]",c:"PUSH",m:"Chest"},
+{n:"Bent Row Lv1 [10-20kg]",c:"PULL",m:"Back"}, {n:"Bent Row Lv2 [20-35kg]",c:"PULL",m:"Back"}, {n:"Bent Row Lv3 [35-50kg]",c:"PULL",m:"Back"}, {n:"Bent Row Lv4 [50-70kg]",c:"PULL",m:"Back"}, {n:"Bent Row Lv5 [70-90kg+]",c:"PULL",m:"Back"},
+{n:"Single Arm Row Lv1 [10-20kg]",c:"PULL",m:"Back"}, {n:"Single Arm Row Lv2 [20-35kg]",c:"PULL",m:"Back"}, {n:"Single Arm Row Lv3 [35-50kg]",c:"PULL",m:"Back"}, {n:"Single Arm Row Lv4 [50-70kg]",c:"PULL",m:"Back"}, {n:"Single Arm Row Lv5 [70-90kg+]",c:"PULL",m:"Back"},
+{n:"Lat Pulldown Lv1 [10-20kg]",c:"PULL",m:"Back"}, {n:"Lat Pulldown Lv2 [20-35kg]",c:"PULL",m:"Back"}, {n:"Lat Pulldown Lv3 [35-50kg]",c:"PULL",m:"Back"}, {n:"Lat Pulldown Lv4 [50-70kg]",c:"PULL",m:"Back"}, {n:"Lat Pulldown Lv5 [70-90kg+]",c:"PULL",m:"Back"},
+{n:"Seated Row Lv1 [10-20kg]",c:"PULL",m:"Back"}, {n:"Seated Row Lv2 [20-35kg]",c:"PULL",m:"Back"}, {n:"Seated Row Lv3 [35-50kg]",c:"PULL",m:"Back"}, {n:"Seated Row Lv4 [50-70kg]",c:"PULL",m:"Back"}, {n:"Seated Row Lv5 [70-90kg+]",c:"PULL",m:"Back"},
+{n:"Shrugs Lv1 [10-20kg]",c:"PULL",m:"Back"}, {n:"Shrugs Lv2 [20-35kg]",c:"PULL",m:"Back"}, {n:"Shrugs Lv3 [35-50kg]",c:"PULL",m:"Back"}, {n:"Shrugs Lv4 [50-70kg]",c:"PULL",m:"Back"}, {n:"Shrugs Lv5 [70-90kg+]",c:"PULL",m:"Back"},
+{n:"Shoulder Press Lv1 [10-20kg]",c:"PUSH",m:"Shoulder"}, {n:"Shoulder Press Lv2 [20-35kg]",c:"PUSH",m:"Shoulder"}, {n:"Shoulder Press Lv3 [35-50kg]",c:"PUSH",m:"Shoulder"}, {n:"Shoulder Press Lv4 [50-70kg]",c:"PUSH",m:"Shoulder"}, {n:"Shoulder Press Lv5 [70-90kg+]",c:"PUSH",m:"Shoulder"},
+{n:"Arnold Press Lv1 [5-15kg]",c:"PUSH",m:"Shoulder"}, {n:"Arnold Press Lv2 [15-25kg]",c:"PUSH",m:"Shoulder"}, {n:"Arnold Press Lv3 [25-35kg]",c:"PUSH",m:"Shoulder"}, {n:"Arnold Press Lv4 [35-50kg]",c:"PUSH",m:"Shoulder"}, {n:"Arnold Press Lv5 [50-70kg+]",c:"PUSH",m:"Shoulder"},
+{n:"Lateral Raise Lv1 [1-5kg]",c:"PUSH",m:"Shoulder"}, {n:"Lateral Raise Lv2 [5-8kg]",c:"PUSH",m:"Shoulder"}, {n:"Lateral Raise Lv3 [8-12kg]",c:"PUSH",m:"Shoulder"}, {n:"Lateral Raise Lv4 [12-17kg]",c:"PUSH",m:"Shoulder"}, {n:"Lateral Raise Lv5 [17-22kg]",c:"PUSH",m:"Shoulder"},
+{n:"Front Raise Lv1 [1-5kg]",c:"PUSH",m:"Shoulder"}, {n:"Front Raise Lv2 [5-8kg]",c:"PUSH",m:"Shoulder"}, {n:"Front Raise Lv3 [8-12kg]",c:"PUSH",m:"Shoulder"}, {n:"Front Raise Lv4 [12-17kg]",c:"PUSH",m:"Shoulder"}, {n:"Front Raise Lv5 [17-22kg]",c:"PUSH",m:"Shoulder"},
+{n:"Rear Delt Fly Lv1 [1-5kg]",c:"PULL",m:"Shoulder"}, {n:"Rear Delt Fly Lv2 [5-8kg]",c:"PULL",m:"Shoulder"}, {n:"Rear Delt Fly Lv3 [8-12kg]",c:"PULL",m:"Shoulder"}, {n:"Rear Delt Fly Lv4 [12-17kg]",c:"PULL",m:"Shoulder"}, {n:"Rear Delt Fly Lv5 [17-22kg]",c:"PULL",m:"Shoulder"},
+{n:"Hammer Curl Lv1 [1-5kg]",c:"PULL",m:"Biceps"}, {n:"Hammer Curl Lv2 [5-8kg]",c:"PULL",m:"Biceps"}, {n:"Hammer Curl Lv3 [8-12kg]",c:"PULL",m:"Biceps"}, {n:"Hammer Curl Lv4 [12-17kg]",c:"PULL",m:"Biceps"}, {n:"Hammer Curl Lv5 [17-22kg]",c:"PULL",m:"Biceps"},
+{n:"Bicep Curl Lv1 [1-5kg]",c:"PULL",m:"Biceps"}, {n:"Bicep Curl Lv2 [5-8kg]",c:"PULL",m:"Biceps"}, {n:"Bicep Curl Lv3 [8-12kg]",c:"PULL",m:"Biceps"}, {n:"Bicep Curl Lv4 [12-17kg]",c:"PULL",m:"Biceps"}, {n:"Bicep Curl Lv5 [17-22kg]",c:"PULL",m:"Biceps"},
+{n:"Preacher Curl Lv1 [1-5kg]",c:"PULL",m:"Biceps"}, {n:"Preacher Curl Lv2 [5-8kg]",c:"PULL",m:"Biceps"}, {n:"Preacher Curl Lv3 [8-12kg]",c:"PULL",m:"Biceps"}, {n:"Preacher Curl Lv4 [12-17kg]",c:"PULL",m:"Biceps"}, {n:"Preacher Curl Lv5 [17-22kg]",c:"PULL",m:"Biceps"},
+{n:"Tricep Ext Lv1 [1-5kg]",c:"PUSH",m:"Triceps"}, {n:"Tricep Ext Lv2 [5-8kg]",c:"PUSH",m:"Triceps"}, {n:"Tricep Ext Lv3 [8-12kg]",c:"PUSH",m:"Triceps"}, {n:"Tricep Ext Lv4 [12-17kg]",c:"PUSH",m:"Triceps"}, {n:"Tricep Ext Lv5 [17-22kg]",c:"PUSH",m:"Triceps"},
+{n:"Skullcrusher Lv1 [5-15kg]",c:"PUSH",m:"Triceps"}, {n:"Skullcrusher Lv2 [15-25kg]",c:"PUSH",m:"Triceps"}, {n:"Skullcrusher Lv3 [25-35kg]",c:"PUSH",m:"Triceps"}, {n:"Skullcrusher Lv4 [35-50kg]",c:"PUSH",m:"Triceps"}, {n:"Skullcrusher Lv5 [50-70kg+]",c:"PUSH",m:"Triceps"},
+{n:"Squat Lv1 [20-30kg]",c:"LEGS",m:"Legs"}, {n:"Squat Lv2 [30-50kg]",c:"LEGS",m:"Legs"}, {n:"Squat Lv3 [50-70kg]",c:"LEGS",m:"Legs"}, {n:"Squat Lv4 [70-90kg]",c:"LEGS",m:"Legs"}, {n:"Squat Lv5 [90-120kg+]",c:"LEGS",m:"Legs"},
+{n:"RDL Lv1 [20-30kg]",c:"LEGS",m:"Legs"}, {n:"RDL Lv2 [30-50kg]",c:"LEGS",m:"Legs"}, {n:"RDL Lv3 [50-70kg]",c:"LEGS",m:"Legs"}, {n:"RDL Lv4 [70-90kg]",c:"LEGS",m:"Legs"}, {n:"RDL Lv5 [90-120kg+]",c:"LEGS",m:"Legs"},
+{n:"Deadlift Lv1 [20-30kg]",c:"PULL",m:"Back"}, {n:"Deadlift Lv2 [30-50kg]",c:"PULL",m:"Back"}, {n:"Deadlift Lv3 [50-70kg]",c:"PULL",m:"Back"}, {n:"Deadlift Lv4 [70-90kg]",c:"PULL",m:"Back"}, {n:"Deadlift Lv5 [90-120kg+]",c:"PULL",m:"Back"},
+{n:"Hip Thrust Lv1 [20-30kg]",c:"LEGS",m:"Legs"}, {n:"Hip Thrust Lv2 [30-50kg]",c:"LEGS",m:"Legs"}, {n:"Hip Thrust Lv3 [50-70kg]",c:"LEGS",m:"Legs"}, {n:"Hip Thrust Lv4 [70-90kg]",c:"LEGS",m:"Legs"}, {n:"Hip Thrust Lv5 [90-120kg+]",c:"LEGS",m:"Legs"},
+];
 const DIFF = {
 "Standard Pushup":6, "Diamond Pushup":10, "Wide Pushup":7, "Archer Pushup":15, "Pike Pushup":8, "Pseudo Planche Pushup":12, "Decline Pushup":7, "Spiderman Pushup":9,
 "Tricep Dips (Chair)":8, "Handstand Pushup Neg":15, "Dips":10,
@@ -244,20 +254,15 @@ const DIFF = {
 "Deadlift Lv1 [20-30kg]":22, "Deadlift Lv2 [30-50kg]":35, "Deadlift Lv3 [50-70kg]":52, "Deadlift Lv4 [70-90kg]":74, "Deadlift Lv5 [90-120kg+]":100,
 "Hip Thrust Lv1 [20-30kg]":18, "Hip Thrust Lv2 [30-50kg]":28, "Hip Thrust Lv3 [50-70kg]":42, "Hip Thrust Lv4 [70-90kg]":60, "Hip Thrust Lv5 [90-120kg+]":82
 };
-
 function calcXP(ex){
   let diff = DIFF[ex.name]||5;
   let sets = ex.sets||1;
   let diffFactor;
-  if(diff <= 20){
-    diffFactor = diff / 5;
-  } else {
-    diffFactor = 4 + (diff - 20) / 25;
-  }
+  if(diff <= 20){ diffFactor = diff / 5; }
+  else { diffFactor = 4 + (diff - 20) / 25; }
   if(METER_ONLY.includes(ex.name)){
     let meters = ex.meters||ex.reps||100;
-    let perMeter = 0.18;
-    return Math.floor(sets * (meters * perMeter * diffFactor * 0.3 + diff * 2.2));
+    return Math.floor(sets * (meters * 0.18 * diffFactor * 0.3 + diff * 2.2));
   }
   if(SEC_ONLY.includes(ex.name)){
     let sec = ex.sec||ex.reps||60;
@@ -270,12 +275,10 @@ function calcXP(ex){
   let r = ex.reps||12;
   return Math.floor(sets * (diff * 2.5 + r * (1.0 + diffFactor*0.25)));
 }
-
 function getXPForLevel(lvl){
   if(lvl<=1) return 1000;
   return Math.floor(900*lvl + Math.pow(lvl, 1.5)*150);
 }
-
 let currentDay = "MONDAY"; let currentCat = "ALL";
 let customData = JSON.parse(localStorage.getItem('ARISE_CUSTOM_V1')||'{}');
 DAYS.forEach(d=>{ if(!customData[d]) customData[d]=[]; });
@@ -301,7 +304,7 @@ function renderTopCards(){
   let xp = localStorage.getItem('ARISE_TOTAL_XP')||'0';
   let el = document.getElementById('miniLvl'); if(el) el.innerText = lvl;
   let el2 = document.getElementById('miniXp'); if(el2) el2.innerText = xp + " XP";
-  }
+}
 function closePortal(){ document.getElementById('portal-overlay').classList.remove('active'); document.body.style.overflow='auto'; clearInterval(timerInt); document.getElementById('detail-intro').style.animation=''; }
 document.getElementById('close-portal').onclick = closePortal;
 document.getElementById('portal-overlay').addEventListener('click',(e)=>{ if(e.target.id==='portal-overlay') closePortal(); });
@@ -316,7 +319,11 @@ function switchCat(c){ currentCat=c; renderLib(); renderTabs(); }
 function renderLib(){
   let q = document.getElementById('searchEx').value.toLowerCase();
   let filtered = LIB.filter(x=>{ let catOk = currentCat==="ALL" || x.c===currentCat; let qOk = x.n.toLowerCase().includes(q) || x.m.toLowerCase().includes(q); return catOk && qOk; });
-  document.getElementById('exList').innerHTML = filtered.map((x,i)=>`<div class="ex-item"><div><b>${x.n}</b><span>${x.c} • ${x.m} • ${DIFF[x.n]||5} XP base</span></div><button class="add-btn" onclick="addExercise('${x.n.replace(/'/g,"\\'")}')">+ ADD</button></div>`).join('');
+  document.getElementById('exList').innerHTML = filtered.map((x,i)=>{
+    let tempEx = {name: x.n, sets:3, reps:12, sec:60, meters:100};
+    let xp = calcXP(tempEx);
+    return `<div class="ex-item"><div><b>${x.n}</b><span>${x.c} • ${x.m} • ${xp} XP (3x12) • base ${DIFF[x.n]||5}</span></div><button class="add-btn" onclick="addExercise('${x.n.replace(/'/g,"\\'")}')">+ ADD</button></div>`;
+  }).join('');
 }
 function getDefaultEx(name){
   if(METER_ONLY.includes(name)) return {name:name, sets:3, meters:100, reps:100};
@@ -330,7 +337,7 @@ function renderPlan(){
   list.innerHTML = customData[currentDay].map((ex,idx)=>{
     let inputHtml = '';
     if(METER_ONLY.includes(ex.name)){
-      inputHtml = `<label>SETS</label><input type="number" value="${ex.sets}" min="1" max="20" onchange="updateSet(${idx},'sets',this.value)"><label>METERS</label><input type="number" value="${ex.meters||ex.reps||100}" min="10" max="20000" step="10" placeholder="780" onchange="updateSet(${idx},'meters',this.value)"><small style="color:#5a7a8a;font-size:8px;">CUSTOM</small>`;
+      inputHtml = `<label>SETS</label><input type="number" value="${ex.sets}" min="1" max="20" onchange="updateSet(${idx},'sets',this.value)"><label>METERS</label><input type="number" value="${ex.meters||ex.reps||100}" min="10" max="20000" step="10" onchange="updateSet(${idx},'meters',this.value)">`;
     } else if(SEC_ONLY.includes(ex.name)){
       inputHtml = `<label>SETS</label><input type="number" value="${ex.sets}" min="1" max="20" onchange="updateSet(${idx},'sets',this.value)"><label>SEC</label><input type="number" value="${ex.sec||ex.reps||60}" min="5" max="600" onchange="updateSet(${idx},'sec',this.value)">`;
     } else {
@@ -413,9 +420,7 @@ function finishBattle(){
   localStorage.setItem('ARISE_LEVEL', calcLvl);
   try {
     if(bgMusic) bgMusic.pause();
-    ariseSfx.currentTime = 0;
-    ariseSfx.volume = 1;
-    ariseSfx.muted = false;
+    ariseSfx.currentTime = 0; ariseSfx.volume = 1; ariseSfx.muted = false;
     let playPromise = ariseSfx.play();
     if(playPromise!== undefined){
       playPromise.then(()=>{ console.log("ARISE BAJA!"); }).catch(err=>{
@@ -433,4 +438,4 @@ function setRestTime(s){ restDefault=s; restLeft=s; document.getElementById('mai
 function formatTime(s){ let m=String(Math.floor(s/60)).padStart(2,'0'); let sc=String(s%60).padStart(2,'0'); return `${m}:${sc}`; }
 </script>
 </body>
-</html>  
+</html>
