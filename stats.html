@@ -4,9 +4,20 @@
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#00e5ff">
 <title>Stats - SHADOW MONARCH</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=0.80, maximum-scale=1.5">
 <link rel="stylesheet" href="style.css">
 <style>
+html,body{overflow-x:hidden; width:100%;}
+@media(max-width:600px){
+  nav{padding:10px 12px !important;}
+  nav .logo{font-size:16px !important; letter-spacing:2px !important;}
+  nav div a{font-size:11px !important; margin-left:8px !important;}
+  .stats-wrap{margin:20px auto !important; padding:10px !important;}
+  .level-card{padding:25px 15px !important; border-radius:20px !important;}
+  .level-num{font-size:52px !important; letter-spacing:4px !important;}
+  .arise-anime{font-size:60px !important; letter-spacing:10px !important;}
+  .lvl-anime b{font-size:60px !important;}
+}
 #music-btn{position:fixed;bottom:20px;right:20px;z-index:99999;background:rgba(0,229,255,0.15);border:1px solid #00e5ff;color:#00e5ff;padding:10px 16px;border-radius:30px;font-size:12px;letter-spacing:2px;cursor:pointer;backdrop-filter:blur(10px);}
 body{background:radial-gradient(ellipse at center, #0a1a24 0%, #020508 100%); min-height:100vh;}
 .stats-wrap{max-width:900px;margin:40px auto;padding:15px;}
