@@ -9,13 +9,13 @@
 <style>
 html,body{overflow-x:hidden; width:100%;}
 @media(max-width:600px){
-  .hero{padding:50px 15px 10px !important;}
-  .hero h1{font-size:36px !important; letter-spacing:3px !important;}
-  nav{padding:10px 12px !important;}
-  nav .logo{font-size:16px !important; letter-spacing:2px !important;}
-  nav div a{font-size:12px !important; margin-left:10px !important;}
-  .workout-card{padding:25px 18px !important;}
-  .workout-card h3{font-size:18px !important;}
+ .hero{padding:50px 15px 10px!important;}
+ .hero h1{font-size:36px!important; letter-spacing:3px!important;}
+  nav{padding:10px 12px!important;}
+  nav.logo{font-size:16px!important; letter-spacing:2px!important;}
+  nav div a{font-size:12px!important; margin-left:10px!important;}
+ .workout-card{padding:25px 18px!important;}
+ .workout-card h3{font-size:18px!important;}
 }
 .workout-container{max-width:900px;margin:40px auto;padding:0 20px; display:grid; gap:22px;}
 .workout-card{ background: linear-gradient(145deg, rgba(10,20,30,0.9), rgba(5,7,10,0.8)); border: 1px solid rgba(0,229,255,0.3); backdrop-filter: blur(15px); padding: 35px 30px; border-radius: 16px; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; }
@@ -103,6 +103,9 @@ html,body{overflow-x:hidden; width:100%;}
 .btn-skip{width:100%; background:transparent; border:none; color:#5a7a8a; margin-top:10px; letter-spacing:2px; font-size:11px; cursor:pointer}
 .progress-bar{height:4px; background:rgba(0,229,255,0.15); border-radius:10px; overflow:hidden; margin:15px 0}
 .progress-fill{height:100%; background:linear-gradient(90deg,#00e5ff,#22ff88); width:0%; transition:width 0.4s}
+.overload-btn{background:linear-gradient(90deg,#00e5ff,#22ff88);border:none;color:#000;padding:6px 12px;border-radius:20px;font-size:9px;font-weight:900;letter-spacing:1px;cursor:pointer;box-shadow:0 0 15px rgba(0,229,255,0.4);transition:0.2s;margin-left:5px;}
+.overload-btn:hover{transform:scale(1.08);box-shadow:0 0 25px #00e5ff;}
+.overload-wrap{display:flex;align-items:center;gap:5px;margin-top:8px;}
 </style>
 </head>
 <body>
@@ -341,6 +344,22 @@ function getDefaultEx(name){
   return {name:name, sets:3, reps:12};
 }
 function addExercise(name){ customData[currentDay].push(getDefaultEx(name)); saveCustom(); renderAll(); }
+function overloadEx(idx){
+  let ex = customData[currentDay][idx];
+  if(METER_ONLY.includes(ex.name)){
+    let cur = ex.meters||ex.reps||100;
+    ex.meters = cur + 50;
+    ex.reps = ex.meters;
+  } else if(SEC_ONLY.includes(ex.name)){
+    let cur = ex.sec||ex.reps||60;
+    ex.sec = cur + 10;
+    ex.reps = ex.sec;
+  } else {
+    ex.reps = (ex.reps||12) + 2;
+  }
+  saveCustom();
+  renderAll();
+}
 function renderPlan(){
   let list = document.getElementById('planList');
   if(customData[currentDay].length===0){ list.innerHTML = `<p style="color:#5a7a8a; font-size:12px; letter-spacing:1px; text-align:center; padding:20px;">No exercises yet. Add from left library →</p>`; return; }
@@ -353,7 +372,8 @@ function renderPlan(){
     } else {
       inputHtml = `<label>SETS</label><input type="number" value="${ex.sets}" min="1" max="50" onchange="updateSet(${idx},'sets',this.value)"><label>REPS</label><input type="number" value="${ex.reps}" min="1" max="500" onchange="updateSet(${idx},'reps',this.value)">`;
     }
-    return `<div class="plan-item"><div><b>${idx+1}. ${ex.name}</b> <small style="color:#00e5ff;">${calcXP(ex)} XP</small><div class="plan-controls">${inputHtml}</div></div><button class="del-btn" onclick="removeEx(${idx})">✕</button></div>`;
+    let overloadLabel = METER_ONLY.includes(ex.name)? 'OVERLOAD +50m' : SEC_ONLY.includes(ex.name)? 'OVERLOAD +10s' : 'OVERLOAD +2';
+    return `<div class="plan-item"><div><b>${idx+1}. ${ex.name}</b> <small style="color:#00e5ff;">${calcXP(ex)} XP</small><div class="plan-controls">${inputHtml}</div><div class="overload-wrap"><button class="overload-btn" onclick="overloadEx(${idx})">${overloadLabel} ⚡</button><span style="color:#5a7a8a;font-size:9px;letter-spacing:1px;">only ${currentDay}</span></div></div><button class="del-btn" onclick="removeEx(${idx})">✕</button></div>`;
   }).join('');
 }
 function updateSet(idx,field,val){ customData[currentDay][idx][field]=parseInt(val)||1; if(field==='meters') customData[currentDay][idx].reps = parseInt(val)||1; if(field==='sec') customData[currentDay][idx].reps = parseInt(val)||1; saveCustom(); renderTopCards(); renderTabs(); renderPlan(); }
