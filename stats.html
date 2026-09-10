@@ -9,14 +9,14 @@
 <style>
 html,body{overflow-x:hidden; width:100%;}
 @media(max-width:600px){
-  nav{padding:10px 12px !important;}
-  nav .logo{font-size:16px !important; letter-spacing:2px !important;}
-  nav div a{font-size:11px !important; margin-left:8px !important;}
-  .stats-wrap{margin:20px auto !important; padding:10px !important;}
-  .level-card{padding:25px 15px !important; border-radius:20px !important;}
-  .level-num{font-size:52px !important; letter-spacing:4px !important;}
-  .arise-anime{font-size:60px !important; letter-spacing:10px !important;}
-  .lvl-anime b{font-size:60px !important;}
+  nav{padding:10px 12px!important;}
+  nav.logo{font-size:16px!important; letter-spacing:2px!important;}
+  nav div a{font-size:11px!important; margin-left:8px!important;}
+.stats-wrap{margin:20px auto!important; padding:10px!important;}
+.level-card{padding:25px 15px!important; border-radius:20px!important;}
+.level-num{font-size:52px!important; letter-spacing:4px!important;}
+.arise-anime{font-size:60px!important; letter-spacing:10px!important;}
+.lvl-anime b{font-size:60px!important;}
 }
 #music-btn{position:fixed;bottom:20px;right:20px;z-index:99999;background:rgba(0,229,255,0.15);border:1px solid #00e5ff;color:#00e5ff;padding:10px 16px;border-radius:30px;font-size:12px;letter-spacing:2px;cursor:pointer;backdrop-filter:blur(10px);}
 body{background:radial-gradient(ellipse at center, #0a1a24 0%, #020508 100%); min-height:100vh;}
@@ -43,8 +43,6 @@ body{background:radial-gradient(ellipse at center, #0a1a24 0%, #020508 100%); mi
 .stat-box span{color:#7aa;font-size:10px;letter-spacing:3px;font-weight:700;margin-top:4px;display:block;}
 .back-btn{display:inline-block;margin-top:36px;background:linear-gradient(90deg,#00e5ff,#0099ff);color:#000;padding:14px 36px;border-radius:40px;letter-spacing:4px;font-size:13px;font-weight:900;text-decoration:none;box-shadow:0 0 30px rgba(0,229,255,0.6);transition:0.3s;position:relative;z-index:1;}
 .back-btn:hover{transform:scale(1.05);box-shadow:0 0 50px rgba(0,229,255,0.8);}
-
-/* --- IGRIS VIDEO FINAL - NO SKIP --- */
 #ANIME_LVL{position:fixed;inset:0;z-index:99999999;background:#000;display:none;overflow:hidden;}
 #ANIME_LVL.locked{display:block}
 #A_VIDEO{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:3;background:#000}
@@ -68,8 +66,8 @@ body{background:radial-gradient(ellipse at center, #0a1a24 0%, #020508 100%); mi
 <div style="color:#00e5ff;font-size:10px;letter-spacing:6px;margin-bottom:10px;opacity:0.7;position:relative;z-index:1;">[ SYSTEM WINDOW ]</div>
 <div class="level-num" id="lvlNum">Lv 0</div>
 <div class="rank" id="rankName">E-RANK</div>
-<div class="xp-bar"><div class="xp-fill" id="xpFill"></div><div class="xp-text" id="xpText">0 / 1000 XP</div></div>
-<p style="color:#5a7a8a;font-size:10px;letter-spacing:3px;margin:0;position:relative;z-index:1;" id="nextInfo">NEXT LEVEL: 1000 XP NEEDED</p>
+<div class="xp-bar"><div class="xp-fill" id="xpFill"></div><div class="xp-text" id="xpText">0 / 250 XP</div></div>
+<p style="color:#5a7a8a;font-size:10px;letter-spacing:3px;margin:0;position:relative;z-index:1;" id="nextInfo">NEXT LEVEL: 250 XP NEEDED</p>
 <div class="grid-stats">
 <div class="stat-box"><b id="totalXp">0</b><span>TOTAL XP</span></div>
 <div class="stat-box"><b id="totalBattles">0</b><span>BATTLES WON</span></div>
@@ -82,7 +80,7 @@ body{background:radial-gradient(ellipse at center, #0a1a24 0%, #020508 100%); mi
 <p style="color:#3a5a6a;margin-top:34px;font-size:10px;letter-spacing:3px;line-height:1.8;position:relative;z-index:1;">
 MAX LEVEL 156 - SHADOW MONARCH<br>
 <span style="color:#00e5ff;">0-10 E | 11-25 D | 26-45 C | 46-70 B | 71-100 A | 101-130 S | 131-154 MONARCH | 155-156 SHADOW MONARCH</span><br>
-<span style="color:#ffaa00;">HARD GRIND • NO EASY WAY • ARISE OR DIE</span>
+<span style="color:#ffaa00;">BALANCED - 2 YEARS TO MAX</span>
 </p>
 <a href="workout.html" class="back-btn">ENTER GATE →</a>
 <a onclick="resetXP()" style="margin-top:15px; display:inline-block; border:1px solid #ff3b3b; color:#ff3b3b; padding:10px 26px; border-radius:30px; letter-spacing:3px; font-size:11px; text-decoration:none; cursor:pointer; box-shadow:0 0 20px rgba(255,59,59,0.3);">RESET XP - Lv 0</a>
@@ -90,7 +88,6 @@ MAX LEVEL 156 - SHADOW MONARCH<br>
 </div>
 <button id="shareBtn" style="width:100%;margin-top:20px;background:linear-gradient(90deg,#00e5ff,#00aaff);color:#000;padding:16px;border-radius:14px;font-weight:900;letter-spacing:2px;border:none;cursor:pointer;box-shadow:0 0 30px rgba(0,229,255,0.6)">SHARE ARISE CARD ⚡</button>
 <canvas id="shareCanvas" width="1080" height="1350" style="display:none"></canvas>
-<!-- IGRIS ANIMATION - VIDEO VERSION NO SKIP -->
 <div id="ANIME_LVL">
   <video id="A_VIDEO" playsinline preload="auto" src="VID-20260903-WA6382.mp4"></video>
   <canvas id="animeCanvas"></canvas>
@@ -98,7 +95,6 @@ MAX LEVEL 156 - SHADOW MONARCH<br>
   <div class="lvl-anime" id="A_LVL"><p>SHADOW EXTRACTION SUCCESS</p><b id="A_NUM">99</b><p id="A_RANK">LEVEL UP</p></div>
 </div>
 <audio id="animeSfx" src="arise.mp3" preload="auto"></audio>
-
 <script>
 const bgMusic=document.getElementById('bg-music'); const musicBtn=document.getElementById('music-btn');
 bgMusic.volume=0.25; let savedTime=localStorage.getItem('aria-time'); if(savedTime) bgMusic.currentTime=parseFloat(savedTime);
@@ -109,10 +105,13 @@ if(wasPlaying) playMusic();
 document.addEventListener('click',function firstClick(){playMusic();document.removeEventListener('click',firstClick);},{once:true});
 musicBtn.onclick=(e)=>{e.stopPropagation(); if(bgMusic.paused){bgMusic.play();musicBtn.innerHTML="🔊 DARK ARIA Lv2";localStorage.setItem('aria-playing','true');}else{bgMusic.pause();musicBtn.innerHTML="🔇 PAUSED";localStorage.setItem('aria-playing','false');}};
 function resetXP(){ if(confirm("Sach me XP zero karna hai?")){ localStorage.setItem('ARISE_TOTAL_XP','0'); localStorage.setItem('ARISE_LEVEL','0'); localStorage.setItem('ARISE_SETS','0'); localStorage.setItem('ARISE_BATTLES','0'); localStorage.removeItem('LAST_SHOWN_LVL'); location.reload(); } }
+
+// --- BALANCED 2 YEARS TO MAX ---
 function getXPForLevel(lvl){
-  if(lvl<=1) return 1000;
-  return Math.floor(900*lvl + Math.pow(lvl, 1.5)*150);
+  if(lvl<=1) return 250;
+  return 200 + (lvl * 50);
 }
+
 function getRank(lvl){ if(lvl<=10)return["E-RANK",""]; if(lvl<=25)return["D-RANK",""]; if(lvl<=45)return["C-RANK",""]; if(lvl<=70)return["B-RANK",""]; if(lvl<=100)return["A-RANK",""]; if(lvl<=130)return["S-RANK",""]; if(lvl<=154)return["MONARCH","monarch"]; return["SHADOW MONARCH","shadow"]; }
 let xp=parseInt(localStorage.getItem('ARISE_TOTAL_XP')||'0'); let battles=parseInt(localStorage.getItem('ARISE_BATTLES')||'0'); let sets=parseInt(localStorage.getItem('ARISE_SETS')||'0');
 let tempXp=xp; let calcLvl=0; while(calcLvl<156){let need=getXPForLevel(calcLvl+1); if(tempXp>=need){tempXp-=need;calcLvl++;}else break;}
@@ -124,13 +123,11 @@ let nextNeed=getXPForLevel(calcLvl+1);
 if(calcLvl>=156){ document.getElementById('xpFill').style.width="100%"; document.getElementById('xpText').innerText="MAXIMUM - YOU ARE SHADOW MONARCH"; document.getElementById('nextInfo').innerText="☠️ SYSTEM: YOU HAVE TRANSCENDED ☠️"; }
 else{ let perc=Math.floor((tempXp/nextNeed)*100); setTimeout(()=>{document.getElementById('xpFill').style.width=perc+"%";},300); document.getElementById('xpText').innerText=tempXp+" / "+nextNeed+" XP ("+perc+"%)"; let nextRank=getRank(calcLvl+1)[0]; document.getElementById('nextInfo').innerText=(nextNeed-tempXp)+" XP TO "+nextRank+" • "+(156-calcLvl)+" LEVELS TO SHADOW MONARCH"; }
 document.getElementById('shareBtn').onclick = ()=>{ let lvl = localStorage.getItem('ARISE_LEVEL')||'0'; let xp = localStorage.getItem('ARISE_TOTAL_XP')||'0'; let battles = localStorage.getItem('ARISE_BATTLES')||'0'; let canvas = document.getElementById('shareCanvas'); let ctx = canvas.getContext('2d'); let grad = ctx.createLinearGradient(0,0,0,1350); grad.addColorStop(0,'#020a14'); grad.addColorStop(1,'#001a33'); ctx.fillStyle=grad; ctx.fillRect(0,0,1080,1350); ctx.strokeStyle='#00e5ff'; ctx.lineWidth=12; ctx.shadowBlur=30; ctx.shadowColor='#00e5ff'; ctx.strokeRect(20,20,1040,1310); ctx.shadowBlur=0; ctx.fillStyle='#fff'; ctx.font='900 80px sans-serif'; ctx.textAlign='center'; ctx.fillText('ARISE FITNESS',540,200); ctx.fillStyle='#00e5ff'; ctx.font='700 30px sans-serif'; ctx.fillText('SHADOW MONARCH',540,260); ctx.fillStyle='#fff'; ctx.font='900 180px sans-serif'; ctx.fillText('Lv.'+lvl,540,550); ctx.fillStyle='#8ab'; ctx.font='600 40px sans-serif'; ctx.fillText(xp+' TOTAL XP • '+battles+' BATTLES',540,650); ctx.fillStyle='rgba(0,229,255,0.1)'; ctx.fillRect(100,750,880,200); ctx.strokeStyle='rgba(0,229,255,0.3)'; ctx.strokeRect(100,750,880,200); ctx.fillStyle='#00e5ff'; ctx.font='800 28px sans-serif'; ctx.textAlign='left'; ctx.fillText('SYSTEM: YOU HAVE LEVELED UP',140,810); ctx.fillStyle='#e0efff'; ctx.font='400 24px sans-serif'; ctx.fillText('"The weak stay weak. The strong ARISE."',140,870); ctx.textAlign='center'; ctx.fillStyle='#5a7a8a'; ctx.font='400 22px sans-serif'; ctx.fillText('arise.isroot.in',540,1250); let link = document.createElement('a'); link.download = `ARISE-Lv${lvl}.png`; link.href = canvas.toDataURL(); link.click(); };
-
 const animeCanvas = document.getElementById('animeCanvas'); const animeCtx = animeCanvas.getContext('2d');
 function animeResize(){ animeCanvas.width=innerWidth; animeCanvas.height=innerHeight; } animeResize(); addEventListener('resize',animeResize);
 let particles=[];
 function spawnAura(x,y,n=50){ for(let i=0;i<n;i++){ particles.push({x,y,vx:(Math.random()-0.5)*10,vy:(Math.random()-0.5)*10-1,life:1,dec:0.012+Math.random()*0.02,r:2+Math.random()*5,color:Math.random()>0.5?'#ff2a5a':'#00e5ff'}); } }
 (function animeLoop(){ animeCtx.fillStyle='rgba(0,0,0,0.22)'; animeCtx.fillRect(0,0,animeCanvas.width,animeCanvas.height); particles.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; p.vy+=0.05; p.life-=p.dec; animeCtx.globalAlpha=p.life; animeCtx.fillStyle=p.color; animeCtx.shadowBlur=25; animeCtx.shadowColor=p.color; animeCtx.beginPath(); animeCtx.arc(p.x,p.y,p.r,0,Math.PI*2); animeCtx.fill(); }); particles=particles.filter(p=>p.life>0); requestAnimationFrame(animeLoop); })();
-
 function ANIME_LEVELUP(lvl){
   const root=document.getElementById('ANIME_LVL');
   const video=document.getElementById('A_VIDEO');
@@ -138,27 +135,20 @@ function ANIME_LEVELUP(lvl){
   const lvlBox=document.getElementById('A_LVL');
   const numEl=document.getElementById('A_NUM');
   const rankEl=document.getElementById('A_RANK');
-
   let prevLvl = parseInt(lvl)-1; if(prevLvl<0) prevLvl=0;
   numEl.innerText = lvl;
   rankEl.innerText = `LEVEL UP - Lv ${prevLvl} → Lv ${lvl} [${getRank(lvl)[0]}]`;
-
   root.classList.add('locked');
   document.body.style.overflow='hidden';
   ariseText.className='arise-anime';
   lvlBox.className='lvl-anime';
-
   try{ bgMusic.pause(); }catch(e){}
-
   try{ let sfx=document.getElementById('animeSfx'); sfx.currentTime=0; sfx.volume=1; sfx.play(); }catch(e){}
-
   video.currentTime=0;
   video.muted=false;
   video.volume=1;
   video.play().catch(()=>{ video.muted=true; video.play(); });
-
   setTimeout(()=>{ ariseText.classList.add('go'); spawnAura(innerWidth/2, innerHeight*0.4, 100); if(navigator.vibrate) navigator.vibrate([150,60,300]); },400);
-
   video.onended = ()=>{
     ariseText.style.display='none';
     lvlBox.classList.add('go');
@@ -178,7 +168,6 @@ function ANIME_LEVELUP(lvl){
     },3500);
   };
 }
-
 let L=localStorage.getItem('LAST_SHOWN_LVL')||0, C=localStorage.getItem('ARISE_LEVEL')||0; if(+C>+L && +C>0){ setTimeout(()=>ANIME_LEVELUP(C),600); localStorage.setItem('LAST_SHOWN_LVL',C); }
 </script>
 </body>
